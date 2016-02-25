@@ -1,0 +1,91 @@
+% Note: this need to be compiled twice! 
+\documentclass[10pt,twocolumn,landscape,a4paper,notitlepage]{article}
+
+% Packages
+\usepackage[twocolumn, voffset=0.5cm, textwidth=25cm, textheight=15cm, columnsep=1.5cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage{listings} 		% for code snipplets.
+\usepackage{fancyhdr}		% for headers and footers.
+\usepackage{subfiles}		% to split this in multiples files. 
+\usepackage{etoolbox}		% for the \maketitle hack
+
+
+% We make visible heder's and footer's ruler.
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+% To display the footer and header on the first page.
+\fancypagestyle{plain}
+{
+	\fancyhf{}
+	\rhead{Do panic}
+	\lhead{UTN FRSF - El Rejunte}
+	\rfoot{P\'agina \thepage}
+}
+\pagestyle{plain}
+
+% and for the rest of the pages.
+\fancyhf{}
+\rhead{\leftmark}
+\lhead{UTN FRSF - El Rejunte}
+\rfoot{P\'agina \thepage}
+
+% We use Courier font to make bold keywords possible.
+\renewcommand{\ttdefault}{pcr}
+
+% Listing code style
+\lstdefinestyle{codestyle}{
+	basicstyle=\scriptsize\ttfamily,
+    commentstyle=\rmfamily\itshape,
+    keywordstyle=\bfseries,        
+    emph={tipo}, % Here we can define customs keywords
+    emphstyle=\bfseries,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=false,
+    numbers=left,
+    numberstyle=\tiny\ttfamily,   
+    numbersep=5pt,
+    frame=single,
+    framesep=3pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=codestyle}
+
+% To dislpay the title on one column 
+\makeatletter
+% Remove the brackets so LaTeX sees \twocolumn\@maketitle
+\patchcmd{\maketitle}{[\@maketitle]}{\@maketitle}{}{}
+% Remove the vertical shift from the title 
+\patchcmd{\@maketitle}{\null\vskip2em\begin{center}}{\vspace*{0pt}\nointerlineskip\begingroup\centering}{}{}
+% In the final part we must remove \end{center}
+\patchcmd{\@maketitle}{\end{center}\par}{\par\endgroup}{}{}
+\makeatother
+
+
+% Information
+\author{UTN FRSF - El Rejunte}
+\title{Cartilla de c\'odigo piola}
+\date{2016}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+% Here we include each section of this notebook from external files.
+% Each of them must have this structure:
+% 
+% \documentclass[notebook.tex]{subfiles}
+% \begin{document}
+% <content>
+% \end{document}
+
+\subfile{secciones/cpp/cpp.tex}
+\subfile{secciones/tablas_const/tablas_const.tex}
+
+\end{document}
