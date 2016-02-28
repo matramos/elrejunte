@@ -6,7 +6,7 @@
 #define forall(i,a,b) for(int (i)=(a);(i)<(b);++(i))
 #define foreach(i,v) for(typeof((v).begin()) (i) = (v).begin(); (i) != (v).end(); ++(i))
 
-//ḿap/pairs
+//map/pairs
 #define mp make_pair
 #define fi first
 #define se second
