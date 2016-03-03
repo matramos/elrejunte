@@ -2,17 +2,26 @@
 \documentclass[10pt,twocolumn,landscape,a4paper,notitlepage]{article}
 
 % Packages
-\usepackage[twocolumn, voffset=0.5cm, textwidth=27cm, textheight=15cm, columnsep=1cm]{geometry}
+\usepackage{calc}			% for length arithmetic.
+\usepackage[twocolumn, top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm, voffset=0cm, hoffset=0cm, headsep=0.2cm, headheight=10pt, footskip=\headsep + \headheight, columnsep=1cm]{geometry}
 \usepackage[spanish]{babel}
 \usepackage{listings} 		% for code snipplets.
 \usepackage{fancyhdr}		% for headers and footers.
-\usepackage{subfiles}		% to split this in multiples files. 
-\usepackage{etoolbox}		% for the \maketitle hack
+\usepackage{etoolbox}		% for the \maketitle hack.
+\usepackage{array}			% for table column specifications.
+\usepackage{graphicx}		% for table resize.
+\usepackage{booktabs}		% for tables.
+\usepackage{xtab}			% for multiple pages tables.
 
+% We create some new table columns types.
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1-2\tabcolsep- 1.25\arrayrulewidth}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1-2\tabcolsep- 1.25\arrayrulewidth}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1-2\tabcolsep- 1.25\arrayrulewidth}}
 
 % We make visible heder's and footer's ruler.
 \renewcommand{\headrulewidth}{0.5pt}
 \renewcommand{\footrulewidth}{0.5pt}
+\renewcommand{\columnseprule}{0.5pt}
 
 % To display the footer and header on the first page.
 \fancypagestyle{plain}
@@ -45,7 +54,7 @@
     captionpos=b,
     keepspaces=false,
     numbers=left,
-    numberstyle=\tiny\ttfamily,   
+    numberstyle=\tiny\ttfamily,
     numbersep=5pt,
     frame=single,
     framesep=3pt,
@@ -78,14 +87,7 @@
 \newpage
 
 % Here we include each section of this notebook from external files.
-% Each of them must have this structure:
-% 
-% \documentclass[notebook.tex]{subfiles}
-% \begin{document}
-% <content>
-% \end{document}
-
-\subfile{secciones/cpp/cpp.tex}
-\subfile{secciones/tablas_const/tablas_const.tex}
+\input{./secciones/cpp/cpp.tex}
+\input{./secciones/tablas_const/tablas_const.tex}
 
 \end{document}

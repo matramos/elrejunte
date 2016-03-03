@@ -1,0 +1,88 @@
+\texttt{\%{[}{*}{]}{[}width{]}{[}length{]}specifier}
+
+\vspace*{-\baselineskip}
+
+\begin{center}
+
+\vspace{0.2cm}
+
+\tablefirsthead{\hline \textbf{spec} & \textbf{Tipo} & \textbf{Descripci\'on} \\ \hline}
+\tablehead{\hline \multicolumn{3}{|c|}{\tiny Continuaci\'on} \\ \hline \textbf{spec} & \textbf{Tipo} & \textbf{Descripci\'on} \\ }
+\tabletail{\hline}
+\tablelasttail{\hline}
+\footnotesize
+{
+\begin{xtabular}{|C{.15\columnwidth}|C{.15\columnwidth}|L{.7\columnwidth}|}
+\texttt{i}                            & \texttt{int}             & D\'igitos dec. \texttt{{[}0-9{]}}, oct. \texttt{(0){[}0-7{]}}, hexa \texttt{(0x|0X){[}0-9a-fA-F{]}}. Con signo.                                      \\ \hline
+\texttt{d, u}                         & \texttt{int, unsigned}   & D\'igitos dec. \texttt{{[}+-0-9{]}}.                                                                                                                 \\ \hline
+\texttt{o}                            & \texttt{unsigned}        & D\'igitos oct. \texttt{{[}+-0-7{]}}.                                                                                                                 \\ \hline
+\texttt{x}                            & \texttt{unsigned}        & D\'igitos hex. \texttt{{[}+-0-9a-fA-F{]}}. Prefijo \texttt{0x,0X} opcional.                                                                          \\ \hline
+\texttt{f, e, g}                      & \texttt{float}           & D\'igitos dec. c/punto flotante \texttt{{[}+-.0-9{]}}. Prefijo \texttt{0x,0X} y sufijo \texttt{e,E} opcionales.                                      \\ \hline
+\texttt{c, {[}width{]}c}              & \texttt{char, char*}     & Siguiente car\'acter. Lee \texttt{width} chars y los almacena contiguamente. No agrega \texttt{\textbackslash 0}.                                    \\ \hline
+\texttt{s}                            & \texttt{char*}           & Secuencia de chars hasta primer espacio. Agrega \texttt{\textbackslash 0}.                                                                           \\ \hline
+\texttt{p}                            & \texttt{void*}           & Secuencia de chars que representa un puntero.                                                                                                        \\ \hline
+\texttt{{[}chars{]}}                  & \texttt{Scanset, char*}  & Caracteres especificados entre corchetes. \texttt{{]}} debe ser primero en la lista, \texttt{-} primero o \'ultimo. Agrega \texttt{\textbackslash 0} \\ \hline
+\texttt{{[}\textasciicircum chars{]}} & \texttt{!Scanset, char*} & Caracteres no especificados entre corchetes.                                                                                                         \\ \hline
+\texttt{n}                            & \texttt{int}             & No consume entrada. Almacena el n\'umero de chars le\'idos hasta el momento.                                                                         \\ \hline
+\texttt{\%}                           &                          & \texttt{\%\%} consume un \texttt{\%}                                                                                                                 \\
+\end{xtabular}
+}
+
+\vspace{0.2cm}
+
+\tablefirsthead{\hline \textbf{sub-specifier} & \textbf{Descripci\'on} \\ \hline}
+\tablehead{\hline \multicolumn{2}{|c|}{\tiny Continuaci\'on} \\ \hline \textbf{sub-spec} & \textbf{Descripci\'on} \\ }
+\tabletail{\hline}
+\tablelasttail{\hline}
+\footnotesize
+{
+\begin{xtabular}[!]{|C{.2\columnwidth}|L{.8\columnwidth}|}
+\texttt{*}   & Indica que se leer\'a el dato pero se ignorar\'a. No necesita argumento. \\ \hline
+\texttt{width}  & Cantidad m\'axima de caracteres a leer. \\ \hline
+\texttt{lenght} & Uno de \texttt{hh, h, l, ll, j, z, t, L}. Ver tabla siguiente. \\
+\end{xtabular}
+}
+
+\vspace{0.2cm}
+
+\tablefirsthead{\hline \textbf{length} & \textbf{d i} & \textbf{u o x} \\ \hline }
+\tablehead{\hline \multicolumn{3}{|c|}{\tiny Continuaci\'on} \\ \hline \textbf{length} & \textbf{d i} & \textbf{u o x} \\ }
+\tabletail{\hline}
+\tablelasttail{\hline}
+\footnotesize
+{
+\begin{xtabular}[!]{|C{.2\columnwidth}|C{.4\columnwidth}|C{.4\columnwidth}|}
+\textbf{(none)}  & \texttt{int*}            & \texttt{unsigned int*}            \\ \hline
+\textbf{hh}      & \texttt{signed char*}    & \texttt{unsigned char*}           \\ \hline
+\textbf{h}       & \texttt{short int*}      & \texttt{unsigned short int*}      \\ \hline
+\textbf{l}       & \texttt{long int*}       & \texttt{unsigned long int*}       \\ \hline
+\textbf{ll}      & \texttt{long long int*}  & \texttt{unsigned long long int*}  \\ \hline
+\textbf{j}       & \texttt{intmax\_t*}      & \texttt{uintmax\_t*}              \\ \hline
+\textbf{z}       & \texttt{size\_t*}        & \texttt{size\_t*}                 \\ \hline
+\textbf{t}       & \texttt{ptrdiff\_t*}     & \texttt{ptrdiff\_t*}              \\ \hline
+\textbf{L}       &                          &                                   \\ 
+\end{xtabular}
+}
+
+\vspace{0.2cm}
+
+\tablefirsthead{\hline \textbf{length} & \textbf{f e g a} & \textbf{c s {[} {]} {[}\textasciicircum {]}} & \textbf{p} & \textbf{n} \\ \hline }
+\tablehead{\hline \multicolumn{5}{|c|}{\tiny Continuaci\'on} \\ \hline \textbf{length} & \textbf{f e g a} & \textbf{c s {[} {]} {[}\textasciicircum {]}} & \textbf{p} & \textbf{n} \\ }
+\tabletail{\hline}
+\tablelasttail{\hline}
+\footnotesize
+{
+\begin{xtabular}[!]{|C{.2\columnwidth}|C{.2\columnwidth}|C{.15\columnwidth}|C{.15\columnwidth}|C{.3\columnwidth}|}
+\textbf{(none)}  & \texttt{float*}       & \texttt{char*}     & \texttt{void**} & \texttt{int*}             \\ \hline
+\textbf{hh}      &                       &                    &                 & \texttt{signed char*}     \\ \hline
+\textbf{h}       &                       &                    &                 & \texttt{short int*}       \\ \hline
+\textbf{l}       & \texttt{double*}      & \texttt{wchar\_t*} &                 & \texttt{long int*}        \\ \hline
+\textbf{ll}      &                       &                    &                 & \texttt{long long int*}   \\ \hline
+\textbf{j}       &                       &                    &                 & \texttt{intmax\_t*}       \\ \hline
+\textbf{z}       &                       &                    &                 & \texttt{size\_t*}         \\ \hline
+\textbf{t}       &                       &                    &                 & \texttt{ptrdiff\_t*}      \\ \hline
+\textbf{L}       & \texttt{long double*} &                    &                 &                           \\ 
+\end{xtabular}
+}
+
+\end{center}

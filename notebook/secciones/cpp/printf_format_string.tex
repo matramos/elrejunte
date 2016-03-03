@@ -1,0 +1,124 @@
+\texttt{\%{[}flags{]}{[}width{]}{[}.precision{]}{[}length{]}specifier}
+
+\vspace*{-\baselineskip}
+
+\begin{center}
+
+\vspace{0.2cm}
+
+\tablefirsthead{\hline \textbf{specifier} & \textbf{Descripci\'on} & \textbf{Ejemplo} \\ \hline}
+\tablehead{\hline \multicolumn{3}{|c|}{\tiny Continuaci\'on} \\ \hline \textbf{specifier} & \textbf{Descripci\'on} & \textbf{Ejemplo} \\ }
+\tabletail{\hline}
+\tablelasttail{\hline}
+\footnotesize
+{
+\begin{xtabular}{|C{.15\columnwidth}|L{.65\columnwidth}|C{.20\columnwidth}|}
+\texttt{d or i} & Entero decimal con signo                                                                                              & \texttt{392}          \\ \hline
+\texttt{u}      & Entero decimal sin signo                                                                                              & \texttt{7235}         \\ \hline
+\texttt{o}      & Entero octal sin signo                                                                                                & \texttt{610}          \\ \hline
+\texttt{x}      & Entero hexadecimal sin signo                                                                                          & \texttt{7fa}          \\ \hline
+\texttt{X}      & Entero hexadecimal sin signo (may\'usculas)                                                                           & \texttt{7FA}          \\ \hline
+\texttt{f}      & Decimal punto flotante (min\'usculas)                                                                                 & \texttt{392.65}       \\ \hline
+\texttt{F}      & Decimal punto flotante (may\'usculas)                                                                                 & \texttt{392.65}       \\ \hline
+\texttt{e}      & Notaci\'on cient\'ifica (mantisa/exponente), (min\'usculas)                                                           & \texttt{3.9265e+2}    \\ \hline
+\texttt{E}      & Notaci\'on cient\'ifica (mantisa/exponente), (may\'usculas)                                                           & \texttt{3.9265E+2}    \\ \hline
+\texttt{g}      & Utilizar la representaci\'ion m\'as corta: \texttt{\%e} \'o \texttt{\%f}                                              & \texttt{392.65}       \\ \hline
+\texttt{G}      & Utilizar la representaci\'ion m\'as corta: \texttt{\%E} \'o \texttt{\%F}                                              & \texttt{392.65}       \\ \hline
+\texttt{a}      & Hexadecimal punto flotante (min\'usculas)                                                                             & \texttt{-0xc.90fep-2} \\ \hline
+\texttt{A}      & Hexadecimal punto flotante (may\'usculas)                                                                             & \texttt{-0XC.90FEP-2} \\ \hline
+\texttt{c}      & Caracter                                                                                                              & \texttt{a}            \\ \hline
+\texttt{s}      & String de caracteres                                                                                                  & \texttt{sample}       \\ \hline
+\texttt{p}      & Direcci\'on de puntero                                                                                                & \texttt{b8000000}     \\ \hline
+\texttt{n}      & No imprime nada. El argumento debe ser \texttt{int*}, almacena el n\'umero de caracteres imprimidos hasta el momento. &                       \\ \hline
+\texttt{\%}     & Un \% seguido de otro \% imprime un solo \%                                                                           & \texttt{\%}           \\
+\end{xtabular}
+}
+
+\vspace{0.2cm}
+
+\tablefirsthead{\hline \textbf{flag} & \textbf{Descripci\'on} \\ \hline}
+\tablehead{\hline \multicolumn{2}{|c|}{\tiny Continuaci\'on} \\ \hline \textbf{flag} & \textbf{Descripci\'on} \\ }
+\tabletail{\hline}
+\tablelasttail{\hline}
+\footnotesize
+{
+\begin{xtabular}{|C{.2\columnwidth}|L{.8\columnwidth}|}
+\texttt{-}         & Justificaci\'on a la izquierda dentro del campo \texttt{width} (ver \texttt{width} sub-specifier).                        \\ \hline                                                                          
+\texttt{+}         & Forza a preceder el resultado de texttt{+} o texttt{-}.                                                                   \\ \hline                               
+\texttt{(espacio)} & Si no se va a escribir un signo, se inserta un espacio antes del valor.                                                   \\ \hline                                               
+\texttt{\#}         & Usado con  \texttt{o, x, X} specifiers el valor es precedido por {0, 0x, 0X} respectivamente para valores distintos de 0. \\ \hline                                                                                                 
+\texttt{0}         & Rellena el n\'umero con texttt{0} a la izquierda en lugar de espacios cuando se especifica \texttt{width}.                \\                                                                                   
+\end{xtabular}
+}
+
+\vspace{0.2cm}
+
+\tablefirsthead{\hline \textbf{width} & \textbf{Descripci\'on} \\ \hline}
+\tablehead{\hline \multicolumn{2}{|c|}{\tiny Continuaci\'on} \\ \hline \textbf{width} & \textbf{Descripci\'on} \\ }
+\tabletail{\hline}
+\tablelasttail{\hline}
+\footnotesize
+{
+\begin{xtabular}{|C{.2\columnwidth}|L{.8\columnwidth}|}
+\texttt{(n\'umero)} & N\'umero m\'inimo de caracteres a imprimir. Si el valor es menor que \texttt{n\'umero}, el resultado es rellando con espacios. Si el valor es mayor, no es truncado.                      \\ \hline
+\texttt{*}          & No se especifica \texttt{width}, pero se agrega un argumento entero precediendo al argumento a ser formateado. Ej. \texttt{printf(\textrm{``}---\%*d----\textbackslash n\textrm{''}, 3, 2); $\Rightarrow$ \textrm{``}----  5----\textrm{''}}.   \\ 
+\end{xtabular}
+}
+
+\vspace{0.2cm}
+
+\tablefirsthead{\hline \textbf{precision} & \textbf{Descripci\'on} \\ \hline}
+\tablehead{\hline \multicolumn{2}{|c|}{\tiny Continuaci\'on} \\ \hline \textbf{precision} & \textbf{Descripci\'on} \\ }
+\tabletail{\hline}
+\tablelasttail{\hline} 
+\footnotesize
+{
+\begin{xtabular}{|C{.2\columnwidth}|L{.8\columnwidth}|}
+\texttt{.(n\'umero)} & Para \texttt{d, i, o, u, x, X}: n\'umero m\'inimo de d\'igitos a imprimir. Si el valor es m\'as chico que \texttt{n\'umero} se rellena con \texttt{0}. \newline Para \texttt{a, A, e, E, f, F}: n\'umero de d\'igitos a imprimir despu\'es de la coma (default 6). \newline Para \texttt{g, G}: N\'umero m\'aximo de cifras significativas a imprimir. \newline Para \texttt{s}: N\'umero m\'aximo de caracteres a imprimir. Trunca. \\ \hline
+\texttt{.*}          & No se especifica \texttt{precision} pero se agrega un argumento entero precediendo al argumento a ser formateado. \\
+\end{xtabular}
+}
+
+\vspace{0.2cm}
+
+\tablefirsthead{\hline \textbf{length} & \textbf{d i} & \textbf{u o x X} \\ \hline }
+\tablehead{\hline \multicolumn{3}{|c|}{\tiny Continuaci\'on} \\ \hline \textbf{length} & \textbf{d i} & \textbf{u o x X} \\ }
+\tabletail{\hline}
+\tablelasttail{\hline}
+\footnotesize
+{
+\begin{xtabular}[!]{|C{.15\columnwidth}|C{.425\columnwidth}|C{.425\columnwidth}|}
+\textbf{(none)} & \texttt{int}           & \texttt{unsigned int}            \\ \hline
+\textbf{hh}     & \texttt{signed char}   & \texttt{unsigned char}           \\ \hline
+\textbf{h}      & \texttt{short int}     & \texttt{unsigned short int}      \\ \hline
+\textbf{l}      & \texttt{long int}      & \texttt{unsigned long int}       \\ \hline
+\textbf{ll}     & \texttt{long long int} & \texttt{unsigned long long int}  \\ \hline
+\textbf{j}      & \texttt{intmax\_t}     & \texttt{uintmax\_t}              \\ \hline
+\textbf{z}      & \texttt{size\_t}       & \texttt{size\_t}                 \\ \hline
+\textbf{t}      & \texttt{ptrdiff\_t}    & \texttt{ptrdiff\_t}              \\ \hline
+\textbf{L}      &                        &                                  \\      
+\end{xtabular}
+}
+
+\vspace{0.2cm}
+
+\tablefirsthead{\hline \textbf{length} & \textbf{f F e E g G a A} & \textbf{c} & \textbf{s} & \textbf{p} & \textbf{n} \\ \hline }
+\tablehead{\hline \multicolumn{6}{|c|}{\tiny Continuaci\'on} \\ \hline \textbf{length} & \textbf{f F e E g G a A} & \textbf{c} & \textbf{s} & \textbf{p} & \textbf{n} \\ }
+\tabletail{\hline}
+\tablelasttail{\hline}
+\footnotesize
+{
+\begin{xtabular}[!]{|C{.15\columnwidth}|C{.23\columnwidth}|C{.12\columnwidth}|C{.15\columnwidth}|C{.1\columnwidth}|C{.25\columnwidth}|}
+\textbf{(none)} & \texttt{double}      & \texttt{int}    & \texttt{char*}    & \texttt{void*} & \texttt{int*}           \\ \hline    
+\textbf{hh}     &                      &                 &                   &                & \texttt{signed char*}   \\ \hline            
+\textbf{h}      &                      &                 &                   &                & \texttt{short int*}     \\ \hline          
+\textbf{l}      &                      & \texttt{wint\_t} & \texttt{wchar\_t*} &                & \texttt{long int*}      \\ \hline         
+\textbf{ll}     &                      &                 &                   &                & \texttt{long long int*} \\ \hline              
+\textbf{j}      &                      &                 &                   &                & \texttt{intmax\_t*}      \\ \hline         
+\textbf{z}      &                      &                 &                   &                & \texttt{size\_t*}        \\ \hline       
+\textbf{t}      &                      &                 &                   &                & \texttt{ptrdiff\_t*}     \\ \hline          
+\textbf{L}      & \texttt{long double} &                 &                   &                &                         \\
+\end{xtabular}
+}
+
+\end{center}
