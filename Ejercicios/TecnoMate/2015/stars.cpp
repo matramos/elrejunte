@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <cstring>
 #include <bitset>
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -47,13 +48,13 @@ ll EulerPhi(ll N)
 
 int main()
 {
-    freopen("input","r",stdin);
-    freopen("output","w",stdout);
+    //freopen("input","r",stdin);
+    //freopen("output","w",stdout);
     primes[0]=0;
     sieve(100000);
 
     unsigned N;
-    while(scanf("%u",&N)!=EOF)
+    while(cin>>N/*scanf("%u",&N)!=EOF*/)
     {
         printf("%lld\n", EulerPhi(N)>>1);
     }
