@@ -1,0 +1,9 @@
+<snippet>
+    <content><![CDATA[
+#define min(a,b) ((a)<(b)?(a):(b))
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>defmin</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.c++,source.c++11</scope>
+</snippet>

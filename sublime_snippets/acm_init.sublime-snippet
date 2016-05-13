@@ -1,0 +1,24 @@
+<snippet>
+    <content><![CDATA[
+#include <cstdio>
+#include <cstring>
+
+using namespace std;
+
+
+int main()
+{
+    freopen("input","r",stdin);
+    //freopen("output","w",stdout);
+
+    ${1}
+
+
+    return 0;
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>acm_init</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.c++,source.c++11</scope>
+</snippet>
