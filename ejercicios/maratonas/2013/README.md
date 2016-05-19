@@ -1,0 +1,13 @@
+Maratona 2013 - Primera Fase
+============================
+
+* [12646 - Zero or One](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=602&page=show_problem&problem=4375) [:beetle: uDebug](https://www.udebug.com/UVa/12646) [:page_facing_up: PDF](https://uva.onlinejudge.org/external/126/12646.pdf)
+* [12647 - Balloon](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=602&page=show_problem&problem=4376) [:beetle: uDebug](https://www.udebug.com/UVa/12647) [:page_facing_up: PDF](https://uva.onlinejudge.org/external/126/12647.pdf)
+* [12648 - Boss](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=602&page=show_problem&problem=4377) [:beetle: uDebug](https://www.udebug.com/UVa/12648) [:page_facing_up: PDF](https://uva.onlinejudge.org/external/126/12648.pdf)
+* [12649 - Folding Machine](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=602&page=show_problem&problem=4378) [:beetle: uDebug](https://www.udebug.com/UVa/12649) [:page_facing_up: PDF](https://uva.onlinejudge.org/external/126/12649.pdf)
+* [12650 - Dangerous Dive](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=602&page=show_problem&problem=4379) [:beetle: uDebug](https://www.udebug.com/UVa/12650) [:page_facing_up: PDF](https://uva.onlinejudge.org/external/126/12650.pdf)
+* [12651 - Triangles](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=602&page=show_problem&problem=4380) [:beetle: uDebug](https://www.udebug.com/UVa/12651) [:page_facing_up: PDF](https://uva.onlinejudge.org/external/126/12651.pdf)
+* [12652 - Lines of Containers](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=602&page=show_problem&problem=4381) [:beetle: uDebug](https://www.udebug.com/UVa/12652) [:page_facing_up: PDF](https://uva.onlinejudge.org/external/126/12652.pdf)
+* [12653 - Buses](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=602&page=show_problem&problem=4382) [:beetle: uDebug](https://www.udebug.com/UVa/12653) [:page_facing_up: PDF](https://uva.onlinejudge.org/external/126/12653.pdf)
+* [12654 - Patches](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=602&page=show_problem&problem=4383) [:beetle: uDebug](https://www.udebug.com/UVa/12654) [:page_facing_up: PDF](https://uva.onlinejudge.org/external/126/12654.pdf)
+* [12655 - Trucks](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=602&page=show_problem&problem=4384) [:beetle: uDebug](https://www.udebug.com/UVa/12655) [:page_facing_up: PDF](https://uva.onlinejudge.org/external/126/12655.pdf)
