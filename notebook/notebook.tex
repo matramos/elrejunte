@@ -5,13 +5,14 @@
 \usepackage{calc}			% for length arithmetic.
 \usepackage[twocolumn, top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm, voffset=0cm, hoffset=0cm, headsep=0.2cm, headheight=10pt, footskip=\headsep + \headheight, columnsep=1cm]{geometry}
 \usepackage[spanish]{babel}
-\usepackage{listings} 		% for code snipplets.
-\usepackage{fancyhdr}		% for headers and footers.
-\usepackage{etoolbox}		% for the \maketitle hack.
-\usepackage{array}			% for table column specifications.
-\usepackage{graphicx}		% for table resize.
-\usepackage{booktabs}		% for tables.
-\usepackage{xtab}			% for multiple pages tables.
+\usepackage{listings} 				% for code snipplets.
+\usepackage{fancyhdr}				% for headers and footers.
+\usepackage{etoolbox}				% for the \maketitle hack.
+\usepackage{array}					% for table column specifications.
+\usepackage{graphicx}				% for table resize.
+\usepackage{booktabs}				% for tables.
+\usepackage{xtab}					% for multiple pages tables.
+\usepackage[hidelinks]{hyperref}	% for click-able toc
 
 % We create some new table columns types.
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1-2\tabcolsep- 1.25\arrayrulewidth}}
