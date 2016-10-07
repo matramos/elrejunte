@@ -1,86 +1,112 @@
 #include <cstdio>
-#include <vector>
 #include <set>
+#include <vector>
 #include <map>
-#include <utility>
 #include <queue>
+#include <string>
+#include <algorithm>
+#include <utility>
 
 using namespace std;
 
-typedef vector<int> vi;
-typedef pair<vi,int> pvii;
-typedef vector<pvii> vpvii;
-typedef pair<int,vi> pivi;
-
 #define INF 100000000
-#define pb push_back
-#define fi first
-#define se second
 
-map<vi, vector<pvii> > g;
-map<vi, int> dist;
-vi ws, we;
+typedef vector<short> vi;
+typedef pair<int,int> ii;
 
-int movs[10][2] = {{0,1},{1,2},{2,3},{4,5},{5,6},{6,7},{0,4},{1,5},{2,6},{3,7}};
+map<int, set<ii> > g;
+map<int,int> dist;
+int movs[10][2] = {{10000000,1000000},{10000000,1000},{1000000,100000},{1000000,100},{100000,10000},{100000,10},{10000,1},{1000,100},{100,10},{10,1}};
+vi pstart, pend;
 
-vpvii get_adj(vi node)
-{
-    vpvii ret;
-    for(int i=0,a,b,x; i<10;++i)
-    {
-        a = movs[i][0], b = movs[i][1];
-        x = node[a], node[a]=node[b], node[b]=x;
-        ret.pb(pvii(node,node[a]+node[b]));
-        x = node[a], node[a]=node[b], node[b]=x;
+set<ii> get_adj(int inicio){
+    int i,a,b,r,p0,p1;
+    set<ii> ret;
+    for(i=0;i<10;++i){
+        r = inicio;
+        p0 = movs[i][0];
+        p1 = movs[i][1];
+        a = (inicio / p0) % 10;
+        b = (inicio / p1) % 10;
+        r -= ((a*p0) + (b*p1));
+        r += ((a*p1) + (b*p0));
+        ret.insert(ii(r, pstart[a-1]+pstart[b-1]));
     }
     return ret;
 }
 
-void make_graph(vi node)
+
+void make_graph(int node)
 {
-    if(g.find(node)==g.end())
+    if(g.find(node) == g.end())
     {
-        g[node] = get_adj(node);
-        dist[node] = INF;
-        for(vpvii::iterator i=g[node].begin();i!=g[node].end();++i)
+        dist[node]=INF;
+        set<ii> s = get_adj(node);
+        g[node]  = s;
+        for(set<ii>::iterator i=s.begin(); i!=s.end(); ++i )
+        {
+//            printf("i->second: %d\n",i->second);
             make_graph(i->first);
+        }
     }
 }
 
+int index(int o, vi& v)
+{
+    for(int i=0;i<v.size();++i)
+        if(o==v[i]) return i;
+    return -1;
+}
+
+
 int main()
 {
-    // freopen("input","r",stdin);
+    //freopen("input","r",stdin);
     //freopen("output","w",stdout);
-    g.get_allocator().allocate(40320);
-    dist.get_allocator().allocate(40320);
+    int s=0,e=0, m, tmp, ix;
+    bool flag;
 
-    int i,tmp;
-    for(i=0;i<8;++i){scanf("%d",&tmp);ws.pb(tmp);}
-    for(i=0;i<8;++i){scanf("%d",&tmp);we.pb(tmp);}
-
-    make_graph(ws);
-
-    priority_queue< pivi, vector<pivi>, greater<pivi> > pq;
-    dist[ws] = 0;
-    pq.push(pivi(0,ws));
-    vi u; int d, du, dv;pvii v;
-    while(!pq.empty())
+    m=10000000; flag=true;
+    for(int i=0;i<8;++i)
     {
-        pivi front = pq.top(); pq.pop();
-        d = front.fi;  u = front.se; du = dist[u]; 
-        if(d > du) continue;
-        for(vpvii::iterator it=g[u].begin();it!=g[u].end();++it)
-        {
-            v = *it;
-            dv = dist[v.fi];
-            if(du+v.se < dv)
-            {
-                dv = du+v.se;
-                dist[v.fi] = dv;
-                pq.push(pivi(dv,v.fi));
-            }
-        }
+        scanf("%d",&tmp);
+        pstart.push_back(tmp);
+
+        ix = index(tmp, pstart);
+        if(ix==-1) s+=(pstart.size() * m);
+        else s+= (ix+1)*m;
+        m/=10;
     }
-    printf("%d\n",dist[we]);
+
+    m=10000000; flag=true;
+    for(int i=0;i<8;++i)
+    {
+        scanf("%d",&tmp);
+        pend.push_back(tmp);
+        ix = index(tmp, pstart);
+        e+= ((ix+1)*m);
+        m/=10;
+    }
+
+    make_graph(s);
+
+    dist[s] = 0;                    // INF = 1B to avoid overflow
+    priority_queue< ii, vector<ii>, greater<ii> > pq; pq.push(ii(0,s));
+                             // ^to sort the pairs by increasing distance from s
+      while (!pq.empty()) {                                             // main loop
+        ii front = pq.top(); pq.pop();     // greedy: pick shortest unvisited vertex
+        int d = front.first, u = front.second;
+        if (d > dist[u]) continue;   // this check is important, see the explanation
+        for(set<ii>::iterator sit=g[u].begin(); sit!=g[u].end(); ++sit){
+        //for (int j = 0; j < (int)AdjList[u].size(); j++) {
+          ii v = *sit;                       // all outgoing edges from u
+          if (dist[u] + v.second < dist[v.first]) {
+            dist[v.first] = dist[u] + v.second;                 // relax operation
+            pq.push(ii(dist[v.first], v.first));
+      } } }  // note: this variant can cause duplicate items in the priority queue
+
+    
+    printf("%d\n",dist[e]);
+
     return 0;
 }
