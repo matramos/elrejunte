@@ -1,8 +1,24 @@
 # El Rejunte - UTN FRSF
 > _"Talk is cheap. Show me the code"_ - Linus Torvalds
 
+Notebook del Equipo The Rejoint (antiguamente El Rejunte) para utilizar en competencias de Programación.
+Conjunto de código, estructuras y funciones útiles.
+Le ~~robamos~~ debemos mucho al notebook [El Diego](https://github.com/mvpossum/eldiego) de Caloventor en Dos.
 
-## Libros
+
+## Recursos
+* __Notebooks Utilizados__
+    - [Notebook de ACM del equipo CaloventorEnDos de la UNR-FCEN (2015-2016)](https://github.com/mvpossum/eldiego)
+    - [Notebook de ACM del equipo AJI de la UBA-FCEN (2011)](https://mega.nz/#!6RY3xIAD!LeXQPOzmnd0j1UVYFsZgYfJCxzRqDum4HozcSIAlrXA)
+    - [Stanford University ACM Team Notebook (2014-15)](https://web.stanford.edu/~liszt90/acm/notebook.html)
+        + [Theoretical Computer Science Cheat Sheet](https://web.stanford.edu/~liszt90/acm/cheatsheet.pdf)
+
+* __Herramientas__
+    - [UVa Toolkit](http://uvatoolkit.com/)
+    - [UDebug](https://www.udebug.com/)
+    - [UVa Node](https://github.com/lucastan/uva-node)
+
+## Bibliografía
 * __Programación Competitiva__
     - [_Competitive Programming_](https://mega.nz/#!nVZAERxC!n7mN7teymbp9RHexomokrKM3AwoVyAZ8sjKrkpg2xVk) - 3rd Ed. - Steven & Felix Halim
         + [Material del libro](https://sites.google.com/site/stevenhalim/home/material)
@@ -26,17 +42,3 @@
     - [_Computational Geometry in C_](https://mega.nz/#!nERRwQqL!MY0PzZ2_-RTQJJk0v8ZSni5xx2Xw5UmLjy_0-1Ll6UA) - 2nd Ed. - Rourke
     - [_A Friendly Introduction to Number Theory_](https://mega.nz/#!KQZSFIiT!0gF3z7Rupf2Hq3dWmBlXbWP4R_3AvE4Ka8Z7SmRY_1o) - 4th Ed. - Silverman  
     - [_Algebra Lineal_](https://mega.nz/#!nMAABb5Z!oczn7OnvYHHwPWxKYQ8c9yKdR-o77cLt7GeZIQfxwGU) - 7ma Ed. - Grossman   
-
-## Recursos
-* __Notebooks__
-    - [Stanford University ACM Team Notebook (2014-15)](https://web.stanford.edu/~liszt90/acm/notebook.html)
-        + [Theoretical Computer Science Cheat Sheet](https://web.stanford.edu/~liszt90/acm/cheatsheet.pdf)
-    - [Notebook de ACM del equipo AJI de la UBA-FCEN (2011)](https://mega.nz/#!6RY3xIAD!LeXQPOzmnd0j1UVYFsZgYfJCxzRqDum4HozcSIAlrXA)
-    - [MIT ACM Reference 2008](http://web.mit.edu/~ecprice/acm/notebook.pdf)
-    - [Notebook del equipo de PUC-Rio 2006](https://6f510b8e-a-cfb2655f-s-sites.googlegroups.com/a/viniciusfortuna.com/maratona/Notebooks/Notebook_PUC-Rio_2006.pdf?attachauth=ANoY7cp4BP-gH1X2QJmC_GFkeqOtZlAkhFTnOuaRCn6pZknhkcoc36vbQIbhDWD9PLuSGQc_6mEjQhz7K6D2ZltQe-c5OunoTH6E-yES9EcThwevsYzGJp9aWgGXF1Zy-kf9Be7QeEOdEeRcniI6_r8O5BpYRI_H9WqCuPry13uQH0MbF61blBuDmjTBpdL_AIqTSm4IhMx9qXEotY6ZsHjxUpNpGQOId_LLC82qb5g4OwahP-z3H1qmVT579FekrH2OU7u6J5xL&attredirects=0)
-    - [Notebook del equipo de Unicamp 2004](https://6f510b8e-a-cfb2655f-s-sites.googlegroups.com/a/viniciusfortuna.com/maratona/Notebooks/Notebook_Unicamp_2004.pdf?attachauth=ANoY7cqDjBqtv-D_Zo1h_ems5IvgGQk3d4Qrl5u89ab0nJjByPdFb1BHOxaWZ2WrIdWW55pY3RSFHBY3CqXEfp_sV5eE-MkC7sbTceGlFAKsnwS0M4nA1Y378Ch-Kg8J2Sg3z98g0OWOzs4KIBevtZGpnyKIKuatV5TOC3uyTb06XpKxQfkntL9sMV0BgrTuVZ_uy5Ei1qsh5mO8hmb3Btx1_j6DmD8USdZeZGHr-ZXj0VFkPeoyyN5qYVaNMjOI8QlfK7-TyQ9o&attredirects=0)
-    - [Notebook del equipo BUET Explorer 2005](http://maratona.viniciusfortuna.com/Notebooks/TeamNotebook_buetexplorer_2005.doc?attredirects=0)
-* __Herramientas__
-    - [UVa Toolkit](http://uvatoolkit.com/)
-    - [UDebug](https://www.udebug.com/)
-    - [UVa Node](https://github.com/lucastan/uva-node)

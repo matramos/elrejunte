@@ -1,7 +1,7 @@
 ## Solucionarios
 
 Esta carpeta es para ir subiendo solucionarios de las competencias que hagamos. Un solucionario es una explicación simple de la solución implementada en el problema.
-Siempre tratar de hablar de código lo menos posible, pero entiendo la solución de manera *abstracta*.
+Siempre tratar de hablar de código lo menos posible, pero entendiendo la solución de manera *abstracta*.
 
 ### Formato a utilizar con Markdown `.md`
 
