@@ -1,15 +1,15 @@
-\section{Teor\'ia de N\'umeros}
+\section{Matem\'atica}
 \subsection{GCD \& LCM}
-\lstinputlisting[language=C++]{secciones/teoria_numeros/gcd_lcm.cpp}
+\lstinputlisting[language=C++]{secciones/math/gcd_lcm.cpp}
 \subsubsection{GCD Extendido (Extended Euclid)}
 \begin{footnotesize}
 	\textbf{Notas:} ecuaciones diof\'anticas ($ax+by=d$ con $d=gcd(a,b)$). Da la primer soluci\'on ($x_{0},y_{0}$), el resto mediante $x=x_{0}+(b/d)n, y=y_{0}-(a/d)n$ con $n \geq 1$.
 \end{footnotesize}
-\lstinputlisting[language=C++]{secciones/teoria_numeros/gcd_ext.cpp}
+\lstinputlisting[language=C++]{secciones/math/gcd_ext.cpp}
 \subsection{Primos}
 \subsubsection{Criba de Erat\'ostenes}
 \begin{footnotesize}
 	\textbf{Utiliza:} \texttt{<vector>}, \texttt{<bitset>}\\
 	\textbf{Notas:} \texttt{ll}=\texttt{long long}, \texttt{vi}=\texttt{vector<int>}. Guarda los primos \texttt{[0-upperbound]} en \texttt{primes}. \texttt{isPrime} funciona s\'olo para \texttt{N} $\leq$ (\'ultimo primo en \texttt{primes})$^{2}$. Cuidado con \texttt{bs} si el tama\~no es $> 10^{7}$
 \end{footnotesize}
-\lstinputlisting[language=C++]{secciones/teoria_numeros/eratostenes.cpp}
+\lstinputlisting[language=C++]{secciones/math/eratostenes.cpp}
