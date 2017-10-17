@@ -9,7 +9,7 @@ Le ~~robamos~~ debemos mucho al notebook [El Diego](https://github.com/mvpossum/
 ## Recursos
 * __Notebooks Utilizados__
     - [Notebook de ACM del equipo CaloventorEnDos de la UNR-FCEIA (2015-2016)](https://github.com/mvpossum/eldiego)
-    - [Notebook de ACM del equipo AJI de la UBA-FCEN (2011)](https://mega.nz/#!6RY3xIAD!LeXQPOzmnd0j1UVYFsZgYfJCxzRqDum4HozcSIAlrXA)
+    - [Notebook de ACM del equipo AJI de la UBA-FCEN (2011)](https://github.com/elsantodel90/notebook-aji)
     - [Stanford University ACM Team Notebook (2014-15)](https://web.stanford.edu/~liszt90/acm/notebook.html)
         + [Theoretical Computer Science Cheat Sheet](https://web.stanford.edu/~liszt90/acm/cheatsheet.pdf)
 
