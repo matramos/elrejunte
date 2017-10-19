@@ -1,7 +1,8 @@
 #include <sstream>
 string num_to_str(int x){
   ostringstream convert;
-  return (convert << entero).str();
+  convert << x;
+  return convert.str();
 }
 
 int str_to_num(string x){
