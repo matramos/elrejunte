@@ -1,9 +1,12 @@
 # El Rejunte - UTN FRSF
 > _"Talk is cheap. Show me the code"_ - Linus Torvalds
 
-Notebook del Equipo The Rejoint (antiguamente El Rejunte) para utilizar en competencias de Programación.
-Conjunto de código, estructuras y funciones útiles. Y tambien algunos solucionarios.
-Le ~~robamos~~ debemos mucho al notebook [El Diego](https://github.com/mvpossum/eldiego) de Caloventor en Dos.
+Repositorio del Equipo TheRejointSet (antiguamente El Rejunte) para utilizar/entrenar para competencias de Programación.
+Pueden encontrar el `notebook` del equipo.
+
+Y diferentes `solucionarios`.
+
+Y algunas otras herramientas (snippets,etc.) que nos fueron útiles a la hora de competir.
 
 
 ## Recursos
