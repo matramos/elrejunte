@@ -8,7 +8,7 @@ map<int, int> G[MAX_V];//limpiar esto -- unordered_map mejora
 //To add an edge use
 #define add(a, b, w) G[a][b]=w
 ll excess[MAX_V];
-int height[MAX_V], active[MAX_V], count[2*MAX_V+1];
+int height[MAX_V], active[MAX_V], cuenta[2*MAX_V+1];
 queue<int> Q;
 
 void enqueue(int v)
@@ -28,25 +28,25 @@ void gap(int k)
 	forn(v, N)
 	{
 		if (height[v] < k) continue;
-		count[height[v]]--;
+		cuenta[height[v]]--;
 		height[v] = max(height[v], N+1);
-		count[height[v]]++;
+		cuenta[height[v]]++;
 		enqueue(v);
 	}
 }
 void relabel(int v)
 {
-	count[height[v]]--;
+	cuenta[height[v]]--;
 	height[v] = 2*N;
 	forall(it, G[v])
 	if(it->snd) height[v] = min(height[v], height[it->fst] + 1);
-	count[height[v]]++;
+	cuenta[height[v]]++;
 	enqueue(v);
 }
 ll maxflow() //O(V^3)
 {
-	zero(height), zero(active), zero(count), zero(excess);
-	count[0]=N-1; count[N]=1;
+	zero(height), zero(active), zero(cuenta), zero(excess);
+	cuenta[0]=N-1; cuenta[N]=1;
 	height[SRC] = N;
 	active[SRC] = active[SNK] = true;
 	forall(it, G[SRC])
@@ -60,7 +60,7 @@ ll maxflow() //O(V^3)
 		active[v]=false;
 		forall(it, G[v]) push(v, it->fst);
 		if(excess[v] > 0)
-		count[height[v]] == 1? gap(height[v]):relabel(v);
+		cuenta[height[v]] == 1? gap(height[v]):relabel(v);
 	}
 	ll mf=0;
 	forall(it, G[SRC]) mf+=G[it->fst][SRC];
