@@ -1,0 +1,3 @@
+-KMP: http://www.spoj.com/problems/NHAY/
+-ZFunction: http://www.spoj.com/problems/NHAY/
+-Trie: no probado, sin cambios respecto a "el diego"

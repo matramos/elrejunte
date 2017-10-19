@@ -22,11 +22,10 @@ typedef vector<ii> vii;
 
 int main()
 {
-    //freopen("input","r",stdin);
-    //freopen("output","w",stdout);
+	//freopen("input","r",stdin);
+	//freopen("output","w",stdout);
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
-	
-    return 0;
+	return 0;
 }

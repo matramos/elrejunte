@@ -41,7 +41,7 @@ void fact2(ll n,map<ll,ll> &f) //O (lg n)
 }
 
 //Usar asi: divisores(fac, divs, fac.begin()); NO ESTA ORDENADO
-void divisores(map<ll,ll> &f, vector<ll> &divs, map<ll,ll>::iterator it, ll n=1)
+void divisores(map<ll,ll> &f,vector<ll> &divs,map<ll,ll>::iterator it,ll n=1)
 {
 	if(it==f.begin()) divs.clear();
 	if(it==f.end())
@@ -70,8 +70,10 @@ ll sumDivs(map<ll,ll> &f)
 	return ret;
 }
 
-ll eulerPhi(map<ll,ll> &f) // con criba: O(lg n)
+ll eulerPhi(ll n) // con criba: O(lg n)
 {
+	map<ll,ll> f;
+	fact(n,f);
 	ll ret=n;
 	forall(it, f) ret-=ret/it->first;
 	return ret;

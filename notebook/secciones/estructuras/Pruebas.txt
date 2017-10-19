@@ -1,0 +1,3 @@
+-Hash_table: no probado, sin cambios respecto a "el diego"
+-SetConBS: no probado, sin cambios respecto a "el diego"
+-UnionFind: no probado, cambios relativamente pequeños a lo de "el diego"
