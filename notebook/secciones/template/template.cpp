@@ -13,6 +13,8 @@
 #define ub upper_bound
 #define fst first
 #define snd second
+#define PI 3.1415926535897932384626
+
 using namespace std;
 
 typedef long long ll;

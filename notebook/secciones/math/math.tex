@@ -1,25 +1,154 @@
 \section{Matem\'atica}
+
+\subsection{Identidades}
+{
+$\sum_{i=0}^n\binom{n}{i}=2^n$
+
+$\sum_{i=0}^n i\binom{n}{i}=n*2^{n-1}$
+
+$\sum_{i=m}^n i = \frac{n(n+1)}{2} - \frac{m(m-1)}{2} = \frac{(n+1-m)(n+m)}{2}$
+
+$\sum_{i=0}^n i = \sum_{i=1}^n i = \frac{n(n+1)}{2}$
+
+$\sum_{i=0}^n i^2 = \frac{n(n+1)(2n+1)}{6} = \frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6}$
+
+$\sum_{i=0}^n i(i-1) = \frac{8}{6}(\frac{n}{2})(\frac{n}{2}+1)(n+1)$ (doubles) $\rightarrow$ Sino ver caso impar y par
+
+$\sum_{i=0}^n i^3 = \left(\frac{n(n+1)}{2}\right)^2 = \frac{n^4}{4} + \frac{n^3}{2} + \frac{n^2}{4} = \left[\sum_{i=1}^n i\right]^2$
+
+$\sum_{i=0}^n i^4 = \frac{n(n+1)(2n+1)(3n^2+3n-1)}{30} = \frac{n^5}{5} + \frac{n^4}{2} + \frac{n^3}{3} - \frac{n}{30}$
+
+$\sum_{i=0}^n i^p = \frac{(n+1)^{p+1}}{p+1} + \sum_{k=1}^p\frac{B_k}{p-k+1}{p\choose k}(n+1)^{p-k+1}$
+
+$r=e-v+k+1$
+
+Teorema de Pick: (Area, puntos interiores y puntos en el borde)
+
+$A=I+\frac{B}{2}-1$
+
+
+}%
+\subsection{Ec. Caracteristica}
+$a_0T(n)+a_1T(n-1)+...+a_kT(n-k)=0$
+
+$p(x)=a_0 x^k + a_1 x^{k-1} + ... + a_k$
+
+Sean $r_1,r_2,...,r_q$ las ra\'ices distintas, de mult. $m_1, m_2, ..., m_q$
+
+$T(n)=\sum_{i=1}^q{\sum_{j=0}^{m_i - 1}c_{ij} n^j r_i^n}$
+
+Las constantes $c_{ij}$ se determinan por los casos base.
+
+\subsection{Teorema Chino del Resto}
+$$y=\sum_{j=1}^n (x_j*(\prod_{i=1, i\neq j}^n m_i)_{m_j}^{-1}*\prod_{i=1, i\neq j}^n m_i)$$
+
 \subsection{GCD \& LCM}
 \lstinputlisting[language=C++]{secciones/math/gcd_lcm.cpp}
-% \subsubsection{GCD Extendido (Extended Euclid)}
-% \begin{footnotesize}
-% 	\textbf{Notas:} ecuaciones diof\'anticas ($ax+by=d$ con $d=gcd(a,b)$). Da la primer soluci\'on ($x_{0},y_{0}$), el resto mediante $x=x_{0}+(b/d)n, y=y_{0}-(a/d)n$ con $n \geq 1$.
-% \end{footnotesize}
-% \lstinputlisting[language=C++]{secciones/math/gcd_ext.cpp}
-% \subsection{Primos}
-% \subsubsection{Criba de Erat\'ostenes}
-% \begin{footnotesize}
-% 	\textbf{Utiliza:} \texttt{<vector>}, \texttt{<bitset>}\\
-% 	\textbf{Notas:} \texttt{ll}=\texttt{long long}, \texttt{vi}=\texttt{vector<int>}. Guarda los primos \texttt{[0-upperbound]} en \texttt{primes}. \texttt{isPrime} funciona s\'olo para \texttt{N} $\leq$ (\'ultimo primo en \texttt{primes})$^{2}$. Cuidado con \texttt{bs} si el tama\~no es $> 10^{7}$
-% \end{footnotesize}
-% \lstinputlisting[language=C++]{secciones/math/eratostenes.cpp}
+
+\subsection{Euclides Extendido}
+\lstinputlisting[language=C++]{secciones/math/extendedEuclid.cpp}
+
 \subsection{Combinatoria}
 \lstinputlisting[language=C++]{secciones/math/Combinatoria.cpp}
+
 \subsection{Exponenciaci\'on de Matrices y Fibonacci}
 \lstinputlisting[language=C++]{secciones/math/Expmatrices_Fibonacci.cpp}
+
 \subsection{Operaciones Modulares}
 \lstinputlisting[language=C++]{secciones/math/OperacionesMOD.cpp}
+
 \subsection{Funciones de Primos}
+Sea $n=\prod{p_i^{k_i}}$, fact(n) genera un map donde a cada $p_i$ le asocia su $k_i$
 \lstinputlisting[language=C++]{secciones/math/funciones_primos.cpp}
+
 \subsection{Phollard's Rho}
 \lstinputlisting[language=C++]{secciones/math/PhollardRho.cpp}
+
+\subsection{Inversos}
+\lstinputlisting[language=C++]{secciones/math/Inversos.cpp}
+
+\subsection{Fracciones}
+\lstinputlisting[language=C++]{secciones/math/Fraction.cpp}
+
+\subsection{Simpson}
+\lstinputlisting[language=C++]{secciones/math/Simpson.cpp}
+
+\subsection{Tablas y cotas (Primos, Divisores, Factoriales, etc)}
+%\subsubsection{
+\paragraph{Factoriales} \ \\
+\begin{tabular}{l|l}
+0! =	1             & 11! = 39.916.800  \\
+1! =	1             & 12! =	479.001.600	($\in \mathtt{int}$)\\
+2! =	2             & 13! =	6.227.020.800	\\
+3! =	6             & 14! =	87.178.291.200	\\
+4! =	24            & 15! =	1.307.674.368.000	\\
+5! =	120   			  & 16! =	20.922.789.888.000	\\
+6! =	720           & 17! =	355.687.428.096.000	\\
+7! =	5.040	        & 18! =	6.402.373.705.728.000	\\
+8! =	40.320	      & 19! =	121.645.100.408.832.000	\\
+9! =	362.880       & 20! =	2.432.902.008.176.640.000	($\in \mathtt{tint}$) \\
+10! =	3.628.800     & 21! =	51.090.942.171.709.400.000
+\end{tabular}
+ 
+max signed tint = 9.223.372.036.854.775.807 \\
+max unsigned tint = 18.446.744.073.709.551.615
+%\subsubsection{
+\paragraph{Primos} \ \\
+2 3 5 7 11 13 17 19 23 29
+31 37 41 43 47 53 59 61 67 71
+73 79 83 89 97 101 103 107 109 113
+127 131 137 139 149 151 157 163 167 173
+179 181 191 193 197 199 211 223 227 229
+233 239 241 251 257 263 269 271 277 281
+283 293 307 311 313 317 331 337 347 349
+353 359 367 373 379 383 389 397 401 409
+419 421 431 433 439 443 449 457 461 463
+467 479 487 491 499 503 509 521 523 541
+547 557 563 569 571 577 587 593 599 601
+607 613 617 619 631 641 643 647 653 659
+661 673 677 683 691 701 709 719 727 733
+739 743 751 757 761 769 773 787 797 809
+811 821 823 827 829 839 853 857 859 863
+877 881 883 887 907 911 919 929 937 941
+947 953 967 971 977 983 991 997 1009 1013
+1019 1021 1031 1033 1039 1049 1051 1061 1063 1069
+1087 1091 1093 1097 1103 1109 1117 1123 1129 1151
+1153 1163 1171 1181 1187 1193 1201 1213 1217 1223
+1229 1231 1237 1249 1259 1277 1279 1283 1289 1291
+1297 1301 1303 1307 1319 1321 1327 1361 1367 1373
+1381 1399 1409 1423 1427 1429 1433 1439 1447 1451
+1453 1459 1471 1481 1483 1487 1489 1493 1499 1511
+1523 1531 1543 1549 1553 1559 1567 1571 1579 1583
+1597 1601 1607 1609 1613 1619 1621 1627 1637 1657
+1663 1667 1669 1693 1697 1699 1709 1721 1723 1733
+1741 1747 1753 1759 1777 1783 1787 1789 1801 1811
+1823 1831 1847 1861 1867 1871 1873 1877 1879 1889
+1901 1907 1913 1931 1933 1949 1951 1973 1979 1987
+1993 1997 1999 2003 2011 2017 2027 2029 2039 2053
+2063 2069 2081
+
+\paragraph{Primos cercanos a $10^n$}\ \\
+9941 9949 9967 9973 10007 10009 10037 10039 10061 10067 10069 10079\\
+99961 99971 99989 99991 100003 100019 100043 100049 100057 100069\\
+999959 999961 999979 999983 1000003 1000033 1000037 1000039\\
+9999943 9999971 9999973 9999991 10000019 10000079 10000103 10000121\\
+99999941 99999959 99999971 99999989 100000007 100000037 100000039 100000049\\
+999999893 999999929 999999937 1000000007 1000000009 1000000021 1000000033
+ 
+\paragraph{Cantidad de primos menores que $10^n$}\ \\
+$\pi(10^1)$ = 4 ;
+$\pi(10^2)$ = 25 ;
+$\pi(10^3)$ = 168 ;
+$\pi(10^4)$ = 1229 ;
+$\pi(10^5)$ = 9592 \\
+$\pi(10^6)$ = 78.498 ;
+$\pi(10^7)$ = 664.579 ;
+$\pi(10^8)$ = 5.761.455 ;
+$\pi(10^9)$ = 50.847.534 \\
+$\pi(10^{10})$ = 455.052,511 ;
+$\pi(10^{11})$ = 4.118.054.813 ;
+$\pi(10^{12})$ = 37.607.912.018% ;
+%
+% Fuente: http://primes.utm.edu/howmany.shtml#table
+%
+%
