@@ -5,7 +5,7 @@ Siempre tratar de hablar de código lo menos posible, pero entendiendo la soluci
 
 ## Formato a utilizar con Markdown `.md`
 
-```md
+```markdown
 # Nombre de la competencia
 [nombre del link](link a la competencia o problemas)
 
@@ -19,6 +19,37 @@ Complejidad de la solución.
 
 ```
 Y así con todos los problemas.
+[Guia Rapida de Markdown](https://help.github.com/articles/creating-and-highlighting-code-blocks/)
+
+
+## Agregando código al `.md`
+
+Para agregar partes de código y que sea más legible lo ideal es ponerlo de la siguiente manera.
+```markdown
+    ```{lenguaje}
+    pedazos de codigo
+    mas codigo.
+    etc.
+    ```
+```
+Se muestra un ejemplo.
+
+### Ejemplo con C++
+```markdown
+    ```c++
+    #include <math.h>
+    for(int i=0;i < n; i++){
+        s
+    }
+    ```
+```
+Que se ve de la siguiente manera:
+```c++
+  #include <math.h>
+  for(int i=0;i < n; i++){
+      s
+  }
+```
 
 ## Notas
 
