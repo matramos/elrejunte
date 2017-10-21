@@ -21,28 +21,14 @@
 \subsection{Hash Table}
 \lstinputlisting[language=C++]{secciones/estructuras/Hash_table.cpp}
 
-\subsection{Segment Trees}
-\subsubsection{Range Sum Query (lazy)}
-\begin{footnotesize}
-	\textbf{Utiliza:} \texttt{<cmath>}\\
-	\textbf{Notas:} Limpiar \texttt{st} y \texttt{lazy} en cada testcase. En \texttt{main()}: \\
-	\begin{itemize}
-		\item \texttt{N} es la cantidad de elementos del problema.
-		\item ($ 0 \leq i,j < N $) \texttt{build(1,0,N-1)}, \texttt{update(1,0,N-1,i,j,value)}, \texttt{query(1,0,N-1,i,j)}. Los elementos en \texttt{arr} tienen que estar desde \texttt{arr[0]}.
-		\item ($ 1 \leq i,j \leq N $) \texttt{build(1,1,N)}, \texttt{update(1,1,N,i,j,value)}, \texttt{query(1,1,N,i,j)}. Los elementos en \texttt{arr} tienen que estar desde \texttt{arr[1]}.
-	\end{itemize}
-\end{footnotesize}
-\lstinputlisting[language=C++]{secciones/estructuras/st_range_sum_query_lazy.cpp}
-
-\subsubsection{Range Min/Max Query (lazy)}
-\begin{footnotesize}
-	\textbf{Utiliza:} \texttt{<cmath>}\\
-	\textbf{Notas:} Limpiar \texttt{st} y \texttt{lazy} en cada testcase. En \texttt{main()}: \\
-	\begin{itemize}
-		\item \texttt{N} es la cantidad de elementos del problema.
-		\item ($ 0 \leq i,j < N $) \texttt{build(1,0,N-1)}, \texttt{update(1,0,N-1,i,j,value)}, \texttt{query(1,0,N-1,i,j)}. Los elementos en \texttt{arr} tienen que estar desde \texttt{arr[0]}.
-		\item ($ 1 \leq i,j \leq N $) \texttt{build(1,1,N)}, \texttt{update(1,1,N,i,j,value)}, \texttt{query(1,1,N,i,j)}. Los elementos en \texttt{arr} tienen que estar desde \texttt{arr[1]}.
-	\end{itemize}
-\end{footnotesize}
-\lstinputlisting[language=C++]{secciones/estructuras/st_range_min_max_query_lazy.cpp}
+\subsection{RMQ}
+\subsubsection{RMQ (static)}
+Dado un arreglo y una operacion asociativa \emph{idempotente}, get(i, j) opera sobre el rango [i, j). Restriccion: LVL $\ge$ ceil(logn); Usar [ ] para llenar arreglo y luego build().
+\lstinputlisting[language=C++]{secciones/estructuras/rmq_static.cpp}
+\subsubsection{RMQ (dynamic)}
+\lstinputlisting[language=C++]{secciones/estructuras/rmq_dynamic.cpp}
+\subsubsection{RMQ (lazy)}
+\lstinputlisting[language=C++]{secciones/estructuras/rmq_lazy.cpp}
+\subsubsection{RMQ (persistente)}
+\lstinputlisting[language=C++]{secciones/estructuras/rmq_persistent.cpp}
 
