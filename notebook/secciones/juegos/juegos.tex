@@ -1,4 +1,13 @@
 \section{Juegos}
+\subsection{Nim Game}
+Juego en el que hay N pilas, con objetos. Cada jugador debe sacar al menos un objeto de una pila. GANA el jugador que saca el \'ultimo objeto.
+$P_0{\oplus}P_1{\oplus}...{\oplus}P_n = R$
+
+Si $R{\neq}0$ gana el jugador 1.
+\subsubsection{Misere Game}
+Es un juego con las mismas reglas que Nim, pero PIERDE el que saca el \'ultimo objeto. Entonces teniendo el resultado de la suma $R$, y 
+si todas las pilas tienen 1 solo objeto $todos1{=}true$, podemos decir que el jugador2 GANA si:
+${(R{\neq}0){\&}{\neg}{todos1}){\parallel}((R{=}0 ){\&}{todos1}}$
 \subsection{Ajedrez}
 \subsubsection{Non-Attacking N Queen}
 \begin{footnotesize}
