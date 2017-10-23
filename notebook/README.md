@@ -3,7 +3,9 @@
 ![el bichi](https://github.com/matramos/elrejunte/blob/master/notebook/bichi.png)
 
 Notebook del Equipo TheRejointSet (antiguamente El Rejunte) para utilizar en competencias de Programación.
+
 Conjunto de código, estructuras y funciones útiles. Y tambien algunos solucionarios.
+
 Le ~~robamos~~ debemos mucho al notebook [El Diego](https://github.com/mvpossum/eldiego) de Caloventor en Dos (equipo de la UNR).
 
 # Instrucciones para agregar material al Notebook.
@@ -21,7 +23,9 @@ Le ~~robamos~~ debemos mucho al notebook [El Diego](https://github.com/mvpossum/
 ## Agregar código a una sección, Agregar una sub-sección.
 
 1. Crear archivo con la extensión correspondiente. Por ej: `.cpp` o `.py`.
-2. Agregar en el archivo de la seccion `seccion.tex` el codigo Tex correspondiente para agregarlo. ***NOTA: Siempre tomar como ejemplo los archivos ya generados. Si no se lo sabe hacer, dejar al menos el archivo fuente.***
+2. Agregar en el archivo de la seccion `seccion.tex` el codigo Tex correspondiente para agregarlo. 
+
+***NOTA: Siempre tomar como ejemplo los archivos ya generados. Si no se lo sabe hacer, dejar al menos el archivo fuente(.cpp).***
 
 ## Link útil
 
