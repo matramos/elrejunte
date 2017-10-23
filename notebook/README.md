@@ -1,6 +1,6 @@
 # El Bichi
 
-![el bichi]()
+![el bichi](https://github.com/matramos/elrejunte/blob/master/notebook/bichi.png)
 
 Notebook del Equipo TheRejointSet (antiguamente El Rejunte) para utilizar en competencias de Programación.
 Conjunto de código, estructuras y funciones útiles. Y tambien algunos solucionarios.
