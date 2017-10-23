@@ -1,4 +1,6 @@
-# {notebooke_name}
+# El Bichi
+
+![el bichi]()
 
 Notebook del Equipo TheRejointSet (antiguamente El Rejunte) para utilizar en competencias de Programación.
 Conjunto de código, estructuras y funciones útiles. Y tambien algunos solucionarios.
