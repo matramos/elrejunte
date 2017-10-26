@@ -9,15 +9,15 @@ struct UnionFind{
 		setSize.rsz(n,1);
 	}
 	int comp(int x){return (f[x]==-1?x:f[x]=comp(f[x]));}//O(1)
-	bool join(int i,int j)
+	bool join(int i,int j) //devuelve true si ya estaban juntos
 	{
 		bool con=comp(i)==comp(j);
 		if(!con)
 		{
 			cantSets--;
-			f[comp(i)]=comp(j);
 			setSize[comp(j)]+=setSize[comp(i)];
 			setSize[comp(i)]=setSize[comp(j)]; //no suma, solo asigna
+			f[comp(i)]=comp(j);
 		}
 		return con;
 	}
