@@ -1,4 +1,4 @@
-# El Bichi
+# El BichiGol
 
 ![el bichi](https://github.com/matramos/elrejunte/blob/master/notebook/bichi.png)
 
