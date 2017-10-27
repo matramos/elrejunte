@@ -1,0 +1,22 @@
+\begin{center}
+\tablefirsthead{\hline \textbf{n} & \textbf{Peor AC Complejidad} & \textbf{Comentario} \\ \hline}
+\tablehead{\hline \multicolumn{3}{|c|}{\tiny Continuaci\'on} \\ \hline \textbf{spec} & \textbf{Tipo} & \textbf{Descripci\'on} \\ }
+% \tabletail{\hline}
+% \tablelasttail{\hline}
+\footnotesize
+{
+  \begin{xtabular}{|C{.15\columnwidth}|C{.25\columnwidth}|L{.55\columnwidth}|}
+  \texttt{$\leq[10..11]$}  & \texttt{$O(n!),O(n^6)$}         & ej. Enumerar permutaciones                                                         \\ \hline
+  \texttt{$\leq[15..18]$}  & \texttt{$O(2^n\times n^2)$}     & ej. DP TSP                                                                         \\ \hline
+  \texttt{$\leq[18..22]$}  & \texttt{$O(2^n\times n)$}       & ej. DP con mascara de bits                                                         \\ \hline
+  \texttt{$\leq100$}       & \texttt{$O(n^4)$}               & ej. DP con 3 dimensiones $+ O(n)$ loops                                            \\ \hline
+  \texttt{$\leq400$}       & \texttt{$O(n^3)$}               & ej. Floyd Warshall                                                                 \\ \hline
+  \texttt{$\leq2K$}        & \texttt{$n^2\log_2n$}           & ej. 2 loops anidados + una busqueda en arbol en una estructura de datos            \\ \hline
+  \texttt{$\leq10K$}       & \texttt{$O(n^2)$}               & ej. Ordenamiento Burbuja/Selecci\'on/Inserci\'on                                   \\ \hline
+  \texttt{$\leq1M$}        & \texttt{$O(n\log_2n)$}          & ej. Merge Sort, armar Segment Tree                                                 \\ \hline
+  \texttt{$\leq100M$}      & \texttt{$O(n),O(\log_2n),O(1)$} & La mayor\'ia de los problemas de contest tiene $n\leq1M$ (cuello de botella en I/O)\\ \hline
+  \end{xtabular}
+}
+\end{center}
+
+  
