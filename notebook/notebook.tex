@@ -16,6 +16,11 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{ragged2e}
+
+\lstnewenvironment{code}
+    {%\lstset{	numbers=none, frame=lines, basicstyle=\small\ttfamily, }%
+    \csname lst@SetFirstLabel\endcsname}
+    {\csname lst@SaveFirstLabel\endcsname}
 % We create some new table columns types.
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1-2\tabcolsep- 1.25\arrayrulewidth}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1-2\tabcolsep- 1.25\arrayrulewidth}}
