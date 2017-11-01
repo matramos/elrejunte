@@ -4,7 +4,7 @@
 
 Notebook del Equipo TheRejointSet (antiguamente El Rejunte) para utilizar en competencias de Programación.
 
-Conjunto de código, estructuras y funciones útiles. Y tambien algunos solucionarios.
+Conjunto de código, algoritmos, estructuras y funciones útiles.
 
 Le ~~robamos~~ debemos mucho al notebook [El Diego](https://github.com/mvpossum/eldiego) de Caloventor en Dos (equipo de la UNR).
 
