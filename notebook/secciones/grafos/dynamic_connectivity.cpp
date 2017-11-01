@@ -23,19 +23,19 @@ struct UnionFind {
 };
 enum {ADD,DEL,QUERY};
 struct Query {int type,u,v;};
-struct DynCon{
+struct DynCon{//bidirectional graphs; create vble as DynCon name(cant_nodos)
 	vector<Query> q;
 	UnionFind dsu;
 	vector<int> match,res;
 	map<ii,int> last;//se puede no usar cuando hay identificador para cada arista (mejora poco)
 	DynCon(int n=0):dsu(n){}
-	void add(int u, int v)
+	void add(int u, int v) //to add an edge
 	{
 		if(u>v) swap(u,v);
 		q.pb((Query){ADD, u, v}), match.pb(-1);
 		last[ii(u,v)] = sz(q)-1;
 	}
-	void remove(int u, int v)
+	void remove(int u, int v) //to remove an edge
 	{
 		if(u>v) swap(u,v);
 		q.pb((Query){DEL, u, v});
@@ -43,11 +43,11 @@ struct DynCon{
 		match[prev] = sz(q)-1;
 		match.pb(prev);
 	}
-	void query()
+	void query() //to add a question (query) type of query
 	{
 		q.pb((Query){QUERY, -1, -1}), match.pb(-1);
 	}
-	void process() 
+	void process() //call this to process queries in the order of q
 	{
 		forn(i,sz(q)) if (q[i].type == ADD && match[i] == -1) match[i] = sz(q);
 		go(0,sz(q));
@@ -69,4 +69,4 @@ struct DynCon{
 		go(m,r);
 		dsu.rollback(s);
 	}
-}dc;
+};

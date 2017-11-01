@@ -1,0 +1,1 @@
+Dynamic connectivity: http://www.spoj.com/problems/DYNACON2/
