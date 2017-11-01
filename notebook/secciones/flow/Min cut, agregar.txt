@@ -1,7 +1,0 @@
-Estrategia para obtener las aristas que forman el min cut:
-1-Correr maxflow
-2-Correr dfs o bfs desde source e identificar todos los nodos que pueden
-ser alcanzados sin usar aristas saturadas (con capacidad 0 luego del MF)
-3-Correr otro dfs o bfs para identificar las aristas del min cut, estas
-serán todas aquellas que van de un nodo alcanzado en el recorrido
-anterior a otro nodo que no fue alcanzado en el recorrido anterior
