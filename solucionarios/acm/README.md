@@ -32,9 +32,10 @@ Los temas/dificultades comúnes son:
 * **Matemática** 
 * **Geometría**
 * **Flujo**
+
 De estos últimos temas se pueden encontrar problemas que se solucionan con un algoritmo o idea de esos temas.
 
-O es más común que sea, mezclando temas de ambos, tener que utilizar una dinámica, luego de calcular algo.
+O es más común que sea, mezclando temas de ambos. Por ej, tener que utilizar una dinámica, luego de calcular algo.
 
 Para una mejor idea de cuales son los temas... **ENTRENAR REALIZANDO LAS REGIONALES ANTERIORES!**
 
