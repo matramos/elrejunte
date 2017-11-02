@@ -66,8 +66,8 @@ Si quieren utilizar ***Pascal***, me apiado en sus almas (?).
 Tienen varias opciones, voy a nombrar las que utilizamos nosotros, seguramente queden algunas afuera. Tengan en cuenta que todo lo que instala Ubuntu por defecto, sigue estando.
 
 * [**GEDIT**](https://wiki.gnome.org/Apps/Gedit) el editor de texto visual por defecto que tiene Ubuntu. Es solo eso, editar texto. Seguramente este `nano` y `vim` accesible por la consola.
-* [**Sublime Text**](https://www.sublimetext.com/) editor de texto moderno, permite compilar, autocompletado, etc. Personalmente, es mi favorito para utilizar con C++. Tengan en cuenta al querer compilar en C++11 lo que dije más arriba, para su ayuda, pueden generar con [este archivo]( elrejunte/sublime_snippets/C++11.sublime-build) una nueva opción de build. (Tools->Build System->New Build System).
-* [**Geany**](https://www.geany.org/) es una editor de texto con algunas de las características de Sublime, tiene algunos botones más visuales, se pude decir que se parece un poco a Zinjai. Tiene mejores herramientas de debuggin que Sublime Text.
+* [**Sublime Text**](https://www.sublimetext.com/) editor de texto moderno, permite compilar, autocompletado, etc. Personalmente, es mi favorito para utilizar con C++. Tengan en cuenta al querer compilar en C++11 lo que dije más arriba, para su ayuda, pueden generar con [este archivo]( https://github.com/matramos/elrejunte/blob/master/sublime_snippets/C%2B%2B11.sublime-build) una nueva opción de build. (Tools->Build System->New Build System).
+* [**Geany**](https://www.geany.org/) es un editor de texto con algunas de las características de Sublime, tiene algunos botones más visuales, se puede decir que se parece un poco a Zinjai. Tiene mejores herramientas de debugging que Sublime Text.
 * [**Eclipse**](https://www.eclipse.org/) el IDE mas utilizada para Java, se que funciona para *C++* y *Python*, pero no lo he utilizado nunca con esos lenguajes. No puedo confirmar que versión van a tener instalada.
 
 Esos son los que me acuerdo, cosas que puede ser que estén pero no estoy seguro: CodeBlocks y NetBeans.
