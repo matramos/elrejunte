@@ -2,13 +2,19 @@
 
 La ACM-ICPC es la competencia de programación (on-site) más importante para alumnos universitarios.
 
-Se realizan regionales (a nosotros nos toca SOUTHAMERICA-SOUTH ()), donde los mejores equipos clasifican a la final, que se realiza en algún lugar del mundo (los sitios van cambiando año a año).
+Se realizan regionales (a nosotros nos toca SOUTHAMERICA-SOUTH (Argentina, Bolivia, Chile, Peru, Paraguay, Uruguay), donde los mejores equipos clasifican a la final, que se realiza en algún lugar del mundo (los sitios van cambiando año a año).
 
 Cada regional tiene diferentes sedes (por país).
 
 El sistema de clasificación depende de cada Región.
-**SOUTHAMERICA-SOUTH** tiene 5 cupos (los 5 primeros que no sean de una misma facultad). Y luego hay 2 cupos a nivel SUPER-REGIONAL Latinoamerica, que se entregan luego de dar todos los cupos para cada Regional.. Uno es para el mejor equipo que es de un país que no recibio cupo.
-Y el segundo es para el mejor equipo (a nivel Latinoamerica) que todavia no clasifico.
+
+**SOUTHAMERICA-SOUTH** tiene 5 cupos (los 5 primeros que no sean de una misma facultad). 
+
+Y luego hay 2 cupos a nivel SUPER-REGIONAL Latinoamerica, que se entregan luego de dar todos los cupos para cada Regional.
+
+Uno es para el mejor equipo, que es de un país que no recibio cupo.
+
+Y el segundo es para el mejor equipo (a nivel Latinoamerica), que todavia no clasifico.
 
 [Más información en el sitio de ACM-ICPC](https://icpc.baylor.edu/)
 
