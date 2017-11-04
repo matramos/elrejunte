@@ -39,6 +39,8 @@ O es más común que sea, mezclando temas de ambos. Por ej, tener que utilizar u
 
 Para una mejor idea de cuales son los temas... **ENTRENAR REALIZANDO LAS REGIONALES ANTERIORES!**
 
+Pueden ver todos los problemas de las regionales en [Live Archive](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8). *La subcarpeta **Latin America** de cada año tiene los problemas de ese año.*
+
 ## Entorno Bombonera (o... que tiene la VM?)
 
 En las regionales en Argentina (y creo que el resto de los países en Latinoamerica tambien lo usan), se utiliza el sistema BOCA como juez, y la máquina virtual [Bombonera](http://www.bombonera.org/) para que utilicen los equipos.
