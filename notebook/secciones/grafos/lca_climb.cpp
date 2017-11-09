@@ -1,5 +1,4 @@
-const int MAXN=100001;
-const int LOGN=20;
+const int MAXN=100001, LOGN=20;
 //f[v][k] holds the 2^k father of v
 //L[v] holds the level of v
 int N, f[MAXN][LOGN], L[MAXN];
