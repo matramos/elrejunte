@@ -4,6 +4,7 @@ struct line{
 	double a,b,c;//Ax+By=C
 //pto MUST store float coordinates!
 	line(double a, double b, double c):a(a),b(b),c(c){}
+	// TO DO chequear porque paso problema metiendo negativo el C (-(todo el calculo como esta))
 	line(pto p, pto q): a(q.y-p.y), b(p.x-q.x), c(a*p.x+b*p.y) {}
 	int side(pto p){return sgn(ll(a) * p.x + ll(b) * p.y - c);}
 };
