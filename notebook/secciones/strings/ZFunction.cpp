@@ -22,5 +22,5 @@ void match(string &T,string &P) //Text, Pattern -- O(|T|+|P|)
 	z.rsz(s.size(),0);
 	zFunction(s);
 	forr(i,P.size()+1,s.size())
-		if(z[i]==P.size()) //match found, idx = i-P.size()-1
+		if(z[i]==P.size()); //match found, idx = i-P.size()-1
 }
