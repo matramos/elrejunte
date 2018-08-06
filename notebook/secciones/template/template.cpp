@@ -5,6 +5,7 @@
 #define forn(i,n) forr(i,0,n)
 #define dforn(i,n) for(int i=n-1;i>=0;i--)
 #define forall(it,v) for(auto it=v.begin();it!=v.end();it++)
+#define foreach(i, v) for(auto i:v)
 #define sz(c) ((int)c.size())
 #define zero(v) memset(v, 0, sizeof(v))
 #define pb push_back
