@@ -25,8 +25,11 @@ typedef vector<ii> vii;
 
 int main()
 {
-	//freopen("input","r",stdin);
-	//freopen("output","w",stdout);
+	// agregar g++ -DREJUNTE en compilación
+	#ifdef REJUNTE
+		freopen("input", "r", stdin);
+		// freopen("output","w", stdout);
+	#endif
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
