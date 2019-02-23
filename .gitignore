@@ -1,5 +1,5 @@
 ## PDFs inside notebook folder.
-notebook/*.pdf
+# notebook/*.pdf
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
