@@ -147,7 +147,6 @@ Esto solo compila en C++11.
 
 \subsection{Hash Table}
 \lstinputlisting[language=C++]{secciones/estructuras/Hash_table.cpp}
-
 \subsection{RMQ}
 \subsubsection{RMQ (static)}
 Dado un arreglo y una operacion asociativa \emph{idempotente}, get(i, j) opera sobre el rango [i, j). Restriccion: LVL $\ge$ ceil(logn); Usar [ ] para llenar arreglo y luego build().
@@ -158,7 +157,6 @@ Dado un arreglo y una operacion asociativa \emph{idempotente}, get(i, j) opera s
 \lstinputlisting[language=C++]{secciones/estructuras/rmq_lazy.cpp}
 \subsubsection{RMQ (persistente)}
 \lstinputlisting[language=C++]{secciones/estructuras/rmq_persistent.cpp}
-
 \subsection{BIGInt}
 \lstinputlisting[language=C++]{secciones/estructuras/bigint.cpp}
 
@@ -166,10 +164,8 @@ Dado un arreglo y una operacion asociativa \emph{idempotente}, get(i, j) opera s
 \section{Algoritmos}
 \subsection{Longest Increasing Subsecuence}
 \lstinputlisting[language=C++]{secciones/algoritmos/LIS.cpp}
-
 \subsection{Mo's}
 $O(q*\sqrt{n})$
-
 \lstinputlisting[language=C++]{secciones/algoritmos/mos.cpp}
 
 % strings
@@ -322,21 +318,7 @@ Sea $n=\prod{p_i^{k_i}}$, fact(n) genera un map donde a cada $p_i$ le asocia su 
 
 \subsection{Tablas y cotas (Primos, Divisores, Factoriales, etc)}
 %\subsubsection{
-\paragraph{Factoriales} \ \\
-\begin{tabular}{l|l}
-0! =	1             & 11! = 39.916.800  \\
-1! =	1             & 12! =	479.001.600	($\in \mathtt{int}$)\\
-2! =	2             & 13! =	6.227.020.800	\\
-3! =	6             & 14! =	87.178.291.200	\\
-4! =	24            & 15! =	1.307.674.368.000	\\
-5! =	120   			  & 16! =	20.922.789.888.000	\\
-6! =	720           & 17! =	355.687.428.096.000	\\
-7! =	5.040	        & 18! =	6.402.373.705.728.000	\\
-8! =	40.320	      & 19! =	121.645.100.408.832.000	\\
-9! =	362.880       & 20! =	2.432.902.008.176.640.000	($\in \mathtt{tint}$) \\
-10! =	3.628.800     & 21! =	51.090.942.171.709.400.000
-\end{tabular}
- 
+\paragraph{Maxs} \ \\ 
 max signed tint = 9.223.372.036.854.775.807 \\
 max unsigned tint = 18.446.744.073.709.551.615
 %\subsubsection{
@@ -345,42 +327,6 @@ max unsigned tint = 18.446.744.073.709.551.615
 31 37 41 43 47 53 59 61 67 71
 73 79 83 89 97 101 103 107 109 113
 127 131 137 139 149 151 157 163 167 173
-179 181 191 193 197 199 211 223 227 229
-233 239 241 251 257 263 269 271 277 281
-283 293 307 311 313 317 331 337 347 349
-353 359 367 373 379 383 389 397 401 409
-419 421 431 433 439 443 449 457 461 463
-467 479 487 491 499 503 509 521 523 541
-547 557 563 569 571 577 587 593 599 601
-607 613 617 619 631 641 643 647 653 659
-661 673 677 683 691 701 709 719 727 733
-739 743 751 757 761 769 773 787 797 809
-811 821 823 827 829 839 853 857 859 863
-877 881 883 887 907 911 919 929 937 941
-947 953 967 971 977 983 991 997 1009 1013
-1019 1021 1031 1033 1039 1049 1051 1061 1063 1069
-1087 1091 1093 1097 1103 1109 1117 1123 1129 1151
-1153 1163 1171 1181 1187 1193 1201 1213 1217 1223
-1229 1231 1237 1249 1259 1277 1279 1283 1289 1291
-1297 1301 1303 1307 1319 1321 1327 1361 1367 1373
-1381 1399 1409 1423 1427 1429 1433 1439 1447 1451
-1453 1459 1471 1481 1483 1487 1489 1493 1499 1511
-1523 1531 1543 1549 1553 1559 1567 1571 1579 1583
-1597 1601 1607 1609 1613 1619 1621 1627 1637 1657
-1663 1667 1669 1693 1697 1699 1709 1721 1723 1733
-1741 1747 1753 1759 1777 1783 1787 1789 1801 1811
-1823 1831 1847 1861 1867 1871 1873 1877 1879 1889
-1901 1907 1913 1931 1933 1949 1951 1973 1979 1987
-1993 1997 1999 2003 2011 2017 2027 2029 2039 2053
-2063 2069 2081
-
-\paragraph{Primos cercanos a $10^n$}\ \\
-9941 9949 9967 9973 10007 10009 10037 10039 10061 10067 10069 10079\\
-99961 99971 99989 99991 100003 100019 100043 100049 100057 100069\\
-999959 999961 999979 999983 1000003 1000033 1000037 1000039\\
-9999943 9999971 9999973 9999991 10000019 10000079 10000103 10000121\\
-99999941 99999959 99999971 99999989 100000007 100000037 100000039 100000049\\
-999999893 999999929 999999937 1000000007 1000000009 1000000021 1000000033
  
 \paragraph{Cantidad de primos menores que $10^n$}\ \\
 $\pi(10^1)$ = 4 ;
@@ -480,27 +426,33 @@ Componente Fuertemente Conexa
 
 % utils
 \section{Utils}
-\subsection{Convertir string a num e viceversa}
-\lstinputlisting[language=C++]{secciones/utils/string_to_num.cpp}
 \subsection{Truquitos para entradas/salidas}
 \lstinputlisting[language=C++]{secciones/utils/tricks.cpp}
 \subsection{Comparaci\'on de Double}
 \lstinputlisting[language=C++]{secciones/utils/comparar_double.cpp}
 \subsection{Iterar subconjuntos}
 \lstinputlisting[language=C++]{secciones/utils/iterar_subconjuntos.cpp}
-\subsection{Limites}
-\lstinputlisting[language=C++]{secciones/utils/limites.cpp}
-\subsection{Mejorar Lectura de Enteros}
-\lstinputlisting[language=C++]{secciones/utils/mejora_lectura_enteros.cpp}
-\subsection{Compilar C++11 con g++}
-Dos opciones, \'util en Linux.
-\begin{code}
-g++ -std=c++11 {file} -o {filename}
-
-g++ -std=c++0x {file} -o {filename}
-\end{code}
-
 \subsection{Funciones Utiles}
-\input{secciones/utils/table_utils.tex}
+\begin{center}
+	\tablefirsthead{\hline \textbf{Algo} & \textbf{Params} & \textbf{Funci\'on} \\ \hline}
+	\tablehead{\hline \multicolumn{3}{|c|}{\tiny Continuaci\'on} \\ \hline \textbf{Algo} & \textbf{Params} & \textbf{Funci\'on} \\ }
+	% \tabletail{\hline}
+	% \tablelasttail{\hline}
+	\footnotesize
+	{
+	  \begin{xtabular}{|L{.4\columnwidth}|C{.22\columnwidth}|L{.4\columnwidth}|}
+	  \texttt{count, count\_if}       & \texttt{f, l, elem/pred}               & cuenta elem, pred(i)                                                                 \\ \hline
+	  \texttt{lexicographical\_compare}        & \texttt{f1,l1,f2,l2}          & \textit{bool} con [f1,l1]<[f2,l2]                                                 \\ \hline
+	  \texttt{inner\_product} & \texttt{f1, l1, f2, i} & \textit{T} $=$ i $+$ [f1, l1) . [f2, $\ldots$ )\\\hline
+	  \texttt{partial\_sum} & \texttt{f, l, r, [op]} & r+i = $\sum$/oper de [f,f+i] $\forall i \in$[f,l)\\\hline
+	  \texttt{\_\_builtin\_ffs} &  \texttt{unsigned int} & Pos. del primer 1 desde la derecha\\\hline
+	  \texttt{\_\_builtin\_clz} &  \texttt{unsigned int} & Cant. de ceros desde la izquierda.\\\hline
+	  \texttt{\_\_builtin\_ctz} &  \texttt{unsigned int} & Cant. de ceros desde la derecha.\\\hline
+	  \texttt{\_\_builtin\_popcount} &  \texttt{unsigned int} & Cant. de 1’s en x.\\\hline
+	  \texttt{\_\_builtin\_parity} &  \texttt{unsigned int} & 1 si x es par, 0 si es impar.\\\hline
+	  \texttt{\_\_builtin\_XXXXXXll} &  \texttt{unsigned ll} & = pero para long long's.\\\hline
+	  \end{xtabular}
+	}
+	\end{center}
 
 \end{document}
