@@ -66,7 +66,7 @@ Recomendamos mucho participar del Training Camp que tengan cerca de su ciudad, o
 
 No solo para crecer en conocimiento, sino también para conocer equipos y personas de otros lugares, que tienen los mismos intereses que uno.
 
-Pasamos el [link del Training Camp de Argentina](http://trainingcamp.org.ar/).
+Pasamos el [link del Training Camp de Argentina](https://tc-arg.tk/).
 
 ## PRACTICAR, PRACTICAR, PRACTICAR
 
