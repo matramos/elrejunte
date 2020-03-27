@@ -6,7 +6,7 @@ struct Trie{
 	Trie *padre, *link, *nxthoja;
 	char pch;//caracter que conecta con padre
 	//Trie(): tran(),  idhoja(), padre(), link() {}
-	//comenté linea de arriba porque me daba errores usarla.
+	//comento linea de arriba porque me daba errores usarla.
 	void insert(const string &s, int id=1, int p=0) //id>0!!!
 	{
 		if(p<sz(s))
@@ -43,7 +43,7 @@ struct Trie{
 		if(idhoja) cout << "found " << idhoja << "  at position " << p-szhoja << endl;
 		if(get_nxthoja()) get_nxthoja()->print(p);
 	}
-	void matching(const string &s, int p=0) //O(|s| + tamaño palabras)
+	void matching(const string &s, int p=0) //O(|s| + tamanio palabras)
 	{
 		print(p); if(p<sz(s)) get_tran(s[p])->matching(s, p+1);
 	}

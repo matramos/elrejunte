@@ -14,12 +14,12 @@ void dfs2(int nodo)
 		{
 			//edge nodo -> (it->fst) pertenece al min_cut
 			//y su peso original era: it->snd + G[it->fst][nodo]
-			//si no existia arista original al revés
+			//si no existia arista original al reves
 		}
 		else if(!used[it->fst]) dfs2(it->fst);
 	}
 }
-void minCut() //antes correr algún maxflow()
+void minCut() //antes correr algun maxflow()
 {
 	dfs1(SRC);
 	dfs2(SRC);
