@@ -2,7 +2,7 @@
 \section{Estructuras de datos}
 
 \subsection{Set Mejorado}
-Esto solo compila en C++11.
+Esto solo compila desde C++11.
 \lstinputlisting[language=C++]{secciones/estructuras/SetConBS.cpp}
 
 % \subsection{Disjoint Sets}
@@ -24,16 +24,25 @@ Esto solo compila en C++11.
 \subsection{Hash Table}
 \lstinputlisting[language=C++]{secciones/estructuras/Hash_table.cpp}
 
-\subsection{RMQ}
-\subsubsection{RMQ (static)}
+\subsection{Gain cost set}
+\lstinputlisting[language=C++]{secciones/estructuras/gain_cost_set.cpp}
+
+\subsection{Disjoint intervals}
+\lstinputlisting[language=C++]{secciones/estructuras/disjoint_intervals.cpp}
+
+\subsection{Segment Tree}
+\subsubsection{ST static}
 Dado un arreglo y una operacion asociativa \emph{idempotente}, get(i, j) opera sobre el rango [i, j). Restriccion: LVL $\ge$ ceil(logn); Usar [ ] para llenar arreglo y luego build().
 \lstinputlisting[language=C++]{secciones/estructuras/rmq_static.cpp}
-\subsubsection{RMQ (dynamic)}
+\subsubsection{ST dynamic}
 \lstinputlisting[language=C++]{secciones/estructuras/rmq_dynamic.cpp}
-\subsubsection{RMQ (lazy)}
+\subsubsection{ST lazy}
 \lstinputlisting[language=C++]{secciones/estructuras/rmq_lazy.cpp}
-\subsubsection{RMQ (persistente)}
+\subsubsection{ST persistente}
 \lstinputlisting[language=C++]{secciones/estructuras/rmq_persistent.cpp}
+\subsubsection{ST 2d}
+\lstinputlisting[language=C++]{secciones/estructuras/rmq_2d.cpp}
+
 
 \subsection{BIGInt}
 \lstinputlisting[language=C++]{secciones/estructuras/bigint.cpp}

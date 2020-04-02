@@ -11,7 +11,7 @@ vector<int> zFunction(string &s) {
 	return z;
 }
 void match(string &T,string &P) { //Text, Pattern -- O(|T|+|P|)
-	string s = P+'$'+T;//'$'' should be a character that is not present in T
+	string s = P+'$'+T;//'$' should be a character that is not present in T
 	vector<int> z = zFunction(s);
 	forr(i, P.size()+1, s.size())
 		if(z[i] == P.size()); //match found, idx = i-P.size()-1
