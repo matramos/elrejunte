@@ -1,8 +1,13 @@
-Fixes #
+## Describe tu PR
+Este PR:
+- [ ] Agrega una sección al notebook
+- [ ] Modifica una seccion del notebook
+- [ ] Agrega uno o más algoritmos
+- [ ] Modifica uno o más algoritmos
+- [ ] Agrega un teorema o tip (en latex)
+- [ ] Otro..
 
-Cambios/Arreglos propuestos en este pull-request:
--
--
--
+## Describe que algoritmos o teoremas agregas o modificas:
+Agregar links a las fuentes correspondientes
 
-Revisar @matramos 
+Luego de completado asignar a matramos o lsantire el PR
