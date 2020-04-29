@@ -12,6 +12,7 @@ struct RMQ{
 		forn(i, 2*sz) t[i] = neutro;
 		forn(i, 2*sz) dirty[i] = neutro2;
 	}
+	void updall() {dforn(i, sz) t[i]=operacion(t[2*i], t[2*i+1]);} //O(n)
 	void push(int n, int a, int b) {//propaga el dirty a sus hijos
 		if(dirty[n] != neutro2) {// n = node of range [a,b)
 			t[n] += dirty[n]*(b-a);//altera el nodo, modificar segun el problema
@@ -45,4 +46,4 @@ struct RMQ{
 	}
 	void alterar(Alt val, int i, int j){alterar(val,i,j,1,0,sz);}
 };//Use: definir operacion, neutros, Alt, Elem, uso de dirty, MAXN
-//cin >> n; rmq.init(n);
+//cin >> n; rmq.init(n); forn(i,n) cin >> rmq[i]; rmq.updall()
