@@ -17,11 +17,12 @@ struct Hash {
 		}
 	}
 	ll get(int s, int e) { // get hash value of the substring [s, e)
-		ll h0 = (h[0][e] - h[0][s] + MOD[0]) % MOD[0];
-		h0 = (1LL * h0 * pi[0][s]) % MOD[0];
-		ll h1 = (h[1][e] - h[1][s] + MOD[1]) % MOD[1];
-		h1 = (1LL * h1 * pi[1][s]) % MOD[1];
-		return (h0<<32)|h1;
+		ll H[2];
+		forn(i,2) {
+			H[i] = (h[i][e] - h[i][s] + MOD[i]) % MOD[i];
+			H[i] = (1LL * H[i] * pi[i][s]) % MOD[i];
+		}
+		return (H[0]<<32)|H[1];
 	}
 	//get hash value of [s, e) if origVal in pos is changed to val
 	//Assumes s <= pos < e. If multiple changes are needed, 
