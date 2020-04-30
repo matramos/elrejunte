@@ -29,4 +29,4 @@ tipo get(int l, int r, node *t, int tl, int tr) {
     else if(l >= tm) return get(l, r, t->r, tm, tr);
 	return oper(get(l, tm, t->l, tl, tm), get(tm, r, t->r, tm, tr));
 }
-//node t represents range [tl, tr). For roots alway use tl = 0, tr = size
+//node t represents range [tl, tr). For roots always use tl = 0, tr = size
