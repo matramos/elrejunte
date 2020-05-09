@@ -16,6 +16,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{ragged2e}
+\usepackage{xcolor}
 
 \lstnewenvironment{code}
     {%\lstset{	numbers=none, frame=lines, basicstyle=\small\ttfamily, }%
@@ -68,7 +69,10 @@
     showspaces=false,
     showstringspaces=false,
     showtabs=false,
-    tabsize=2
+    tabsize=2,
+    commentstyle=\color{brown}, % comment color
+    keywordstyle=\color{blue}, % keyword color
+    stringstyle=\color{red} % string color
 }
 \lstset{style=codestyle}
 
