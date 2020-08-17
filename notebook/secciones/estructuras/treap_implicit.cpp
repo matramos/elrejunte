@@ -2,7 +2,7 @@
 // However, the key is not stored explicitly, but can be calculated as
 // the sum of the sizes of the left child of the ancestors where the node
 // is in the right subtree of it.
-// (commented parts are specific to range sum queries problem)
+// (commented parts are specific to range sum queries and other problems)
 // rng = random number generator, works better than rand in some cases
 mt19937 rng;
 typedef struct item *pitem;
@@ -12,8 +12,9 @@ struct item {
 //	int sum; // (paramters for range query)
 //	int add; // (parameters for lazy prop)
 	pitem l, r;
-	item(int val) : pr(rng()), cnt(1), val(val), l(NULL), r(NULL),
-					rev(false)/*, sum(val), add(0)*/{}
+//	pitem p; // ptr to parent, for getPos
+	item(int val) : pr(rng()), cnt(1), val(val), rev(false),/* sum(val),
+					 add(0),*/ l(NULL), r(NULL), /*p(NULL)*/{}
 };
 void push(pitem node) {
 	if(node){
@@ -34,7 +35,10 @@ int cnt(pitem t) {return t ? t->cnt : 0;}
 void upd_cnt(pitem t) {
 	if(t) {
 		t->cnt = cnt(t->l) + cnt(t->r) + 1;
-		// t->sum=t->val+sum(t->l)+sum(t->r);
+		//t->sum=t->val+sum(t->l)+sum(t->r); // for range sum
+		/*if(t->l) t->l->p = t; // for getPos
+		if(t->r) t->r->p = t;
+		t->p = NULL;*/
 	}
 }
 void split(pitem node, pitem& L, pitem& R, int sz) {// sz: wanted size for L
@@ -91,6 +95,22 @@ void reverse(pitem &node, int L, int R) {//[L, R) O(log)
 	int ret = t2->sum;
 	merge(node, t1, t2);
 	merge(node, node, t3);
+	return ret;
+}*/
+/*int getPos(pitem t) { //returns implicit key of a node
+	assert(t);				//(position in the array)
+	int ret = 0;
+	if(t->l) ret += t->l->cnt;
+	pitem prev = t;
+	t = t->p;
+	while(t) {
+		if(t->r == prev) {
+			ret++;
+			if(t->l) ret += t->l->cnt;
+		}
+		prev = t;
+		t = t->p;
+	}
 	return ret;
 }*/
 void output(pitem t){ // useful for debugging
