@@ -51,11 +51,14 @@
 % We use Courier font to make bold keywords possible.
 \renewcommand{\ttdefault}{pcr}
 
+\usepackage{xcolor}
+\definecolor{commentgreen}{RGB}{2,112,10}
+
 % Listing code style
 \lstdefinestyle{codestyle}{
 	basicstyle=\scriptsize\ttfamily,
     keywordstyle=\bfseries,
-    emph={tipo}, % Here we can define customs keywords
+    emph={int,char,double,float,unsigned,void,bool},
     emphstyle=\bfseries,
     breakatwhitespace=false,
     breaklines=true,
@@ -70,7 +73,7 @@
     showstringspaces=false,
     showtabs=false,
     tabsize=2,
-    commentstyle=\color{brown}, % comment color
+    commentstyle=\color{commentgreen}, % comment color
     keywordstyle=\color{blue}, % keyword color
     stringstyle=\color{red} % string color
 }

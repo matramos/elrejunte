@@ -1,24 +1,17 @@
 \newpage
 \section{Estructuras de datos}
 
-\subsection{Set Mejorado}
+\subsection{Ordered set}
 Esto solo compila desde C++11.
 \lstinputlisting[language=C++]{secciones/estructuras/SetConBS.cpp}
 
-% \subsection{Disjoint Sets}
 \subsection{Union Find}
-% \begin{footnotesize}
-% 	\textbf{Utiliza:} \texttt{<vector>}\\
-% 	\textbf{Notas:} Rangos \texttt{[i,j]} (\textit{0 based}). No recomendable si se tienen que crear y destruir muchos objetos. Probar funcionamiento en casos l\'imites. 
-% \end{footnotesize}
-% \lstinputlisting[language=C++]{secciones/estructuras/union_find_oop.cpp}
-% \subsubsection{Union Find (C Style/Static)}
-% \begin{footnotesize}
-% 	\textbf{Utiliza:} \texttt{<cstring>}\\
-% 	\textbf{Notas:} Rangos \texttt{[i,j]} (\textit{0 based}). En \texttt{init(n)}, \texttt{n $\leq$ MAXN}
-% \end{footnotesize}
-% \lstinputlisting[language=C++]{secciones/estructuras/union_find_static.cpp}
+
+\subsubsection{Classic DSU}
 \lstinputlisting[language=C++]{secciones/estructuras/UnionFind.cpp}
+
+\subsubsection{DSU with rollbacks}
+\lstinputlisting[language=C++]{secciones/estructuras/union_find_rollbacks.cpp}
 
 \newpage
 \subsection{Hash Table}
