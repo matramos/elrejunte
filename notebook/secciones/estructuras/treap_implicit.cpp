@@ -4,7 +4,7 @@
 // is in the right subtree of it.
 // (commented parts are specific to range sum queries and other problems)
 // rng = random number generator, works better than rand in some cases
-mt19937 rng;
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 typedef struct item *pitem;
 struct item {
 	int pr, cnt, val;
