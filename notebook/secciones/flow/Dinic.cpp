@@ -62,7 +62,7 @@ struct Dinic {
 		}
 		return 0;
 	}
-	ll maxFlow(int S,int T)
+	ll maxFlow(int S,int T) //O(V^2*E), unit nets: O(sqrt(V)*E)
 	{
 		ll total = 0;
 		while(BFS(S, T))
