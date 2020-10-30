@@ -97,21 +97,19 @@ void reverse(pitem &node, int L, int R) {//[L, R) O(log)
 	merge(node, node, t3);
 	return ret;
 }*/
-/*int getPos(pitem t) { //returns implicit key of a node
-	assert(t);				//(position in the array)
-	int ret = 0;
-	if(t->l) ret += t->l->cnt;
-	pitem prev = t;
-	t = t->p;
-	while(t) {
-		if(t->r == prev) {
-			ret++;
-			if(t->l) ret += t->l->cnt;
-		}
-		prev = t;
-		t = t->p;
+/*/void push_all(pitem t){
+	if(t->p)push_all(t->p);
+	push(t);
+}
+pitem getRoot(pitem t, int& pos){ // get root and position for node t
+	push_all(t);
+	pos=cnt(t->l);
+	while(t->p){
+		pitem p=t->p;
+		if(t==p->r)pos+=cnt(p->l)+1;
+		t=p;
 	}
-	return ret;
+	return t;
 }*/
 void output(pitem t){ // useful for debugging
     if(!t)return;
