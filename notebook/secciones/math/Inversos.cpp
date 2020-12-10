@@ -7,6 +7,6 @@ void calc(int p) //O(p)
 }
 int inverso(int x) //O(log x)
 {
-	return expMod(x, eulerPhi(MOD)-2);//si mod no es primo(sacar a mano)
+	return expMod(x, eulerPhi(MOD)-1);//si mod no es primo(sacar a mano)
 	return expMod(x, MOD-2);//si mod es primo
 }
