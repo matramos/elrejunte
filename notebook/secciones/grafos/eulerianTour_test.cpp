@@ -35,9 +35,9 @@ vector<vector<int>> mx;
 // and uses every edge once.
 struct EulerianTour {
   int N, M = 0, odd = 0;
-  std::vector<std::vector<std::pair<int, int>>> E;
-  std::vector<int> deg;
-  std::vector<bool> vis;
+  vector<vector<ii>> E;
+  vector<int> deg;
+  vector<bool> vis;
   EulerianTour(int N) : N(N), E(N), deg(N), vis(N) {}
   void add_edge(int u, int v) {
     int V[2] = {u, v};
