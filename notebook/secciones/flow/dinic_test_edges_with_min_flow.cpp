@@ -111,12 +111,15 @@ struct DinicWithMinOnEdges {
 		ll flow = dinic.maxFlow(SRC, SNK);
 		if(flow < minFlowSum) return -1; // no valid flow exists
 		assert(flow == minFlowSum);
-		forn(i,sz(E)) {
+		// Not sure why this commented part doesn't seem to be
+		// necessary. And also not sure why it's not needed to
+		// rebuild the dinic for getting the actual maxflow
+		/*forn(i,sz(E)) {
 			dinic.E[6*i+4].cap += E[i].snd;
 			dinic.E[6*i+4].flow += E[i].snd;
 			dinic.E[6*i+5].flow -= E[i].snd;
 		}
-		forn(_,2) dinic.E.pop_back();
+		forn(_,2) dinic.E.pop_back();*/
 		return dinic.maxFlow(S, T);
 	}
 };
