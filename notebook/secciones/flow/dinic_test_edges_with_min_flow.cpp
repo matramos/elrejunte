@@ -88,12 +88,12 @@ struct Dinic {
 
 const int INF = 100010;
 
-// Dinic wrapper to allow setting min flow on edges
-struct DinicWithMinOnEdges {
+// Dinic wrapper to allow setting demands of min flow on edges
+struct DinicWithDemands {
 	int N;
 	vector<pair<Edge, ll>> E; // (normal dinic edge, min flow)
 	Dinic dinic;
-	DinicWithMinOnEdges(int n): N(n), E(0), dinic(n+2) {}
+	DinicWithDemands(int n): N(n), E(0), dinic(n+2) {}
 	void addEdge(int u, int v, ll cap, ll minFlow) {
 		assert(minFlow <= cap);
 		if (u != v) E.emplace_back(mp(Edge(u, v, cap), minFlow));
@@ -111,24 +111,25 @@ struct DinicWithMinOnEdges {
 		ll flow = dinic.maxFlow(SRC, SNK);
 		if(flow < minFlowSum) return -1; // no valid flow exists
 		assert(flow == minFlowSum);
-		// Not sure why these changes to the dinic were enough for
-		// getting the maxflow on the tests performed.
+		// Now go back to the original network, to a valid
+		// state where all min flow values are satisfied.
 		forn(i,sz(E)) {
+			forn(j,4) {
+			    assert(j%2 || dinic.E[6*i+j].flow == E[i].snd);
+			    dinic.E[6*i+j].cap = dinic.E[6*i+j].flow = 0;
+			}
 			dinic.E[6*i+4].cap += E[i].snd;
 			dinic.E[6*i+4].flow += E[i].snd;
-			dinic.E[6*i+5].flow -= E[i].snd;
+			// don't change edge [6*i+5] to keep forcing the mins
 		}
-		forn(_,2) dinic.E.pop_back();
-		// If you get a WA, you could try rebuilding the dinic
-		// here before getting the maxflow. However, the resulting
-		// flow probably won't satisfy the min flow restrictions,
-		// but we would know that there is a way of satisfying them
-		/*dinic = Dinic(N);
-		forall(e, E) dinic.addEdge(e->fst.u, e->fst.v, e->fst.cap);*/
-		return dinic.maxFlow(S, T);
+		forn(i,2) dinic.E[6*sz(E)+i].cap = dinic.E[6*sz(E)+i].flow = 0;
+		// Just finish the maxFlow now
+		dinic.maxFlow(S, T);
+		flow = 0; // get the result manually
+		forall(e, dinic.g[S]) flow += dinic.E[*e].flow;
+		return flow;
 	}
 };
-
 
 int main()
 {
@@ -146,7 +147,7 @@ int main()
 	map<int,int> cntx, cnty, mx, my, midx, midy;
 	int auxid = 0;
 	map<ii,vector<int>> mid;
-	DinicWithMinOnEdges dinic(2*n+2);
+	DinicWithDemands dinic(2*n+2);
 	int SRC = 2*n, SNK = 2*n+1;
 	forn(i,n)
 	{
