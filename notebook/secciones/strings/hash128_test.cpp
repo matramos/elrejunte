@@ -21,16 +21,16 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> ii;
 
-#define bint __int128
+typedef __int128 bint; // needs gcc compiler?
+const bint MOD=212345678987654321LL, P=1777771, PI=106955741089659571LL;
 struct Hash {
-	bint MOD=212345678987654321LL, P=1777771, PI=106955741089659571LL;
 	vector<bint> h, pi;
 	Hash(string& s) {
 		assert((P*PI)%MOD == 1);
 		h.resize(s.size()+1); pi.resize(s.size()+1);
 		h[0]=0; pi[0]=1;
 		bint p=1;
-		forr(i, 1, s.size()+1) {
+		forr(i, 1, sz(s)+1) {
 			h[i] = (h[i-1] + p*s[i-1]) % MOD;
 			pi[i] = (pi[i-1] * PI) % MOD;
 			p = (p*P) % MOD;
@@ -56,7 +56,7 @@ int main()
 	rs = s;
 	reverse(rs.begin(), rs.end());
 	Hash h(s), rh(rs);
-	forn(i,s.size()-k+1) if(h.get(i, i+k) == rh.get(s.size()-i-k,s.size()-i)) ans++;
+	forn(i,sz(s)-k+1) if(h.get(i, i+k) == rh.get(sz(s)-i-k,sz(s)-i)) ans++;
 	cout << ans << '\n';
 	return 0;
 }

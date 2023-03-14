@@ -1,22 +1,20 @@
+// P should be a prime number, could be randomly generated,
+// sometimes is good to make it close to alphabet size
+// MOD[i] must be a prime of this order, could be randomly generated
+const int P=1777771, MOD[2] = {999727999, 1070777777};
+const int PI[2] = {325255434, 10018302}; // PI[i] = P^-1 % MOD[i]
 struct Hash {
-	//P must be a prime number, could be randomly generated,
-	//sometimes is good to make it close to alphabet size
-	int P=1777771, MOD[2], PI[2];
 	ll h[2];
 	vector<ll> vp[2];
-	deque<char> x;
-	Hash(vector<char>& s) {
+	deque<int> x;
+	Hash(vector<int>& s) {
 		forn(i,sz(s)) x.pb(s[i]);
-		//MOD[i] must be a prime of this order, could be randomly generated
-		MOD[0]=999727999; MOD[1]=1070777777;
-		//PI[i] = P^-1 % MOD[i]
-		PI[0]=325255434; PI[1]=10018302;
 		forn(k, 2)
 			vp[k].rsz(s.size()+1);
 		forn(k, 2) {
 			h[k] = 0; vp[k][0] = 1;
 			ll p=1;
-			forr(i, 1, s.size()+1) {
+			forr(i, 1, sz(s)+1) {
 				h[k] = (h[k] + p*s[i-1]) % MOD[k];
 				vp[k][i] = p = (p*P) % MOD[k];
 			}
@@ -52,3 +50,4 @@ struct Hash {
 	}
 	ll getHashVal() {return (h[0]<<32)|h[1];}
 };
+

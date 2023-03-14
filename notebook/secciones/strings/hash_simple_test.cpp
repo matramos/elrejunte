@@ -22,23 +22,23 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> ii;
 
+// P should be a prime number, could be randomly generated,
+// sometimes is good to make it close to alphabet size
+// MOD[i] must be a prime of this order, could be randomly generated
+const int P=1777771, MOD[2] = {999727999, 1070777777};
+const int PI[2] = {325255434, 10018302}; // PI[i] = P^-1 % MOD[i]
 struct Hash {
-	//P must be a prime number, could be randomly generated,
-	//sometimes is good to make it close to alphabet size
-	int P=1777771, MOD[2];
 	ll h[2];
-	vector<ll> vp[2]; //Only used if getChanged is used (delete it if not)
-	vector<int> x;
+	vector<ll> vp[2];
+	deque<int> x;
 	Hash(vector<int>& s) {
-		x = s;
-		//MOD[i] must be a prime of this order, could be randomly generated
-		MOD[0]=999727999; MOD[1]=1070777777;
+		forn(i,sz(s)) x.pb(s[i]);
 		forn(k, 2)
 			vp[k].rsz(s.size()+1);
 		forn(k, 2) {
 			h[k] = 0; vp[k][0] = 1;
 			ll p=1;
-			forr(i, 1, s.size()+1) {
+			forr(i, 1, sz(s)+1) {
 				h[k] = (h[k] + p*s[i-1]) % MOD[k];
 				vp[k][i] = p = (p*P) % MOD[k];
 			}
@@ -50,8 +50,32 @@ struct Hash {
 			h[i] = (h[i] + vp[i][pos] * (val - x[pos] + MOD[i])) % MOD[i];
 		x[pos] = val;
 	}
+	//Add val to the end of the current string
+	void push_back(int val) {
+		int pos = sz(x);
+		x.pb(val);
+		forn(k, 2)
+		{
+			assert(pos <= sz(vp[k]));
+			if(pos == sz(vp[k])) vp[k].pb(vp[k].back()*P%MOD[k]);
+			ll p = vp[k][pos];
+			h[k] = (h[k] + p*val) % MOD[k];
+		}
+	}
+	//Delete the first element of the current string
+	void pop_front() {
+		assert(sz(x) > 0);
+		forn(k,2)
+		{
+			h[k] = (h[k] - x[0] + MOD[k]) % MOD[k];
+			h[k] = h[k] * PI[k] % MOD[k];
+		}
+		x.pop_front();
+	}
 	ll getHashVal() {return (h[0]<<32)|h[1];}
 };
+
+
 
 
 int main()
@@ -75,16 +99,18 @@ int main()
 	vector<ll> curpos(n, 0), hvalOfPos(n);
 	forn(i,n) posOfVal[v[i]].pb(i);
 	Hash h(cant);
-	map<ll, int> m;
+	unordered_map<ll, int> m;
 	assert(h.getHashVal() == 0);
 	m[h.getHashVal()]++;
 	ll ans = 0;
 	int pos = 0;
+	bool fst = true;
 	forn(i,n)
 	{
 		if(curpos[v[i]] >= 3)
 		{
-			if(pos == 0) m[0]--;
+			if(fst) m[0]--;
+			fst = false;
 			int posto = posOfVal[v[i]][curpos[v[i]]-3];
 			while(pos < posto) m[hvalOfPos[pos++]]--;
 		}
@@ -92,7 +118,6 @@ int main()
 		cant[v[i]]%=3;
 		h.change(v[i], cant[v[i]]);
 		ll hval = h.getHashVal();
-		cout << i << ' ' << m[hval] << '\n';
 		ans += m[hval]++;
 		hvalOfPos[i] = hval;
 		curpos[v[i]]++;
