@@ -27,6 +27,8 @@ ll rho(ll n)
 	ll c=rand()%n+1;
 	while(d==1)
 	{
+		// may want to avoid mulMod if possible
+		// maybe replace with * operator using __int128?
 		x=(mulMod(x,x,n)+c)%n;
 		y=(mulMod(y,y,n)+c)%n;
 		y=(mulMod(y,y,n)+c)%n;
