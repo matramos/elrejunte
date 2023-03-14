@@ -1,3 +1,8 @@
+const ll MOD = 1000000007; // Change according to problem
+
+// Only needed for MOD > 2^31
+// Actually, for 2^31 < MOD < 2^63 it's usually better to use __int128
+// and normal multiplication (* operator) instead of mulMod
 ll mulMod(ll a,ll b,ll m=MOD) //O(log b)
 { //returns (a*b) %c, and minimize overfloor
 	ll x=0, y=a%m;
@@ -9,12 +14,12 @@ ll mulMod(ll a,ll b,ll m=MOD) //O(log b)
 	}
 	return x%m;
 }
-ll expMod(ll b,ll e,ll m=MOD) //O(log b)
+ll expMod(ll b,ll e,ll m=MOD) //O(log e)
 {
 	if(!e) return 1;
 	ll q=expMod(b,e/2,m);
-	q=mulMod(q,q,m);
-	return e%2? mulMod(b,q,m) : q;
+	q=q*q%m; // or q=mulMod(q,q,m); if needed
+	return e%2? b*q%m : q; // or e%2? mulMod(b,q,m) : q;
 }
 ll sumMod(ll a,ll b,ll m=MOD)
 {
