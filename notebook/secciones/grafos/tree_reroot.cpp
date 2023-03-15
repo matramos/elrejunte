@@ -15,9 +15,9 @@ struct SubtreeData {
 	void merge(Edge* e, SubtreeData &s) {
 		// Modify this subtree's data to reflect that 's' is being
 		// merged into 'this' through the edge 'e'.
-		// When e == NULL, then no edge is present, but the root of
-		// 's' is the same as the root of 'this', these 2 subtrees
-		// don't have any other shared nodes nor edges.
+		// When e == NULL, then no edge is present, but then, 'this'
+		// and 's' have THE SAME ROOT (be CAREFUL with this).
+		// These 2 subtrees don't have any other shared nodes nor edges.
 	}
 };
 struct Reroot {
