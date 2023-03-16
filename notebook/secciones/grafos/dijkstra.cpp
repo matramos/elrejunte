@@ -11,6 +11,7 @@ ll dijkstra(int s, int t){//O(|E| log |V|)
 	while(sz(Q)){
 		ii p = Q.top(); Q.pop();
 		if(p.snd == t) break;
+		if(p.fst > dist[p.snd]) continue;
 		forall(it, G[p.snd])
 			if(dist[p.snd]+it->first < dist[it->snd]){
 				dist[it->snd] = dist[p.snd] + it->fst;
