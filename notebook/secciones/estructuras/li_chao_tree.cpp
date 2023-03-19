@@ -1,6 +1,5 @@
 typedef long long T;
-const int MAXN = 100000;
-const T INF = LLONG_MAX;
+const T INF = 1000'000'100;
 
 struct line{
 	T m, b;
@@ -11,34 +10,53 @@ struct line{
 	T f(T x){ return m*x + b; }
 };
 
-struct li_chao_tree{
-	int sz;
-	line neutro = line(0,INF); // for max, use line(0,-INF)
-	line t[4*MAXN];
+struct li_chao{
+	line cur_line;
+	li_chao* lnode;
+	li_chao* rnode;
 	
-	void init(int n){
-		sz = 1 << (32 - __builtin_clz(n));
-		forn(i,2*sz) t[i] = neutro;
+	li_chao(line nline, li_chao* nlnode = nullptr, li_chao* nrnode = nullptr){
+		cur_line = nline;
+		lnode = nlnode; 
+		rnode = nrnode; 
 	}
 	
-	void add(line new_line, int v, int l, int r){
-		int m = (l+r) / 2;
+	void add(line new_line, T l, T r){ // for persistent, use li_chao* instead of void 
+		T m = (l+r) / 2;
 		
-		bool lef = new_line.f(l) < new_line.f(l); // for max, use >
-		bool mid = new_line.f(m) < new_line.f(m); // for max, use >
+		bool lef = new_line.f(l) < cur_line.f(l); // for max, use >
+		bool mid = new_line.f(m) < cur_line.f(m); // for max, use >
 		
-		if(mid) swap(new_line,t[v]);
+		//~ uncomment for persistent
+		//~ line to_push = new_line, to_keep = cur_line; 
+		//~ if(mid) swap(to_push,to_keep);
+		if(mid) swap(new_line,cur_line);
 		
-		if(r - l == 1) return;
-		else if(lef != mid) add(new_line, v*2, l, m);
-		else add(new_line, v*2+1, m, r);
+		if(r - l == 1){
+			//~ uncomment for persistent
+			//~ return new li_chao(to_keep);
+			return;
+		}else if(lef != mid){
+			if(lnode == nullptr) lnode = new li_chao(line(0,INF)); // for min, use -INF
+			//~ uncomment for persistent
+			//~ return new li_chao(lnode->add(to_push, l, m), rnode, to_keep);
+			lnode->add(new_line,l,m);
+		}else{
+			if(rnode == nullptr) rnode = new li_chao(line(0,INF)); // for min, use -INF
+			//~ uncomment for persistent
+			//~ return new li_chao(lnode, rnode->add(to_push, m, r), to_keep);
+			rnode->add(new_line,m,r);
+		}
 	}
 	
-	T get(int x, int v, int l, int r){
-		int m = (r+l)/2;
+	T get(T x, T l, T r){
+		T m = (r+l)/2;
 		
-		if(r - l == 1) return t[v].f(x);
-		else if(x < m) return min(t[v].f(x), get(x, v*2, l, m)); // for max, use max
-		else return min(t[v].f(x), get(x, v*2+1, m, r)); 		 // for max, use max
+		if(r - l == 1) return cur_line.f(x);
+		else if(x < m){
+			return min(cur_line.f(x), lnode == nullptr ? INF : lnode->get(x, l, m)); // for max, use max and -INF
+		}else{
+			return min(cur_line.f(x), rnode == nullptr ? INF : rnode->get(x, m, r)); // for max, use max and -INF
+		}
 	}
 };

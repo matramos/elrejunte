@@ -8,9 +8,7 @@
 #define pb push_back
 
 #ifdef FRUTA_FRESCA
-	const int MAXN = 10000;
 #else
-	const int MAXN = 1000010;
 #endif
 
 using namespace std;
@@ -18,7 +16,8 @@ using namespace std;
 typedef unsigned long long ll;
 typedef pair<int,int> ii;
 typedef __int128 T;
-const unsigned long long INF = 15000000000000000000ULL;
+const unsigned long long INF = 15'000'000'000'000'000'000ULL;
+const unsigned long long MAXT = 1000'000'010;
 
 struct line{
 	T m, b, pl;
@@ -34,66 +33,76 @@ struct line{
 		pl = newPl;
 	}
 	
-	T y (T x){
+	T f (T x){
 		return m*x + b;
 	}
 };
 
-struct liChaoTree{
-	int sz;
-	line neutro = line(0,INF,-1);
-	line t[MAXN*4];
-	unordered_map<ll,ll> getTime;
+struct li_chao{
+	line cur_line;
+	li_chao* lnode;
+	li_chao* rnode;
 	
-	void init(int n){
-		sz = 1 << (32 - __builtin_clz(n)); 
-		forn(i,2*sz) t[i] =  neutro;
+	li_chao(line nline, li_chao* nlnode = nullptr, li_chao* nrnode = nullptr){
+		lnode = nlnode; 
+		rnode = nrnode; 
+		cur_line = nline;
 	}
 	
-	void add(line newLine){
-		add(newLine,1,0,sz);
-	}
-	
-	void add(line newLine, int v, int l, int r){
-		int m = (l + r) / 2;
+	void add(line new_line, T l, T r){ // for persistent, use li_chao* instead of void
+		T m = (l+r) / 2;
 		
-		bool lef = newLine.y(getTime[l]) < t[v].y(getTime[l]);
-		bool mid = newLine.y(getTime[m]) < t[v].y(getTime[m]);
+		bool lef = new_line.f(l) < cur_line.f(l); // for max, use >
+		bool mid = new_line.f(m) < cur_line.f(m); // for max, use >
 		
-		if(mid) swap(t[v],newLine);
-		if(newLine.y(getTime[m]) == t[v].y(getTime[m]) && newLine.m == t[v].m) t[v].pl = max(newLine.pl,t[v].pl);
+		//~ uncomment for persistent
+		//~ line to_push = new_line, to_keep = cur_line; 
+		//~ if(mid) swap(to_push,to_keep);
+		if(mid) swap(new_line,cur_line);
+		if(new_line.f(m) == cur_line.f(m) && new_line.m == cur_line.m) cur_line.pl = max(new_line.pl,cur_line.pl);
 		
-		if(r - l == 1) return;
-		else if(lef != mid) add(newLine, v*2, l, m);
-		else add(newLine, v*2 + 1, m, r);
+		if(r - l == 1){
+			//~ uncomment for persistent
+			//~ return new li_chao(to_keep);
+			return;
+		}else if(lef != mid){
+			//~ uncomment for persistent
+			//~ return new li_chao(lnode->add(to_push, l, m), rnode, to_keep);
+			if(lnode == nullptr) lnode = new li_chao(line(0,INF,-1));
+			lnode->add(new_line,l,m);
+		}else{
+			//~ uncomment for persistent
+			//~ return new li_chao(lnode, rnode->add(to_push, m, r), to_keep);
+			if(rnode == nullptr) rnode = new li_chao(line(0,INF,-1)); 
+			rnode->add(new_line,m,r);
+		}
 	}
 	
-	line get(int x){
-		return get(x,1,0,sz);
+	line get(T x){
+		return get(x,0,MAXT);
 	}
 	
-	line getMin(line a, line b, T x){
-		if(a.y(x) < b.y(x)){
+	line get_min(line a, line b, T x){
+		if(a.f(x) < b.f(x)){
 			return a;
-		}else if(a.y(x) == b.y(x)){
+		}else if(a.f(x) == b.f(x)){
 			return line(a.m,a.b,max(a.pl,b.pl));
 		}else{
 			return b;
 		}
 	}
 	
-	line get(T x, int v, int l, int r){
-		int m = (l + r)/2;
-		if(r - l == 1) return t[v];
-		else if(x < getTime[m]){
-			return getMin(t[v], get(x, v*2, l, m), x);
-		}else{
-			return getMin(t[v], get(x, v*2 + 1, m, r), x);
-		}
+	line get(T x, T l, T r){
+		T m = (r+l)/2;
+		
+		if(r - l == 1) return cur_line;
+		else if(x < m) 
+			return get_min(cur_line, lnode == nullptr ? line(0,INF,-1) : lnode->get(x, l, m), x);	// for max, use max
+		else 
+			return get_min(cur_line, rnode == nullptr ? line(0,INF,-1) : rnode->get(x, m, r), x);  // for max, use max
 	}
-	
-	
 };
+
 
 int main()
 {
@@ -107,10 +116,10 @@ int main()
 	int n,q; cin >> n >> q;
 	vector<T> v(n),d(n),lt(n);
 	
-	vector<line> lines;
+	li_chao lc = li_chao(line(0,INF,-1));
 	forn(i,n){ 
 		ll vi; cin >> vi; v[i] = vi;
-		lines.pb(line(vi,0,i));
+		lc.add(line(vi,0,i), 0, MAXT);
 	}
 	
 	vector<T> queries;
@@ -125,22 +134,13 @@ int main()
 		v[pl] -= vi;
 		lt[pl] = ti;
 		
-		lines.pb(line(v[pl],d[pl]-ti*v[pl],pl));
+		lc.add(line(v[pl],d[pl]-ti*v[pl],pl),0,MAXT);
 	}
-	
-	int id = 0;
-	
-	liChaoTree lct; ll inft = 10000000000;
-	forn(i,sz(queries)) lct.getTime[id++] = queries[i];
-	lct.init(id);
-	forr(i,sz(queries),lct.sz) lct.getTime[i] = inft++;
-	forn(i,sz(lines)) lct.add(lines[i]);
-	
+		
 	forn(i,sz(queries)){
-		line ans = lct.get(queries[i]);
-		cout << ll(ans.pl+1) << " " << ll(ans.y(queries[i])) << "\n"; 
+		line ans = lc.get(queries[i]);
+		cout << ll(ans.pl+1) << " " << ll(ans.f(queries[i])) << "\n"; 
 	}
 	
 	return 0;
 }
-
