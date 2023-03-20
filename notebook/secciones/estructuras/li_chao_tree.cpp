@@ -39,12 +39,12 @@ struct li_chao{
 		}else if(lef != mid){
 			if(lnode == nullptr) lnode = new li_chao(line(0,INF)); // for min, use -INF
 			//~ uncomment for persistent
-			//~ return new li_chao(lnode->add(to_push, l, m), rnode, to_keep);
+			//~ return new li_chao(to_keep, lnode->add(to_push, l, m), rnode);
 			lnode->add(new_line,l,m);
 		}else{
 			if(rnode == nullptr) rnode = new li_chao(line(0,INF)); // for min, use -INF
 			//~ uncomment for persistent
-			//~ return new li_chao(lnode, rnode->add(to_push, m, r), to_keep);
+			//~ return new li_chao(to_keep, lnode, rnode->add(to_push, m, r));
 			rnode->add(new_line,m,r);
 		}
 	}
