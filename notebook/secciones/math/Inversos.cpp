@@ -17,7 +17,7 @@ ll fact[MAXN], ifact[MAXN];
 void build_facts(){ // O(MAXN)
 	fact[0] = 1;
 	forr(i,1,MAXN) fact[i] = fact[i-1] * i%MOD;
-	ifact[MAXN-1] = inv(fact[MAXN-1]);
+	ifact[MAXN-1] = inverso(fact[MAXN-1]);
 	dforn(i, MAXN-1) ifact[i] = ifact[i+1] * (i+1)%MOD;
 	return;
 }
