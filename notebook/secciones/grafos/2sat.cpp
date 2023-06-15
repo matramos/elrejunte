@@ -2,6 +2,10 @@
 //Every edge stored in G represents an implication. To add an equation of the form a||b, use addor(a, b)
 //MAX=max cant var, n=cant var
 #define addor(a, b) (G[neg(a)].pb(b), G[neg(b)].pb(a)) 
+
+// addor(a,b) means a|b 
+// if you want to add a condition like a->b, do G[a].pb(b)
+
 vector<int> G[MAX*2];
 //idx[i]=index assigned in the dfs
 //lw[i]=lowest index(closer from the root) reachable from i
