@@ -4,7 +4,7 @@
 #define addor(a, b) (G[neg(a)].pb(b), G[neg(b)].pb(a)) 
 
 // addor(a,b) means a|b 
-// if you want to add a condition like a->b, do G[a].pb(b)
+// if you want to add a condition like a->b, do G[a].pb(b) G[neg(b)].pb(neg(a))
 
 vector<int> G[MAX*2];
 //idx[i]=index assigned in the dfs
