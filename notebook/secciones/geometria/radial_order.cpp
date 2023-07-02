@@ -1,20 +1,12 @@
-struct Cmp{//orden total de puntos alrededor de un punto r
-	pto r;
-	Cmp(pto r):r(r) {}
-	int cuad(const pto &a) const{
-		if(a.x > 0 && a.y >= 0)return 0;
-		if(a.x <= 0 && a.y > 0)return 1;
-		if(a.x < 0 && a.y <= 0)return 2;
-		if(a.x >= 0 && a.y < 0)return 3;
-		assert(a.x ==0 && a.y==0);
-		return -1;
+struct Cmp { // radial sort around point O
+	pto o;
+	Cmp (pto no) : o(no) {}
+	bool half(pto p) const{
+		assert(!(p.x == 0 && p.y == 0)); // (0,0) isn't well defined
+		return p.y > 0 || (p.y == 0 && p.x < 0); 
 	}
-	bool cmp(const pto&p1, const pto&p2)const{
-		int c1 = cuad(p1), c2 = cuad(p2);
-		if(c1==c2) return p1.y*p2.x<p1.x*p2.y;
-        else return c1 < c2;
+	
+	bool operator() (pto & p1, pto & p2) const {
+		return mp(half(p1-o), 0LL) < mp(half(p2-o), ((p1-o)^(p2-o)));
 	}
-    bool operator()(const pto&p1, const pto&p2) const{
-    return cmp(pto(p1.x-r.x,p1.y-r.y),pto(p2.x-r.x,p2.y-r.y));
-    }
 };
