@@ -29,19 +29,19 @@ struct pto {
 	pto operator+(pto a) { return pto(x+a.x, y+a.y); }
 	pto operator-(pto a) { return pto(x-a.x, y-a.y); }
 	pto operator*(ll a) { return pto(x*a, y*a); }
-	pto operator*(pto a) { return pto(x*a.x, y*a.y); }
-	ll operator^(pto a) { return x*a.y - y*a.x; }
+	ll operator*(pto a) { return x*a.x+y*a.y; }
+	ll operator^(pto a) { return x*a.y-y*a.x; }
 };
 
 struct Cmp {
-	pto o;
-	Cmp (pto no) : o(no) {}
-	bool half(pto p) const{
+	pto o, v;
+	Cmp (pto no, pto nv) : o(no), v(nv) {}
+	bool half(pto p) {
 		assert(!(p.x == 0 && p.y == 0)); // (0,0) isn't well defined
-		return p.y > 0 || (p.y == 0 && p.x < 0); 
+		return (v^p) > 0 || ((v^p) == 0 && (v*p) > 0); 
 	}
 	
-	bool operator() (pto & p1, pto & p2) const {
+	bool operator() (pto & p1, pto & p2) {
 		return mp(half(p1-o), 0LL) < mp(half(p2-o), ((p1-o)^(p2-o)));
 	}
 };
@@ -65,7 +65,7 @@ int main(){
 			ptos[i] = {x,y};
 		}
 		
-		sort(ptos.begin(), ptos.end(), Cmp(pto(0LL,0LL)));
+		sort(ptos.begin(), ptos.end(), Cmp(pto(0LL,0LL),pto(1LL,0LL)));
 		forn(i,n) ptos.pb(ptos[i]);
 		
 		int ans = n;
