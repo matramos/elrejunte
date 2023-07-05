@@ -3,7 +3,7 @@ struct Cmp { // radial sort around point O in counter-clockwise direction starti
 	Cmp (pto no, pto nv) : o(no), v(nv) {}
 	bool half(pto p) {
 		assert(!(p.x == 0 && p.y == 0)); // (0,0) isn't well defined
-		return (v^p) > 0 || ((v^p) == 0 && (v*p) > 0); 
+		return (v^p) < 0 || ((v^p) == 0 && (v*p) < 0); 
 	}
 	
 	bool operator() (pto & p1, pto & p2) {
