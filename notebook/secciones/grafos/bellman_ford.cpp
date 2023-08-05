@@ -9,7 +9,7 @@ struct BellmanFord {
 	vector<ll> dist;
 	int N;
 	BellmanFord(int n) { N = n; G.rsz(n); dist.rsz(n); }
-	void addEdge(int a, int b, int w) { G[a].pb(mp(w, b)); }
+	void addEdge(int a, int b, long long w) { G[a].pb(mp(w, b)); }
 	void run(int src){//O(VE)
 		dist[src] = 0;
 		forn(i, N-1) forn(j, N) if(dist[j] != INF) forall(it, G[j])
