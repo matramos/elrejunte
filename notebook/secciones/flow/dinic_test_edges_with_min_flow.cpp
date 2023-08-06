@@ -1,4 +1,4 @@
-// Problem: https://codeforces.com/problemset/problem/704/D
+// https://codeforces.com/gym/101308/problem/I
 #include <bits/stdc++.h>
 #define forr(i,a,b) for(int i=(a);i<(b);i++)
 #define forn(i,n) forr(i,0,n)
@@ -14,7 +14,9 @@
 #define snd second
 
 #ifdef ANARAP
+//local
 #else
+//judge
 #endif
 
 using namespace std;
@@ -86,7 +88,7 @@ struct Dinic {
 	}
 };
 
-const int INF = 100010;
+const int INF = 10010;
 
 // Dinic wrapper to allow setting demands of min flow on edges
 struct DinicWithDemands {
@@ -131,93 +133,82 @@ struct DinicWithDemands {
 	}
 };
 
+
+
 int main()
 {
+	// agregar g++ -DANARAP en compilacion
 	#ifdef ANARAP
 		freopen("input.in", "r", stdin);
-		//freopen("output.out","w", stdout);
+		//freopen("output","w", stdout);
+	#else
+		freopen("inspection.in", "r", stdin);
+		freopen("inspection.out","w", stdout);
 	#endif
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
-	int n,m;
-	ll r,b;
-	cin >> n >> m >> r >> b;
-	int idx = 0, idy = n;
-	map<int,int> cntx, cnty, mx, my, midx, midy;
-	int auxid = 0;
-	map<ii,vector<int>> mid;
-	DinicWithDemands dinic(2*n+2);
-	int SRC = 2*n, SNK = 2*n+1;
+	int n;
+	cin >> n;
+	vector<ii> v;
 	forn(i,n)
 	{
-		int x,y;
-		cin >> x >> y;
-		if(!midx.count(x)) midx[x] = idx++;
-		if(!midy.count(y)) midy[y] = idy++;
-		mid[mp(midx[x], midy[y])].pb(auxid++);
-		cntx[x]++;
-		cnty[y]++;
-		dinic.addEdge(midx[x], midy[y], 1, 0);
-	}
-	forn(i,m)
-	{
-		int t,l,d;
-		cin >> t >> l >> d;
-		if(t == 1)
+		int k;
+		cin >> k;
+		forn(_,k)
 		{
-			if(!cntx.count(l)) continue;
-			if(cntx[l]%2 && d == 0)
-			{
-				cout << "-1\n";
-				return 0;
-			}
-			mx[l] = max(mx[l], (cntx[l]-d+1)/2);
-		}
-		else
-		{
-			if(!cnty.count(l)) continue;
-			if(cnty[l]%2 && d == 0)
-			{
-				cout << "-1\n";
-				return 0;
-			}
-			my[l] = max(my[l], (cnty[l]-d+1)/2);
+			int x;
+			cin >> x;
+			v.pb(mp(i,x-1));
 		}
 	}
-	forall(it,cntx)
+	int L = 1, R = sz(v);
+	const int SRC0 = n, SRC1 = n+1, SNK = n+2;
+	while(L < R)
 	{
-		assert(it->snd >= 2*mx[it->fst]);
-		dinic.addEdge(SRC, midx[it->fst], it->snd-mx[it->fst], mx[it->fst]);
+		int M = (L+R)/2;
+		DinicWithDemands dinic(n+3);
+		forall(it,v) dinic.addEdge(it->fst, it->snd, M, 1);
+		dinic.addEdge(SRC0, SRC1, M, 0);
+		forn(i,n)
+		{
+			dinic.addEdge(SRC1, i, M, 0);
+			dinic.addEdge(i, SNK, M, 0);
+		}
+		if(dinic.maxFlow(SRC0, SNK) == -1) L = M+1;
+		else R = M;
 	}
-	forall(it,cnty)
+	DinicWithDemands dinic(n+3);
+	forall(it,v) dinic.addEdge(it->fst, it->snd, L, 1);
+	dinic.addEdge(SRC0, SRC1, L, 0);
+	forn(i,n)
 	{
-		assert(it->snd >= 2*my[it->fst]);
-		dinic.addEdge(midy[it->fst], SNK, it->snd-my[it->fst], my[it->fst]);
+		dinic.addEdge(SRC1, i, L, 0);
+		dinic.addEdge(i, SNK, L, 0);
 	}
-	ll f1 = dinic.maxFlow(SRC, SNK);
-	if(f1 == -1)
+	assert(dinic.maxFlow(SRC0, SNK) == L);
+	cout << L << '\n';
+	forn(i,L)
 	{
-		cout << "-1\n";
-		return 0;
+		int node = SRC1;
+		while(node != SNK)
+		{
+			bool found = false;
+			if(node != SRC1) cout << node+1 << ' ';
+			forall(it,dinic.dinic.g[node]) if(*it%2 == 0 && dinic.dinic.E[*it].flow)
+			{
+				int nxt = node^dinic.dinic.E[*it].u^dinic.dinic.E[*it].v;
+				if(nxt <= SNK)
+				{
+					node = nxt;
+					found = true;
+					dinic.dinic.E[*it].flow--;
+					break;
+				}
+			}
+			assert(found);
+		}
+		cout << '\n';
 	}
-	assert(f1 >= (n+1)/2);
-	ll f2 = n-f1;
-	char goodc = 'b', badc = 'r';
-	if(b > r) swap(goodc, badc);
-	cout << f1*min(b,r) + f2*max(b,r) << '\n';
-	string ans;
-	ans.rsz(n,badc);
-	forn(i,idx) forall(eid, dinic.dinic.g[i]) if(dinic.dinic.E[*eid].flow == 1)
-	{
-		int u = dinic.dinic.E[*eid].u;
-		int v = dinic.dinic.E[*eid].v;
-		assert(u == i);
-		//cout << "edge " << u << ' ' << v << '\n';
-		assert(!mid[mp(u,v)].empty());
-		ans[mid[mp(u,v)].back()] = goodc;
-		mid[mp(u,v)].pop_back();
-	}
-	cout << ans << '\n';
 	return 0;
 }
