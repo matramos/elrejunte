@@ -1,3 +1,29 @@
+// https://open.kattis.com/problems/illumination
+#include <bits/stdc++.h>
+#define forr(i,a,b) for(int i=(a);i<(b);i++)
+#define forn(i,n) forr(i,0,n)
+#define dforn(i,n) for(int i=n-1;i>=0;i--)
+#define forall(it,v) for(auto it=v.begin();it!=v.end();it++)
+#define sz(c) ((int)c.size())
+#define rsz resize
+#define pb push_back
+#define mp make_pair
+#define lb lower_bound
+#define ub upper_bound
+#define fst first
+#define snd second
+
+#ifdef ANARAP
+//local
+#else
+//judge
+#endif
+
+using namespace std;
+
+typedef long long ll;
+typedef pair<ll,int> ii;
+
 // Usage:
 // 1. Create with n = number of variables
 // 2. Add restrictions through the existing methods, using ~X for
@@ -73,3 +99,80 @@ struct Sat2 {
 		assert(auxid == N);
 	}
 };
+
+
+int main()
+{
+	// agregar g++ -DANARAP en compilacion
+	#ifdef ANARAP
+		freopen("input.in", "r", stdin);
+		//freopen("output","w", stdout);
+	#endif
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	int n,len,k;
+	cin >> n >> len >> k;
+	Sat2 sat(n*n+k);
+	vector<vector<int>> vv(n, vector<int>(n, -1));
+	forn(i,k)
+	{
+		int r,c;
+		cin >> r >> c;
+		r--;c--;
+		vv[r][c] = i;
+		forr(j,max(0,r-len),min(r+len+1,n)) sat.addimpl(n*n+i, j*n+c);
+		forr(j,max(0,c-len),min(c+len+1,n)) sat.addimpl(~(n*n+i), r*n+j);
+	}
+	vector<int> toAdd;
+	forn(j,n)
+	{	
+		deque<int> dq;
+		int lr = 0, rr = 0;
+		forn(i,n)
+		{
+			while(rr-i <= len && rr < n)
+			{
+				if(vv[rr][j] != -1) dq.pb(vv[rr][j]);
+				rr++;
+			}
+			while(i-lr > len)
+			{
+				if(vv[lr][j] != -1) assert(dq.front() == vv[lr][j]), dq.pop_front();
+				lr++;
+			}
+			if(sz(dq) > 1)
+			{
+				toAdd = vector<int>(sz(dq));
+				forn(pos,sz(dq)) toAdd[pos] = n*n+dq[pos];
+				sat.atmost1(toAdd);
+			}
+		}
+	}
+	forn(i,n)
+	{	
+		deque<int> dq;
+		int lc = 0, rc = 0;
+		forn(j,n)
+		{
+			while(rc-j <= len && rc < n)
+			{
+				if(vv[i][rc] != -1) dq.pb(vv[i][rc]);
+				rc++;
+			}
+			while(j-lc > len)
+			{
+				if(vv[i][lc] != -1) assert(dq.front() == vv[i][lc]), dq.pop_front();
+				lc++;
+			}
+			if(sz(dq) > 1)
+			{
+				toAdd = vector<int>(sz(dq));
+				forn(pos,sz(dq)) toAdd[pos] = ~(n*n+dq[pos]);
+				sat.atmost1(toAdd);
+			}
+		}
+	}
+	cout << sat.satisf() << '\n';
+	return 0;
+}
