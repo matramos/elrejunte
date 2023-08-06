@@ -25,7 +25,7 @@ typedef long long ll;
 typedef pair<ll,int> ii;
 
 // Usage:
-// 1. Create with n = number of variables
+// 1. Create with n = number of variables (0-indexed)
 // 2. Add restrictions through the existing methods, using ~X for
 //    negating variable X for example.
 // 3. Call satisf() to check whether there is a solution or not.
@@ -37,7 +37,7 @@ struct Sat2 {
 	vector<vector<int>> G;
 	//idx[i]=index assigned in the dfs
 	//lw[i]=lowest index(closer from the root) reachable from i
-	//verdad[cmp[i]]=valor de la variable i
+	//verdad[cmp[2*i]]=valor de la variable i
 	int N, qidx, qcmp;
 	vector<int> lw, idx, cmp, verdad;
 	stack<int> q;
@@ -99,7 +99,6 @@ struct Sat2 {
 		assert(auxid == N);
 	}
 };
-
 
 int main()
 {
