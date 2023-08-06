@@ -22,9 +22,10 @@ struct BellmanFord {
 	vector<vector<ii>> G;//ady. list with pairs (weight, dst)
 	vector<ll> dist;
 	int N;
-	BellmanFord(int n) { N = n; G.rsz(n); dist.rsz(n); }
+	BellmanFord(int n): G(n), N(n) {}
 	void addEdge(int a, int b, ll w) { G[a].pb(mp(w, b)); }
 	void run(int src){//O(VE)
+		dist = vector<ll>(N, INF);
 		dist[src] = 0;
 		forn(i, N-1) forn(j, N) if(dist[j] != INF) forall(it, G[j])
 			dist[it->snd] = min(dist[it->snd], dist[j] + it->fst);
