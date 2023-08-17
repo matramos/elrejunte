@@ -7,6 +7,7 @@ struct line{
 	// TO DO chequear porque paso problema metiendo negativo el C (-(todo el calculo como esta))
 	line(pto p, pto q): a(q.y-p.y), b(p.x-q.x), c(a*p.x+b*p.y) {}
 	int side(pto p){return sgn(ll(a) * p.x + ll(b) * p.y - c);}
+	bool inside(pto p){ return abs(a*p.x + b*p.y - c) < EPS; }
 };
 bool parallels(line l1, line l2){return abs(l1.a*l2.b-l2.a*l1.b)<EPS;}
 pto inter(line l1, line l2){//intersection
