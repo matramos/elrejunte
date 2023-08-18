@@ -1,3 +1,4 @@
+// https://cses.fi/problemset/task/1651
 #include <bits/stdc++.h>
 #define sqr(a) ((a)*(a))
 #define rsz resize
@@ -19,87 +20,83 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> ii;
 
-//Dado un arreglo y una operacion asociativa con neutro, get(i, j) opera sobre el rango [i, j).
-#define operacion(x,y) ((x)+(y))
 typedef ll Elem;
 typedef ll Alt;
-const Elem neutro=0; const Alt neutro2=0;
-#define MAXN 100010//Cambiar segun el N del problema
-struct RMQ{
+const Elem neutro = 0;
+const Alt neutro2 = 0;
+Elem oper(const Elem& a, const Elem& b) { return a+b; }
+struct ST{
 	int sz;
-	Elem t[4*MAXN];
-	Alt dirty[4*MAXN];//las alteraciones pueden ser de distinto Elem
-	Elem &operator[](int p) {return t[sz+p];}
-	void init(int n){//O(nlgn)
+	vector<Elem> t;
+	vector<Alt> dirty; // Alt and Elem could be different types
+	ST(int n) {
 		sz = 1 << (32-__builtin_clz(n));
-		forn(i, 2*sz) t[i] = neutro;
-		forn(i, 2*sz) dirty[i] = neutro2;
+		t = vector<Elem>(2*sz, neutro);
+		dirty = vector<Alt>(2*sz, neutro);
 	}
-	void push(int n, int a, int b) {//propaga el dirty a sus hijos, n = node of range [a,b)
-		if(dirty[n] != neutro2) {
-			t[n] += dirty[n]*(b-a);//altera el nodo, modificar segun el problema
-			if(n<sz){
-				dirty[2*n] += dirty[n];
-				dirty[2*n+1] += dirty[n];
+	Elem &operator[](int p) { return t[sz+p]; }
+	void updall() { dforn(i, sz) t[i] = oper(t[2*i], t[2*i+1]); }
+	void push(int n, int a, int b) { // push dirt to n's child nodes
+		if(dirty[n] != neutro2) { // n = node of range [a,b)
+			t[n] += dirty[n]*(b-a); // CHANGE for your problem
+			if(n < sz) {
+				dirty[2*n] += dirty[n]; // CHANGE for your problem
+				dirty[2*n+1] += dirty[n]; // CHANGE for your problem
 			}
 			dirty[n] = neutro2;
 		}
 	}
-	Elem get(int i, int j, int n, int a, int b) {//O(lgn), n = node of range [a,b)
-		if(j<=a || i>=b) return neutro;
-		push(n, a, b);//corrige el valor antes de usarlo
-		if(i<=a && b<=j) return t[n];
+	Elem get(int i, int j, int n, int a, int b) { //O(lgn)
+		if(j <= a || i >= b) return neutro;
+		push(n, a, b); // adjust value before using it
+		if(i <= a && b <= j) return t[n]; // n = node of range [a,b)
 		int c = (a+b)/2;
-		return operacion(get(i, j, 2*n, a, c), get(i, j, 2*n+1, c, b));
+		return oper(get(i, j, 2*n, a, c), get(i, j, 2*n+1, c, b));
 	}
-	Elem get(int i, int j) {return get(i,j,1,0,sz);}
+	Elem get(int i, int j) { return get(i, j, 1, 0, sz); }
 	//altera los valores en [i, j) con una alteracion de val
-	void alterar(Alt val, int i, int j, int n, int a, int b) {//O(lgn)
+	void update(Alt val, int i, int j, int n, int a, int b) {//O(lgn)
 		push(n, a, b);
-		if(j<=a || i>=b) return;
-		if(i<=a && b<=j){
-			dirty[n] += val; // modificar segun el problema
+		if(j <= a || i >= b) return;
+		if(i <= a && b <= j) {
+			dirty[n] += val; // CHANGE for your problem
 			push(n, a, b);
 			return;
 		}
 		int c = (a+b)/2;
-		alterar(val, i, j, 2*n, a, c), alterar(val, i, j, 2*n+1, c, b);
-		t[n] = operacion(t[2*n], t[2*n+1]);//por esto es el push de arriba
+		update(val, i, j, 2*n, a, c), update(val, i, j, 2*n+1, c, b);
+		t[n] = oper(t[2*n], t[2*n+1]);
 	}
-	void alterar(Alt val, int i, int j){alterar(val,i,j,1,0,sz);}
-};//Use: definir operacion, neutros, Alt, Elem, uso de dirty, MAXN
-//cin >> n; rmq.init(n);
+	void update(Alt val, int i, int j){update(val,i,j,1,0,sz);}
+};//Use: definir operacion, neutros, Alt, Elem, uso de dirty
+//cin >> n; ST st(n); forn(i,n) cin >> st[i]; st.updall()
 
 int main()
 {
-	#ifdef REJUNTE
-	freopen("input.in","r",stdin);
-	//freopen("output.out","w",stdout);
+	#ifdef ANARAP
+		freopen("input.in","r",stdin);
+		//freopen("output.out","w",stdout);
 	#endif
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
-	int t;
-	RMQ rmq;
-	cin >> t;
-	forn(_,t)
+	int n,q;
+	cin >> n >> q;
+	ST st(n);
+	forn(i,n) cin >> st[i];
+	st.updall();
+	forn(_,q)
 	{
-		int n,c;
-		cin >> n >> c;
-		rmq.init(n);
-		forn(i,c)
+		int t,a;
+		cin >> t >> a;
+		a--;
+		if(t == 1)
 		{
-			int t,a,b;
-			cin >> t >> a >> b;
-			a--;
-			if(t == 0)
-			{
-				int x;
-				cin >> x;
-				rmq.alterar(x,a,b);
-			}
-			else cout << rmq.get(a,b) << '\n';
+			int b,x;
+			cin >> b >> x;
+			st.update(x,a,b);
 		}
+		else cout << st.get(a,a+1) << '\n';
 	}
 	return 0;
 }
