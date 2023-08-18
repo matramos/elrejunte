@@ -1,32 +1,42 @@
 typedef int tipo;
-tipo oper(const tipo &a, const tipo &b){
-    return a+b;
-}
-struct node{
-	tipo v; node *l, *r;
-	node(tipo v) : v(v), l(NULL), r(NULL) {}
-    node(node *l, node *r) : l(l), r(r) {
-        if(!l) v = r->v;
-        else if(!r) v = l->v;
-        else v = oper(l->v, r->v);
-    }
-};
-node *build(tipo *a, int tl, int tr) {//build a partir de un arreglo
-	if(tl+1 == tr) return new node(a[tl]);
-	int tm = (tl+tr)>>1;
-	return new node(build(a, tl, tm), build(a, tm, tr));
-}
-node *update(int pos, int new_val, node *t, int tl, int tr) {
-	if(tl+1 == tr) return new node(new_val);
-	int tm = (tl+tr)>>1;
-	if(pos < tm) return new node(update(pos, new_val, t->l, tl, tm), t->r);
-	else return new node(t->l, update(pos, new_val, t->r, tm, tr));
-}
-tipo get(int l, int r, node *t, int tl, int tr) {
-    if(l==tl && tr==r) return t->v;
-	int tm = (tl+tr)>>1;
-    if(r <= tm) return get(l, r, t->l, tl, tm);
-    else if(l >= tm) return get(l, r, t->r, tm, tr);
-	return oper(get(l, tm, t->l, tl, tm), get(tm, r, t->r, tm, tr));
-}
-//node t represents range [tl, tr). For roots always use tl = 0, tr = size
+#define oper(a,b) (a+b)
+const tipo neutro = 0;
+struct ST {
+	int n;
+	vector<tipo> st;
+	vector<int> L, R;
+	ST(int nn): n(nn), st(1,neutro), L(1,0), R(1,0) {}
+	int new_node(tipo v, int l = 0, int r = 0) {
+		int id = sz(st);
+		st.pb(v); L.pb(l); R.pb(r);
+		return id;
+	}
+	int init(vector<tipo>& v, int l, int r) {
+		if(l+1 == r) return new_node(v[l]);
+		int m = (l+r)/2, a = init(v, l, m), b = init(v, m ,r);
+		return new_node(oper(st[a], st[b]), a, b);
+	}
+	int update(int cur, int pos, int val, int l, int r) {
+		int id = new_node(st[cur], L[cur], R[cur]);
+		if(l+1 == r) { st[id] = val; return id; }
+		int m = (l+r)/2, ASD; // MUST USE THE ASD!!!
+		if(pos < m) ASD = update(L[id], pos, val, l, m), L[id] = ASD;
+		else ASD = update(R[id], pos, val, m, r), R[id] = ASD;
+		st[id] = oper(st[L[id]], st[R[id]]);
+		return id;
+	}
+	tipo get(int cur, int from, int to, int l, int r) {
+		if(r <= from || to <= l) return neutro;
+		if(from <= l && r <= to) return st[cur];
+		int m = (l+r)/2;
+		return oper(get(L[cur], from, to, l, m), get(R[cur], from, to, m, r));
+	}
+	int init(vector<tipo>& v) { return init(v, 0, n); }
+	int update(int root, int pos, int val) {
+		return update(root, pos, val, 0, n);
+	}
+	tipo get(int root, int from, int to) {
+		return get(root, from, to, 0, n);
+	}
+}; // usage: ST st(n); root = st.init(v) (or root = 0);
+// new_root = st.update(root,i,x); st.get(root,l,r);
