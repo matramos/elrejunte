@@ -10,7 +10,7 @@ struct ST{
 	ST(int n) {
 		sz = 1 << (32-__builtin_clz(n));
 		t = vector<Elem>(2*sz, neutro);
-		dirty = vector<Alt>(2*sz, neutro);
+		dirty = vector<Alt>(2*sz, neutro2);
 	}
 	Elem &operator[](int p) { return t[sz+p]; }
 	void updall() { dforn(i, sz) t[i] = oper(t[2*i], t[2*i+1]); }
@@ -45,6 +45,6 @@ struct ST{
 		update(val, i, j, 2*n, a, c), update(val, i, j, 2*n+1, c, b);
 		t[n] = oper(t[2*n], t[2*n+1]);
 	}
-	void update(Alt val, int i, int j){update(val,i,j,1,0,sz);}
+	void update(Alt val, int i, int j) { update(val, i, j, 1, 0, sz); }
 };//Use: definir operacion, neutros, Alt, Elem, uso de dirty
 //cin >> n; ST st(n); forn(i,n) cin >> st[i]; st.updall()
