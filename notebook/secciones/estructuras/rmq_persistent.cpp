@@ -1,6 +1,6 @@
 typedef int tipo;
-tipo oper(const tipo& a, const tipo& b) { return a+b; }
 const tipo neutro = 0;
+tipo oper(const tipo& a, const tipo& b) { return a+b; }
 struct ST {
 	int n;
 	vector<tipo> st;
