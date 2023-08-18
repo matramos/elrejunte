@@ -1,5 +1,5 @@
 typedef int tipo;
-#define oper(a,b) (a+b)
+tipo oper(const tipo& a, const tipo& b) { return a+b; }
 const tipo neutro = 0;
 struct ST {
 	int n;
