@@ -51,8 +51,8 @@ struct ST {
 			val = oper(t[p*2], t[p*2+1]);
 		}
 	}
-}; //Use: definir operacion tipo neutro y MAXN,
-//cin >> n; rmq.init(n); forn(i, n) cin >> rmq[i]; rmq.updall();
+}; //Use: definir oper tipo neutro,
+//cin >> n; ST st(n); forn(i, n) cin >> st[i]; st.updall();
 
 int main()
 {
