@@ -1,3 +1,30 @@
+// https://cses.fi/problemset/task/2076/
+#include <bits/stdc++.h>
+#define forr(i,a,b) for(int i=(a);i<(b);i++)
+#define forn(i,n) forr(i,0,n)
+#define dforn(i,n) for(int i=n-1;i>=0;i--)
+#define forall(it,v) for(auto it=v.begin();it!=v.end();it++)
+#define dforall(it,v) for(auto it=v.rbegin();it!=v.rend();it++)
+#define sz(c) ((int)c.size())
+#define rsz resize
+#define pb push_back
+#define mp make_pair
+#define lb lower_bound
+#define ub upper_bound
+#define fst first
+#define snd second
+
+#ifdef ANARAP
+//local
+#else
+//judge
+#endif
+
+using namespace std;
+
+typedef long long ll;
+typedef pair<int,int> ii;
+
 struct Bicon {
 	vector<vector<int>> G;
 	struct edge {
@@ -74,3 +101,32 @@ struct Bicon {
 		return -1; // for nodes with no neighbours in G
 	}
 };
+
+
+int main()
+{
+	// agregar g++ -DANARAP en compilacion
+	#ifdef ANARAP
+		freopen("input.in", "r", stdin);
+		//freopen("output","w", stdout);
+	#endif
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	int n,m;
+	cin >> n >> m;
+	Bicon bicon(n);
+	forn(_,m)
+	{
+		int a,b;
+		cin >> a >> b;
+		a--;b--;
+		bicon.addEdge(a,b);
+	}
+	bicon.run();
+	int ans = 0;
+	forall(it, bicon.ve) if(it->bridge) ans++;
+	cout << ans << '\n';
+	forall(it, bicon.ve) if(it->bridge) cout << it->u+1 << ' ' << it->v+1 << '\n';
+	return 0;
+}

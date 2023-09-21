@@ -73,7 +73,7 @@ struct Bicon {
 			}
 		}
 	}
-	void run() { forn(i,n) if(d[i] == -1) dfs(i,-1); }
+	void run() { forn(i,n) if(d[i] == -1) art[i]--, dfs(i,-1); }
 	// block-cut tree (copy only if needed)
 	vector<map<int, int>> bctree; // set to dedup
 	vector<int> artid; // art nodes to tree node (-1 for !arts)
@@ -82,7 +82,7 @@ struct Bicon {
 		int ntree = nbc+nart, auxid = nbc;
 		bctree = vector<map<int, int>>(ntree);
 		artid = vector<int>(n, -1);
-		forn(i,n) if(art[i]) {
+		forn(i,n) if(art[i] > 0) {
 			forall(eid, G[i]) { // edges always bc <-> art
 				// depending on the problem, may want
 				// to add more data on bctree edges
