@@ -3,8 +3,7 @@ struct segm{
 	segm(pto s_, pto e_): s(s_), e(e_) {}
 	
 	pto closest(pto b) {
-		pto bs = b-s;
-		pto es = e-s;
+		pto bs = b-s, es = e-s;
 		ld l = es*es;
 		if(abs(l) <= EPS) return s;
 		ld t = (bs*es)/l;
