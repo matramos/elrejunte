@@ -1,22 +1,25 @@
 struct segm{
-	pto s,f;
-	segm(pto s, pto f):s(s), f(f) {}
-	pto closest(pto p) {//use for dist to point
-	   double l2 = dist_sq(s, f);
-	   if(l2==0.) return s;
-	   double t =((p-s)*(f-s))/l2;
-	   if (t<0.) return s;//not write if is a line
-	   else if(t>1.)return f;//not write if is a line
-	   return s+((f-s)*t);
+	pto s, e;
+	segm(pto s_, pto e_): s(s_), e(e_) {}
+	
+	pto closest(pto b) {
+		pto bs = b-s;
+		pto es = e-s;
+		ld l = es*es;
+		if(abs(l) <= EPS) return s;
+		ld t = (bs*es)/l;
+		if(t < 0.) return s; // comment for lines
+		else if(t>1.)return e; // comment for lines
+		return s+((es)*t);
 	}
-    bool inside(pto p){return abs(dist(s, p)+dist(p, f)-dist(s, f))<EPS;}
+	
+	bool inside(pto b){ return abs(s.dist(b)+e.dist(b)-s.dist(e))<EPS; }
+	
+	pto inter(segm b){ // if a and b are collinear, returns one point
+		if((*this).inside(b.s)) return b.s;
+		if((*this).inside(b.e)) return b.e;
+		pto in = line(s,e).inter(line(b.s, b.e));
+		if((*this).inside(in) && b.inside(in)) return in;
+		return pto(INF, INF);
+	}
 };
-
-//NOTA: Si los segmentos son coolineales solo devuelve un punto de interseccion
-pto inter(segm s1, segm s2){
-    if(s1.inside(s2.s)) return s2.s; //Fix cuando son colineales
-    if(s1.inside(s2.f)) return s2.f; //Fix cuando son colineales
-	pto r=inter(line(s1.s, s1.f), line(s2.s, s2.f));
-    if(s1.inside(r) && s2.inside(r)) return r;
-	return pto(INF, INF);
-}

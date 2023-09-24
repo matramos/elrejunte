@@ -1,6 +1,7 @@
 typedef long double T;
 typedef long double ld;
 const T EPS = 1e-9; // if T is integer, set to 0
+const T INF = 1e18;
 
 struct pto{
 	T x, y;
