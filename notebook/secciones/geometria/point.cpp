@@ -25,7 +25,7 @@ struct pto{
 	ld dist(pto b){ return (b-(*this)).norm(); }
 
 	//rotate by theta rads CCW w.r.t. origin (0,0)
-	pto rotate(T theta) { return pto(x*cos(theta)-y*sin(theta),x*sin(theta)+y*cos(theta)); }
+	pto rotate(T theta) { return pto(x*cosl(theta)-y*sinl(theta),x*sinl(theta)+y*cosl(theta)); }
 	
 	// true if this is at the left side of line qr
 	bool left(pto a, pto b){return ((a-*this)^(b-*this))>0;}
@@ -35,7 +35,7 @@ struct pto{
 
 ld angle(pto a, pto o, pto b){
 	pto oa=a-o, ob=b-o;
-	return atan2(oa^ob, oa*ob);
+	return atan2l(oa^ob, oa*ob);
 }
 
 ld angle(pto a, pto b){
