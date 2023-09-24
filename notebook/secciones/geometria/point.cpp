@@ -1,32 +1,44 @@
+typedef long double T;
+typedef long double ld;
+const T EPS = 1e-9; // if T is integer, set to 0
+
 struct pto{
-	double x, y;
-	pto(double x=0, double y=0):x(x),y(y){}
-	pto operator+(pto a){return pto(x+a.x, y+a.y);}
-	pto operator-(pto a){return pto(x-a.x, y-a.y);}
-	pto operator+(double a){return pto(x+a, y+a);}
-	pto operator*(double a){return pto(x*a, y*a);}
-	pto operator/(double a){return pto(x/a, y/a);}
-	//dot product, producto interno:
-	double operator*(pto a){return x*a.x+y*a.y;}
-	//module of the cross product or vectorial product:
-	//if a is less than 180 clockwise from b, a^b>0
-	double operator^(pto a){return x*a.y-y*a.x;}
-	//returns true if this is at the left side of line qr
-	bool left(pto q, pto r){return ((q-*this)^(r-*this))>0;}
-	bool operator<(const pto &a) const{return x<a.x-EPS || (abs(x-a.x)<EPS && y<a.y-EPS);}
-bool operator==(pto a){return abs(x-a.x)<EPS && abs(y-a.y)<EPS;}
-	double norm(){return sqrt(x*x+y*y);}
-	double norm_sq(){return x*x+y*y;}
+	T x, y;
+	
+	pto() : x(0), y(0) {}
+	pto(T _x, T _y) : x(_x), y(_y) {}
+	
+	pto operator+(pto b){ return pto(x+b.x, y+b.y); }
+	pto operator-(pto b){ return pto(x-b.x, y-b.y); }
+	pto operator+(T k){ return pto(x+k, y+k); }
+	pto operator*(T k){ return pto(x*k, y*k); }
+	pto operator/(T k){ return pto(x/k, y/k); }
+	
+	//dot product
+	T operator*(pto b){ return x*b.x+y*b.y; }
+	//cross product, a^b>0 if angle_cw(u,v)<180
+	T operator^(pto b){ return x*b.y-y*b.x; }
+	pto proy(pto b) { return b*((*this)*b)/(b*b); }
+
+	T norm_sq(){ return x*x+y*y; }
+	ld norm(){ return sqrtl(x*x+y*y); }
+	ld dist(pto b){ return (b-(*this)).norm(); }
+
+	//rotate by theta rads CCW w.r.t. origin (0,0)
+	pto rotate(T theta) { return pto(x*cos(theta)-y*sin(theta),x*sin(theta)+y*cos(theta)); }
+	
+	// true if this is at the left side of line qr
+	bool left(pto a, pto b){return ((a-*this)^(b-*this))>0;}
+	bool operator<(const pto &b) const{return x<b.x-EPS || (abs(x-b.x)<=EPS && y<b.y-EPS);}
+	bool operator==(pto b){return abs(x-b.x)<=EPS && abs(y-b.y)<=EPS;}
 };
-double dist(pto a, pto b){return (b-a).norm();}
-typedef pto vec;
 
-double angle(pto a, pto o, pto b){
+ld angle(pto a, pto o, pto b){
 	pto oa=a-o, ob=b-o;
-	return atan2(oa^ob, oa*ob);}
+	return atan2(oa^ob, oa*ob);
+}
 
-//rotate p by theta rads CCW w.r.t. origin (0,0)
-pto rotate(pto p, double theta){
-	return pto(p.x*cos(theta)-p.y*sin(theta),
-     p.x*sin(theta)+p.y*cos(theta));
+ld angle(pto a, pto b){
+	ld cost = (a*b)/a.norm()/b.norm();
+	return acosl(max(ld(-1.), min(ld(1.), cost)));
 }
