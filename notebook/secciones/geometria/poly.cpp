@@ -13,6 +13,16 @@ struct poly{
 				pi=i;
 		rotate(pt.begin(), pt.begin()+pi, pt.end());
 	}
+		
+	bool is_convex(){ // delete collinear points first
+		int N = sz(pt);
+		if(N<3) return false;
+		bool isLeft=pt[0].left(pt[1], pt[2]);
+		forr(i, 1, sz(pt))
+			if(pt[i].left(pt[(i+1)%N], pt[(i+2)%N]) != isLeft)
+				return false;
+		return true; 
+	}
 	
 	// for convex or concave polygons
 	// excludes boundaries, check it manually
