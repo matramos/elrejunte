@@ -6,7 +6,6 @@ struct halfplane:line{ // left half plane
 	bool operator<(halfplane h) const { return angle<h.angle; }
 	bool out(pto p){ return (uv^(p-u))<-EPS; }
 };
-
 vector<pto> intersect(vector<halfplane> h){
 	pto box[4] = {{INF,INF}, {-INF,INF}, {-INF,-INF}, {INF,-INF}};
 	forr(i,0,4) h.pb(halfplane(box[i],box[(i+1)%4]));
@@ -16,17 +15,11 @@ vector<pto> intersect(vector<halfplane> h){
 	forn(i,sz(h)){
 		while(len>1 && h[i].out(dq[len-1].inter(dq[len-2]))){ dq.pop_back(); len--; }
 		while(len>1 && h[i].out(dq[0].inter(dq[1]))) { dq.pop_front(); len--; }
-		
 		if(len>0 && abs(h[i].uv^dq[len-1].uv)<=EPS) {
-			if(h[i].uv*dq[len-1].uv<0.){
-				return vector<pto>();
-			}
-			if(h[i].out(dq[len-1].u)){
-				dq.pop_back();
-				len--;
-			}else continue;
+			if(h[i].uv*dq[len-1].uv<0.) return vector<pto>();
+			if(h[i].out(dq[len-1].u)){ dq.pop_back(); len--; } 
+            else continue;
 		}
-		
 		dq.pb(h[i]);
 		len++;
 	}

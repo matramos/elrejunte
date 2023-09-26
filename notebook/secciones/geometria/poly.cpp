@@ -58,6 +58,23 @@ struct poly{
 		}
 		return poly(ret);
 	}
+
+	poly minkowski(poly p) {
+		this->normalize();
+		p.normalize();
+		vector<pto> a = (*this).pt, b = p.pt;
+		a.pb(a[0]); a.pb(a[1]);
+		b.pb(b[0]); b.pb(b[1]);
+		vector<pto> sum;
+		int i = 0, j = 0;
+		while(i<sz(a)-2 || j<sz(b)-2) {
+			sum.pb(a[i]+b[j]);
+			T cross = (a[i+1]-a[i])^(b[j+1]-b[j]);
+			if(cross <= 0 && i < sz(a)-2) i++;
+			if(cross >= 0 && j < sz(b)-2) j++;
+		}
+		return poly(sum);
+	}
 	
 	// area ellipse = M_PI*a*b where a and b are the semi axis lengths
 	// area triangle = sqrt(s*(s-a)(s-b)(s-c)) where s=(a+b+c)/2
