@@ -1,4 +1,4 @@
-struct Cmp { // radial sort around point O in counter-clockwise direction starting from vector v
+struct cmp { // radial sort around point O in counter-clockwise direction starting from vector v
 	pto o, v;
 	Cmp (pto no, pto nv) : o(no), v(nv) {}
 	bool half(pto p) {

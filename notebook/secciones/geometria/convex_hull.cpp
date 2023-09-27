@@ -1,17 +1,18 @@
-//stores convex hull of P in S, CCW order
-//left must return >=0 to delete collinear points!
-void CH(vector<pto>& P, vector<pto> &S){
-	S.clear();
-	sort(P.begin(), P.end());//first x, then y
-	forn(i, sz(P)){//lower hull
-		while(sz(S)>= 2 && S[sz(S)-1].left(S[sz(S)-2], P[i])) S.pop_back();
-		S.pb(P[i]);
+// returns convex hull of p in CCW order
+// left must return >=0 to delete collinear points
+vector<pto> CH(vector<pto>& p){
+	vector<pto> ch;
+	sort(p.begin(), p.end());
+	forn(i, sz(p)){ // lower hull
+		while(sz(ch)>= 2 && ch[sz(ch)-1].left(ch[sz(ch)-2], p[i])) ch.pop_back();
+		ch.pb(p[i]);
 	}
-	S.pop_back();
-	int k=sz(S);
-	dforn(i, sz(P)){//upper hull
-		while(sz(S) >= k+2 && S[sz(S)-1].left(S[sz(S)-2], P[i])) S.pop_back();
-		S.pb(P[i]);
+	ch.pop_back();
+	int k=sz(ch);
+	dforn(i, sz(p)){ // upper hull
+		while(sz(ch) >= k+2 && ch[sz(ch)-1].left(ch[sz(ch)-2], p[i])) ch.pop_back();
+		ch.pb(p[i]);
 	}
-	S.pop_back();
+	ch.pop_back();
+	return ch;
 }
