@@ -2,8 +2,8 @@ struct CHT{
 	vector<pto> hull, normal;
 	T f; int pos;
 	
-	void init(vector<pto> lines, bool mini_){
-		f = mini_ ? 1 : -1;
+	void init(vector<pto> lines, bool mini){
+		f = mini ? 1 : -1;
 		pos = 0;
 		forn(i,sz(lines)) lines[i] = lines[i]*f;
 		sort(lines.begin(),lines.end()); // if lines aren't sorted
