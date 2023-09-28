@@ -11,9 +11,9 @@ struct line{
 	int side(pto v){return sgn(a*v.x + b*v.y - c);}
 	bool inside(pto v){ return abs(a*v.x + b*v.y - c) <= EPS; }
 	bool parallel(line v){return abs(a*v.b-v.a*b) <= EPS;}
-	pto inter(line v){
+	vector<pto> inter(line v){
 		T det=a*v.b-v.a*b;
-		if(abs(det)<=EPS) return pto(INF, INF);
-		return pto(v.b*c-b*v.c, a*v.c-v.a*c)/det;
+		if(abs(det)<=EPS) return {};
+		return {pto(v.b*c-b*v.c, a*v.c-v.a*c)/det};
 	}
 };

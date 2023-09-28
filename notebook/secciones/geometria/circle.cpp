@@ -13,7 +13,7 @@ struct circle{
 	circle(pto o_=pto(INF,INF), T r_=INF) : o(o_), r(r_) {}
 	
 	circle(pto a, pto b, pto c){
-		o=bisector(a, b).inter(bisector(b, c));
+		o=bisector(a, b).inter(bisector(b, c))[0];
 		r=o.dist(a);
 	}
 	
@@ -36,14 +36,14 @@ struct circle{
 		return make_pair(m2-per*h, m2+per*h);
 	}
 	
-	pair<pto,pto> inter(line l){
+	vector<pto> inter(line l){
 		ld a = l.a, b = l.b, c = l.c - l.a*o.x - l.b*o.y;
 		
 		pto xy0 = pto(a*c/(a*a+b*b),b*c/(a*a+b*b));
 		if(c*c > r*r*(a*a+b*b)+EPS){
-			return {pto(INF,INF),pto(INF,INF)};
+			return {};
 		}else if(abs(c*c-r*r*(a*a+b*b))<EPS){
-			return {xy0+o,xy0+o};
+			return {xy0+o};
 		}else{
 			ld m = sqrtl((r*r - c*c/(a*a+b*b))/(a*a+b*b));
 			pto p1 = xy0 + (pto(-b,a)*m);
@@ -52,7 +52,7 @@ struct circle{
 		}
 	}
 	
-	pair<pto, pto> inter(circle c){
+	vector<pto> inter(circle c){
 		line l;
 		l.a = o.x-c.o.x;
 		l.b = o.y-c.o.y;
