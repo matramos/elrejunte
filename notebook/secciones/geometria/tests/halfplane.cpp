@@ -70,7 +70,8 @@ struct halfplane{ // left half plane
 	halfplane(){}
 	halfplane(pto u_, pto v_): u(u_), uv(v_-u_), angle(atan2l(uv.y,uv.x)) {}
 	bool operator<(halfplane h) const { return angle<h.angle; }
-	bool out(pto p){
+	bool out(pto p){ 
+		assert(!(p==pto(INF,INF)));
 		return (uv^(p-u))<-EPS; 
 	}
 	pto inter(halfplane& h) {
