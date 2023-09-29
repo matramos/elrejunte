@@ -60,8 +60,7 @@ struct poly{
 	}
 
 	poly minkowski(poly p) {
-		this->normalize();
-		p.normalize();
+		this->normalize(); p.normalize();
 		vector<pto> a = (*this).pt, b = p.pt;
 		a.pb(a[0]); a.pb(a[1]);
 		b.pb(b[0]); b.pb(b[1]);
