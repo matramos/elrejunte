@@ -1,3 +1,29 @@
+// Problem: https://open.kattis.com/problems/cram
+#include <bits/stdc++.h>
+#define forr(i,a,b) for(int i=(a);i<(b);i++)
+#define forn(i,n) forr(i,0,n)
+#define dforn(i,n) for(int i=n-1;i>=0;i--)
+#define forall(it,v) for(auto it=v.begin();it!=v.end();it++)
+#define sz(c) ((int)c.size())
+#define rsz resize
+#define pb push_back
+#define mp make_pair
+#define lb lower_bound
+#define ub upper_bound
+#define fst first
+#define snd second
+
+#ifdef ANARAP
+//local
+#else
+//judge
+#endif
+
+using namespace std;
+
+typedef long long ll;
+typedef pair<int,int> ii;
+
 const int INF = 1e6+10; // INF > n
 const int MAXLOG = 20; // 2^MAXLOG > 2*n
 //The SuffixTree of S is the compressed trie that would result after
@@ -71,9 +97,9 @@ struct SuffixTree {
     // When this is needed, usually binary lifting (vp) and depths are
     // also needed.
     // Usually you also need to compute extra information in the dfs.
-    vector<int> vleaf, vdepth;
+    vector<int> vleaf, vdepth, vsubtree;
     vector<vector<int>> vp;
-    void dfs(int cur, int p, int curlen) {
+    int dfs(int cur, int p, int curlen) {
 		if(cur > 0) curlen += len[cur];
 		vdepth[cur] = curlen;
 		vp[cur][0] = p;
@@ -82,14 +108,18 @@ struct SuffixTree {
 			assert(vleaf[n-curlen] == -1);
 			vleaf[n-curlen] = cur;
 			// here maybe compute some extra info
+			vsubtree[cur] = n-curlen;
 		}
 		else forall(it,to[cur]) {
-			dfs(it->snd, cur, curlen);
+			int aux = dfs(it->snd, cur, curlen);
 			// maybe change return type and here compute extra info
+			vsubtree[cur] = min(vsubtree[cur], aux);
 		}
 		// maybe return something here related to extra info
+		return vsubtree[cur];
 	}
     void buildLeaf() {
+		vsubtree.rsz(sz(to), n); // tree size
 		vdepth.rsz(sz(to), 0); // tree size
 		vleaf.rsz(n, -1); // string size
 		vp.rsz(sz(to), vector<int>(MAXLOG)); // tree size * log
@@ -98,3 +128,60 @@ struct SuffixTree {
 		forn(i,n) assert(vleaf[i] != -1);
 	}
 };
+
+
+string s;
+
+int main()
+{
+    // agregar g++ -DANARAP en compilacion
+    #ifdef ANARAP
+        freopen("input.in", "r", stdin);
+        //freopen("output","w", stdout);
+    #endif
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    string x;
+    while(cin >> x)
+    {
+        if(!s.empty()) s.pb(' ');
+        s += x;
+    }
+    s.pb('$');
+    SuffixTree st(sz(s));
+    forall(it,s) st.add(*it);
+    st.finishedAdding();
+    st.buildLeaf();
+    vector<int> dp(sz(s),0);
+    dforn(i,sz(s)-1)
+    {
+        dp[i] = 1+dp[i+1];
+        int L = 1, R = sz(s)-i;
+        while(L < R)
+        {
+			int M = (L+R)/2;
+			int aux = M;
+			int node = st.vleaf[i];
+			dforn(j,MAXLOG) if((1<<j) <= aux)
+			{
+				node = st.vp[node][j];
+				aux -= 1<<j;
+			}
+			assert(aux == 0);
+			if(st.vsubtree[node] < i) R = M;
+			else L = M+1;
+		}
+		int node = st.vleaf[i];
+		dforn(j,MAXLOG) if((1<<j) <= L)
+		{
+			node = st.vp[node][j];
+			L -= 1<<j;
+		}
+		int len = max(1,st.vdepth[node]);
+        dp[i] = min(dp[i], dp[i+len] + min(len, 3));
+    }
+    cout << dp[0] << '\n';
+    return 0;
+}
+//ababbbbbbbbbbbbbbbbababababababababab
