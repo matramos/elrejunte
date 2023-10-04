@@ -1,5 +1,4 @@
-// ANARAP 💙💛💙
-//NCPC 2021 Problem H: Hiring Help
+// https://open.kattis.com/problems/hiringhelp
 #include <bits/stdc++.h>
 #define forr(i,a,b) for(int i=(a);i<(b);i++)
 #define forn(i,n) forr(i,0,n)
@@ -25,100 +24,106 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> ii;
 typedef pair<ii,pair<long double,long double>> query;
-#define EPS 1e-7
+typedef long double T;
+typedef long double ld;
+const T EPS = 1e-9; // if T is integer, set to 0
+const T INF = 1e18;
+
 struct pto{
-	long double x, y;
-	pto(long double x=0, long double y=0):x(x),y(y){}
-	pto operator+(pto a){return pto(x+a.x, y+a.y);}
-	pto operator-(pto a){return pto(x-a.x, y-a.y);}
-	pto operator+(long double a){return pto(x+a, y+a);}
-	pto operator*(long double a){return pto(x*a, y*a);}
-	pto operator/(long double a){return pto(x/a, y/a);}
-	//dot product, producto interno:
-	long double operator*(pto a){return x*a.x+y*a.y;}
-	//module of the cross product or vectorial product:
-	//if a is less than 180 clockwise from b, a^b>0
-	long double operator^(pto a){return x*a.y-y*a.x;}
-	//returns true if this is at the left side of line qr
-	bool left(pto q, pto r){return ((q-*this)^(r-*this))>0;}
-	bool operator<(const pto &a) const{return x<a.x-EPS || (abs(x-a.x)<EPS && y<a.y-EPS);}
-bool operator==(pto a){return abs(x-a.x)<EPS && abs(y-a.y)<EPS;}
-	long double norm(){return sqrt(x*x+y*y);}
-	long double norm_sq(){return x*x+y*y;}
+	T x, y;
+	
+	pto() : x(0), y(0) {}
+	pto(T _x, T _y) : x(_x), y(_y) {}
+	
+	pto operator+(pto b){ return pto(x+b.x, y+b.y); }
+	pto operator-(pto b){ return pto(x-b.x, y-b.y); }
+	pto operator+(T k){ return pto(x+k, y+k); }
+	pto operator*(T k){ return pto(x*k, y*k); }
+	pto operator/(T k){ return pto(x/k, y/k); }
+	
+	//dot product
+	T operator*(pto b){ return x*b.x+y*b.y; }
+	//cross product, a^b>0 if angle_cw(u,v)<180
+	T operator^(pto b){ return x*b.y-y*b.x; }
+	pto proy(pto b) { return b*((*this)*b)/(b*b); }
+
+	T norm_sq(){ return x*x+y*y; }
+	ld norm(){ return sqrtl(x*x+y*y); }
+	ld dist(pto b){ return (b-(*this)).norm(); }
+
+	//rotate by theta rads CCW w.r.t. origin (0,0)
+	pto rotate(T theta) { return pto(x*cosl(theta)-y*sinl(theta),x*sinl(theta)+y*cosl(theta)); }
+	
+	// true if this is at the left side of line qr
+	bool left(pto a, pto b){return ((a-*this)^(b-*this))>0;}
+	bool operator<(const pto &b) const{return x<b.x-EPS || (abs(x-b.x)<=EPS && y<b.y-EPS);}
+	bool operator==(pto b){return abs(x-b.x)<=EPS && abs(y-b.y)<=EPS;}
 };
-long double dist(pto a, pto b){return (b-a).norm();}
-typedef pto vec;
 
-long double angle(pto a, pto o, pto b){
+ld angle(pto a, pto o, pto b){
 	pto oa=a-o, ob=b-o;
-	return atan2(oa^ob, oa*ob);}
-
-//rotate p by theta rads CCW w.r.t. origin (0,0)
-pto rotate(pto p, double theta){
-	return pto(p.x*cos(theta)-p.y*sin(theta),
-     p.x*sin(theta)+p.y*cos(theta));
+	return atan2l(oa^ob, oa*ob);
 }
+
+ld angle(pto a, pto b){
+	ld cost = (a*b)/a.norm()/b.norm();
+	return acosl(max(ld(-1.), min(ld(1.), cost)));
+}
+
  
-// Superior
-struct Semi_Chull {
-    set<pto> pts;
+struct semi_chull {
+    set<pto> pt; // maintains semi chull without collinears points
+    // in case we want them on the set, make the changes commented below
     bool check(pto p) {
-        if(pts.empty()) return false;
-        if(*pts.rbegin() < p) return false;
-        if(p < *pts.begin()) return false;
-        auto it = pts.lower_bound(p);
-        if(it->x == p.x) return p.y <= it->y;
+        if(pt.empty()) return false;
+        if(*pt.rbegin() < p) return false;
+        if(p < *pt.begin()) return false;
+        auto it = pt.lower_bound(p);
+        if(it->x == p.x) return p.y <= it->y; // ignore it to take in count collinears points too
         pto b = *it;
         pto a = *prev(it);
-        return ((b-p)^(a-p))+EPS >= 0;
+        return ((b-p)^(a-p))+EPS >= 0; // > 0 to take in count collinears points too
     }
  
     void add(pto p) {
         if(check(p)) return;
-        pts.erase(p); pts.insert(p);
-        auto it = pts.find(p);
+        pt.erase(p); pt.insert(p);
+        auto it = pt.find(p);
  
         while(true) {
-            if(next(it) == pts.end() || next(next(it)) == pts.end()) break;
+            if(next(it) == pt.end() || next(next(it)) == pt.end()) break;
             pto a = *next(it);
             pto b = *next(next(it));
-            if(((b-a)^(p-a))+EPS >= 0) {
-                pts.erase(next(it));
+            if(((b-a)^(p-a))+EPS >= 0) { // > 0 to take in count collinears points too
+                pt.erase(next(it));
             } else break;
         }
  
-        it = pts.find(p);
- 
+        it = pt.find(p);
         while(true) {
-            if(it == pts.begin() || prev(it) == pts.begin()) break;
+            if(it == pt.begin() || prev(it) == pt.begin()) break;
             pto a = *prev(it);
             pto b = *prev(prev(it));
-            if(((b-a)^(p-a))-EPS <=0) {
-                pts.erase(prev(it));
+            if(((b-a)^(p-a))-EPS <=0) { // < 0 to take in count collinears points too
+                pt.erase(prev(it));
             } else break;
         }
     }
 };
- 
-struct Chull {
-    Semi_Chull sup, inf;
+
+struct CHD{
+    semi_chull sup, inf;
     void add(pto p) {
-        sup.add(p);
-        pto np = {-1*p.x, -1*p.y};
-        inf.add(np);
+        sup.add(p); inf.add(p*(-1));
     }
     bool check(pto p) {
-		pto np = {-1*p.x, -1*p.y};
-        return sup.check(p) && inf.check(np);
+        return sup.check(p) && inf.check(p*(-1));
     }
 };
- 
 
 
-
-int main()
-{
-	#ifdef ANARAP
+int main(){
+	#ifdef JP
 		freopen("input.in", "r", stdin);
 		//~ freopen("output.txt", "w", stdout);
 		unsigned t0, t1; t0=clock();
@@ -150,7 +155,7 @@ int main()
 			q[i].fst.snd = kick;
 		}
 	}
-	Chull chull;
+	CHD chull;
 	long double maxx = 0.0, maxy=0.0;
 	vector<bool> ans;
 	forn(i,n) if(!used[i]){chull.add(emp[i]); maxx = max(maxx,emp[i].x); maxy = max(maxy,emp[i].y);}
