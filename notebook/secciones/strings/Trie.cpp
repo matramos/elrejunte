@@ -1,5 +1,5 @@
-struct trie{
-	map<char, trie> m;
+struct Trie{
+	map<char, Trie> m;
 	// For persistent trie only. Call "clone" probably from
 	// "add" and/or other methods, to implement persistence.
 	void clone(int pos) {
