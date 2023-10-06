@@ -50,7 +50,7 @@ struct poly{
 	
 	// cuts this along line ab and return the left side 
 	// (swap a, b for the right one)
-	poly cut(pto a, pto b){
+	poly cut(pto a, pto b){ // O(n)
 		vector<pto> ret;
 		forn(i, sz(pt)){
 			ld left1=(b-a)^(pt[i]-a), left2=(b-a)^(pt[(i+1)%sz(pt)]-a);
@@ -61,7 +61,8 @@ struct poly{
 		return poly(ret);
 	}
 
-	poly minkowski(poly p) {
+	// addition of polygons
+	poly minkowski(poly p) { // O(n+m) n=|this|,m=|p| 
 		this->normalize(); p.normalize();
 		vector<pto> a = (*this).pt, b = p.pt;
 		a.pb(a[0]); a.pb(a[1]);
@@ -79,7 +80,7 @@ struct poly{
 	
 	// area ellipse = M_PI*a*b where a and b are the semi axis lengths
 	// area triangle = sqrt(s*(s-a)(s-b)(s-c)) where s=(a+b+c)/2
-	ld area(){
+	ld area(){ // O(n)
 		ld area=0;
 		forn(i, sz(pt)) area+=pt[i]^pt[(i+1)%sz(pt)];
 		return abs(area)/ld(2);
