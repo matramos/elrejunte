@@ -26,7 +26,7 @@ struct poly{
 	
 	// for convex or concave polygons
 	// excludes boundaries, check it manually
-	bool inside(pto p) {  
+	bool inside(pto p) { // O(n)  
 		bool c = false;
 		forn(i, sz(pt)){
 			int j=(i+1)%sz(pt);
@@ -37,7 +37,7 @@ struct poly{
 		return c;
 	}
 	
-	bool inside_convex(pto p){ // normalize first
+	bool inside_convex(pto p){ // O(lg(n)) normalize first
 		if(p.left(pt[0], pt[1]) || p.left(pt[sz(pt)-1], pt[0])) return false;
 		int a=1, b=sz(pt)-1;
 		while(b-a>1){
@@ -48,6 +48,8 @@ struct poly{
 		return !p.left(pt[a], pt[a+1]);
 	}
 	
+	// cuts this along line ab and return the left side 
+	// (swap a, b for the right one)
 	poly cut(pto a, pto b){
 		vector<pto> ret;
 		forn(i, sz(pt)){

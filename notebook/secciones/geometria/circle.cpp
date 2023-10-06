@@ -10,20 +10,21 @@ line bisector(pto a, pto b){
 struct circle{
 	pto o; T r;
 	
-	circle(pto o_=pto(INF,INF), T r_=INF) : o(o_), r(r_) {}
-	
+	circle(){}
 	circle(pto a, pto b, pto c){
-		o=bisector(a, b).inter(bisector(b, c))[0];
+		o=bisector(a, b).inter(bisector(b, c));
 		r=o.dist(a);
 	}
 	
 	// circle containing p1 and p2 with radius r
 	// swap p1, p2 to get snd solution
-	circle(pto a, pto b, T r_){
+	circle* circle2PtoR(pto a, pto b, T r_){
         ld d2=(a-b).norm_sq(), det=r_*r_/d2-ld(0.25);
-        if(det<0) return;
-        o=(a+b)/ld(2)+perp(b-a)*sqrt(det);
-        r=r_;
+        if(det<0) return nullptr;
+		circle *ret = new circle();
+        ret->o=(a+b)/ld(2)+perp(b-a)*sqrt(det);
+        ret->r=r_;
+		return ret;
 	}
 	
 	pair<pto, pto> tang(pto p){
