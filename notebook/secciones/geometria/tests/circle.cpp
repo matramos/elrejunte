@@ -76,10 +76,10 @@ struct line{
 	int side(pto v){return sgn(a*v.x + b*v.y - c);}
 	bool inside(pto v){ return abs(a*v.x + b*v.y - c) <= EPS; }
 	bool parallel(line v){return abs(a*v.b-v.a*b) <= EPS;}
-	vector<pto> inter(line v){
+	pto inter(line v){
 		T det=a*v.b-v.a*b;
-		if(abs(det)<=EPS) return {};
-		return {pto(v.b*c-b*v.c, a*v.c-v.a*c)/det};
+		if(abs(det)<=EPS) return pto(INF, INF);
+		return pto(v.b*c-b*v.c, a*v.c-v.a*c)/det;
 	}
 };
 
@@ -93,11 +93,31 @@ line bisector(pto a, pto b){
 struct circle{
 	pto o; T r;
 	
-	circle(pto o_=pto(INF,INF), T r_=INF) : o(o_), r(r_) {}
-	
+	circle(){}
 	circle(pto a, pto b, pto c){
-		o=bisector(a, b).inter(bisector(b, c))[0];
+		o=bisector(a, b).inter(bisector(b, c));
 		r=o.dist(a);
+	}
+	
+	// circle containing p1 and p2 with radius r
+	// swap p1, p2 to get snd solution
+	circle* circle2PtoR(pto a, pto b, T r_){
+        ld d2=(a-b).norm_sq(), det=r_*r_/d2-ld(0.25);
+        if(det<0) return nullptr;
+		circle *ret = new circle();
+        ret->o=(a+b)/ld(2)+perp(b-a)*sqrt(det);
+        ret->r=r_;
+		return ret;
+	}
+	
+	pair<pto, pto> tang(pto p){
+		pto m=(p+o)/2;
+		ld d=o.dist(m);
+		ld a=r*r/(2*d);
+		ld h=sqrtl(r*r-a*a);
+		pto m2=o+(m-o)*a/d;
+		pto per=perp(m-o)/d;
+		return make_pair(m2-per*h, m2+per*h);
 	}
 	
 	vector<pto> inter(line l){
@@ -140,7 +160,8 @@ int main(){
 		vector<circle> c(n);
 		forn(i,n){
 			T x,y,r; cin >> x >> y >> r;
-			c[i] = circle(pto(x,y),r);
+			c[i].o = pto(x,y);
+			c[i].r = r;
 		}
 		
 		int ans = 0;
