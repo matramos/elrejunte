@@ -1,41 +1,35 @@
-struct Line{tipo m,h;};
-//Coordenada X de la interseccion
-tipo inter(Line a, Line b){
-    tipo x=b.h-a.h, y=a.m-b.m;
-    return x/y+(x%y?!((x>0)^(y>0)):0);//==ceil(x/y)
-}
-struct CHT {
-	vector<Line> c;
-	bool mx;
-	int pos;
-	CHT(bool mx=0):mx(mx),pos(0){}//mx=1 si las query devuelven el max
-	//Indexar de der a izq si se inserto con m/-m creciente (min/max)
-	inline Line acc(int i){return c[c[0].m>c.back().m? i : sz(c)-1-i];}
-	inline bool irre(Line x, Line y, Line z){
-		return c[0].m>z.m? inter(y, z) <= inter(x, y)
-                         : inter(y, z) >= inter(x, y);
-	}
-	void add(tipo m, tipo h) {//O(1), los m tienen que entrar ordenados
-        if(mx) m*=-1, h*=-1; //max f_i(x) == min -f_i(x)
-		Line l=(Line){m, h};
-		//Manejar caso igual pendiente
-        if(sz(c) && m==c.back().m) { l.h=min(h, c.back().h), c.pop_back(); if(pos) pos--; }
-        while(sz(c)>=2 && irre(c[sz(c)-2], c[sz(c)-1], l)) { c.pop_back(); if(pos) pos--; }
-        c.pb(l);
-	}
-	inline bool fbin(tipo x, int m) {return inter(acc(m), acc(m+1))>x;}
-	tipo eval(tipo x){
-		int n = sz(c);
-		//query con x no ordenados O(lgn)
-		int a=-1, b=n-1;
-		while(b-a>1) { int m = (a+b)/2;
-			if(fbin(x, m)) b=m;
-			else a=m;
+struct CHT{
+	deque<pto> h;
+	T f = 1, pos;
+	CHT(bool min_=0): f(min_ ? 1 : -1), pos(0){} // min_=1 for min queries
+	void add(pto p) { // O(1), pto(m,b) <=> y = mx + b 
+		p = p*f;
+		if(h.empty()) { h.pb(p); return; }
+		
+		// p.x should be the lower/greater hull x
+		assert(p.x <= h[0].x || p.x >= h.back().x);
+		if(p.x <= h[0].x) {
+			while(sz(h) > 1 && h[0].left(p,h[1])) h.pop_front(), pos--;
+			h.push_front(p); pos++;
+		}else{
+			while(sz(h) > 1 && h[sz(h)-1].left(h[sz(h)-2], p)) h.pop_back();
+			h.pb(p);
 		}
-		return (acc(b).m*x+acc(b).h)*(mx?-1:1);
-        //query O(1), con x ordenado
-		while(pos>0 && fbin(x, pos-1)) pos--;
-		while(pos<n-1 && !fbin(x, pos)) pos++;
-		return (acc(pos).m*x+acc(pos).h)*(mx?-1:1);
+		pos = min(max(T(0),pos), T(sz(h)-1));
 	}
-} ch;
+	T get(T x){ 
+		pto q = {x,1};
+		// O(log) query for unordered x
+		int L = 0,R = sz(h)-1, M;
+		while(L < R) {
+			M = (L+R)/2;
+			if(h[M+1]*q <= h[M]*q) L = M+1;
+			else R = M;
+		}
+		return h[L]*q*f;
+		// O(1) query for ordered x
+		while(pos > 0 && h[pos-1]*q < h[pos]*q) pos--;
+		while(pos < sz(h)-1 && h[pos+1]*q < h[pos]*q) pos++;
+		return h[pos]*q*f;
+	}
+};
