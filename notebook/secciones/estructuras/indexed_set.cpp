@@ -3,7 +3,7 @@
 using namespace __gnu_pbds;
 //<key,mapped type,comparator,...>
 typedef tree<int,null_type,less<int>,rb_tree_tag,
-	tree_order_statistics_node_update> ordered_set;
+	tree_order_statistics_node_update> indexed_set;
 //find_by_order(i) devuelve iterador al i-esimo elemento
 //order_of_key(k): devuelve la pos del lower bound de k
 //Ej: 12, 100, 505, 1000, 10000.

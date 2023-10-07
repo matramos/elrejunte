@@ -24,14 +24,13 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> ii;
 
-struct HopcroftKarp {
-	// [0,n)->[0,m) (ids independent in each side)
+struct HopcroftKarp { // [0,n)->[0,m) (ids independent in each side)
 	vector<vector<int>> g;
 	int n, m;
 	vector<int> mt, mt2, ds;
 	HopcroftKarp(int nn, int mm) { n = nn; m = mm; g.rsz(n); }
 	void add(int a, int b) { g[a].pb(b); }
-	bool bfs(){
+	bool bfs() {
 		queue<int> q;
 		ds = vector<int>(n, -1);
 		forn(i,n) if(mt2[i] < 0) ds[i] = 0, q.push(i);
@@ -47,7 +46,7 @@ struct HopcroftKarp {
 		}
 		return r;
 	}
-	bool dfs(int x){
+	bool dfs(int x) {
 		for(int y : g[x]) {
 			if(mt[y] < 0 || ds[mt[y]] == ds[x] + 1 && dfs(mt[y])) {
 				mt[y] = x; mt2[x] = y;
@@ -61,9 +60,7 @@ struct HopcroftKarp {
 		int r = 0;
 		mt = vector<int>(m, -1);
 		mt2 = vector<int>(n, -1);
-		while(bfs()){
-			forn(i,n) if(mt2[i] < 0) r += dfs(i);
-		}
+		while(bfs()) forn(i,n) if(mt2[i] < 0) r += dfs(i);
 		return r;
 	}
 };

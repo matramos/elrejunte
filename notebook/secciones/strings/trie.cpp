@@ -1,13 +1,12 @@
 struct Trie{
-	map<char, Trie> m;
+	map<char, Trie> m; // Trie* when using persistence
 	// For persistent trie only. Call "clone" probably from
 	// "add" and/or other methods, to implement persistence.
 	void clone(int pos) {
 		Trie* prev = NULL;
 		if(m.count(pos)) prev = m[pos];
 		m[pos] = new Trie();
-		if(prev != NULL)
-		{
+		if(prev != NULL) {
 			m[pos]->m = prev->m;
 			// copy other relevant data
 		}
@@ -17,7 +16,6 @@ struct Trie{
 	}
 	void dfs() {
 		//Do stuff
-		forall(it, m)
-		it->second.dfs();
+		forall(it, m) it->second.dfs();
 	}
 };

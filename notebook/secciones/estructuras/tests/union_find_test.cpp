@@ -23,31 +23,22 @@ typedef pair<int,int> ii;
 typedef vector<int> vi;
 typedef vector<ii> vii;
 
-struct UnionFind{
-	vector<int> f, setSize; //the array f contains the parent of each node
-	int cantSets;
-	void init(int n)
-	{
-		f.clear(); setSize.clear();
-		cantSets = n;
-		f.rsz(n, -1);
-		setSize.rsz(n, 1);
-	}
-	int comp(int x) {return (f[x]==-1? x : f[x]=comp(f[x]));}//O(1)
-	bool join(int i,int j) //devuelve true si ya estaban juntos
-	{
+struct UnionFind {
+	int nsets;
+	vector<int> f, setsz; // f[i] = parent of node i
+	UnionFind(int n) : nsets(n), f(n, -1), setsz(n, 1) {}
+	int comp(int x) { return (f[x] == -1 ? x : f[x]=comp(f[x])); } //O(1)
+	bool join(int i,int j) { // returns true if already in the same set
 		int a = comp(i), b = comp(j);
-		if(a != b)
-		{
-			cantSets--;
-			if(setSize[a] > setSize[b]) swap(a,b);
-			setSize[b] += setSize[a];
-			f[a] = b; //el grupo mas grande (b) pasa a representar al mas chico (a)
+		if(a != b) {
+			if(setsz[a] > setsz[b]) swap(a,b);
+			setsz[b] += setsz[a];
+			f[a] = b; // the bigger group (b) now represents the smaller (a)
+			nsets--;
 		}
 		return a == b;
 	}
 };
-
 
 int main()
 {
@@ -60,9 +51,8 @@ int main()
 	cout.tie(NULL);
 	int n;
 	vector<ii> badEdges;
-	UnionFind dsu;
 	cin >> n;
-	dsu.init(n);
+	UnionFind dsu(n);
 	forn(i,n-1)
 	{
 		int a,b;
@@ -73,9 +63,9 @@ int main()
 	set<int> representantes;
 	forn(i,n) representantes.insert(dsu.comp(i));
 	int sum = 0;
-	forall(it, representantes) sum += dsu.setSize[*it];
+	forall(it, representantes) sum += dsu.setsz[*it];
 	assert(sum == n);
-	assert(dsu.cantSets == representantes.size());
+	assert(dsu.nsets == representantes.size());
 	assert(badEdges.size() == representantes.size()-1);
 	cout << badEdges.size() << '\n';
 	set<int>::iterator ite = representantes.begin();
