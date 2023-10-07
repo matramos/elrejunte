@@ -38,7 +38,7 @@ struct ST {
 	void updall() { dforn(i, sz) t[i] = oper(t[2*i], t[2*i+1]); }
 	tipo get(int i, int j) { return get(i, j, 1, 0, sz); }
 	tipo get(int i, int j, int n, int a, int b) { //O(log n), [i, j)
-		if(j <= a || i >= b) return neutro;
+		if(j <= a || b <= i) return neutro;
 		if(i <= a && b <= j) return t[n]; // n = node of range [a,b)
 		int c = (a+b)/2;
 		return oper(get(i, j, 2*n, a, c), get(i, j, 2*n+1, c, b));

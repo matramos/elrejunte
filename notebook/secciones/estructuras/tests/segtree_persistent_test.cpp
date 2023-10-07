@@ -48,7 +48,7 @@ struct ST {
 		return id;
 	}
 	tipo get(int cur, int from, int to, int l, int r) {
-		if(r <= from || to <= l) return neutro;
+		if(to <= l || r <= from) return neutro;
 		if(from <= l && r <= to) return st[cur];
 		int m = (l+r)/2;
 		return oper(get(L[cur], from, to, l, m), get(R[cur], from, to, m, r));

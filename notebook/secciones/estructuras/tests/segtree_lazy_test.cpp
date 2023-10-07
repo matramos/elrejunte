@@ -47,7 +47,7 @@ struct ST{
 		}
 	}
 	Elem get(int i, int j, int n, int a, int b) { //O(lgn)
-		if(j <= a || i >= b) return neutro;
+		if(j <= a || b <= i) return neutro;
 		push(n, a, b); // adjust value before using it
 		if(i <= a && b <= j) return t[n]; // n = node of range [a,b)
 		int c = (a+b)/2;
@@ -57,7 +57,7 @@ struct ST{
 	//altera los valores en [i, j) con una alteracion de val
 	void update(Alt val, int i, int j, int n, int a, int b) {//O(lgn)
 		push(n, a, b);
-		if(j <= a || i >= b) return;
+		if(j <= a || b <= i) return;
 		if(i <= a && b <= j) {
 			dirty[n] += val; // CHANGE for your problem
 			push(n, a, b);

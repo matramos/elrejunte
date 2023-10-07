@@ -34,7 +34,6 @@ const tipo neutro = {0,0};
 tipo oper(const tipo& a, const tipo& b) {
 	return {a.cnt+b.cnt, a.sum+b.sum};
 }
-
 // Compressed segtree, it works for any range (even negative indexes)
 struct ST {
 	ST *lc, *rc;
@@ -79,7 +78,7 @@ struct ST {
 	}
 	// O(log(R-L))
 	tipo get(int ql, int qr) {
-		if(L >= qr || R <= ql) return neutro;
+		if(qr <= L || R <= ql) return neutro;
 		if(ql <= L && R <= qr) return ret;
 		return oper(lc ? lc->get(ql,qr) : neutro, rc ? rc->get(ql,qr) : neutro);
 	}
