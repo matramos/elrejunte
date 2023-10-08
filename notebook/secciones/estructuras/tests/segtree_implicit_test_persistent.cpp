@@ -1,3 +1,25 @@
+//Problem: https://www.spoj.com/problems/DQUERY/
+#include <bits/stdc++.h>
+#define sqr(a) ((a)*(a))
+#define rsz resize
+#define forr(i,a,b) for(int i=(a);i<(b);i++)
+#define forn(i,n) forr(i,0,n)
+#define dforn(i,n) for(int i=n-1;i>=0;i--)
+#define forall(it,v) for(auto it=v.begin();it!=v.end();it++)
+#define sz(c) ((int)c.size())
+#define zero(v) memset(v, 0, sizeof(v))
+#define pb push_back
+#define mp make_pair
+#define lb lower_bound
+#define ub upper_bound
+#define fst first
+#define snd second
+ 
+using namespace std;
+ 
+typedef long long ll;
+typedef pair<int,int> ii;
+
 typedef int tipo;
 const tipo neutro = 0;
 tipo oper(const tipo& a, const tipo& b) { return a+b; }
@@ -21,21 +43,21 @@ struct ST {
 	// total memory used by the tree is O(N), where N is the number
 	// of times this 'set' function is called. (2*log nodes when persistent)
 	// parameter 'isnew' only needed when persistent
-	void set(int p, tipo x, bool isnew = false) { // return ST* for persistent
+	ST* set(int p, tipo x, bool isnew = false) { // return ST* for persistent
 		// uncomment for persistent
-		/*if(!isnew) {
+		if(!isnew) {
 			ST* newnode = new ST(L, R, lc, rc);
 			return newnode->set(p, x, true);
-		}*/
+		}
 		// might need to CHANGE val = x with something else
-		if(L + 1 == R) { val = x; return; } // 'return this;' for persistent
+		if(L + 1 == R) { val = x; return this; } // 'return this;' for persistent
 		int m = (L+R) / 2;
 		ST** c = p < m ? &lc : &rc;
 		if(!*c) *c = new ST(p, p+1, x);
 		else if((*c)->L <= p && p < (*c)->R) {
 			// replace by comment for persistent
-			(*c)->set(p,x);
-			//*c = (*c)->set(p,x);
+			//(*c)->set(p,x);
+			*c = (*c)->set(p,x);
 		}
 		else {
 			int l = L, r = R;
@@ -52,7 +74,7 @@ struct ST {
 			//*c = new ST(p & ~rm, (p | rm)+1, *c, new ST(p, p+1, x));
 		}
 		val = oper(lc ? lc->val : neutro, rc ? rc->val : neutro);
-		//return this; // uncomment for persistent
+		return this; // uncomment for persistent
 	}
 	// O(log(R-L))
 	tipo get(int ql, int qr) {
@@ -62,3 +84,41 @@ struct ST {
 	}
 };
 // Usage: 1- RMQ st(MIN_INDEX, MAX_INDEX) 2- normally use set/get
+ 
+
+ 
+int main()
+{
+	#ifdef ANARAP
+		freopen("input.in","r",stdin);
+		//freopen("output.out","w",stdout);
+	#endif
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	int n;
+	cin >> n;
+	vector<int> vlast(1e6+10, -1);
+	vector<ST*> roots;
+	roots.reserve(n+1);
+	roots.pb(new ST(0, n));
+	forn(i,n)
+	{
+		int x;
+		cin >> x;
+		roots.pb(roots.back());
+		if(vlast[x] != -1) roots.back() = roots.back()->set(vlast[x], roots.back()->get(vlast[x], vlast[x]+1)-1);
+		roots.back() = roots.back()->set(i, 1);
+		vlast[x] = i;
+	}
+	int q;
+	cin >> q;
+	forn(_,q)
+	{
+		int l,r;
+		cin >> l >> r;
+		l--;
+		cout << roots[r]->get(l,r) << '\n';
+	}
+	return 0;
+}
