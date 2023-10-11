@@ -80,8 +80,7 @@ struct Mat {
 		return res;
 	}
 	Mat operator ^(int k) { // O(N^3 * logk), exponentiation
-		Mat res(N);
-		Mat aux = *this;
+		Mat res(N), aux = *this;
 		forn(i, N) res[i][i] = 1;
 		while(k) if(k&1) res = res*aux, k--; else aux = aux*aux, k/=2;
 		return res;
