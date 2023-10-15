@@ -156,7 +156,6 @@ struct li_chao {
 		else return min(cur[id].f(x), get(R[id], x, m, tr));
 	}
 	T get(int id, T x) {
-		assert(id != -1);
 		return get(id,x,minx,maxx)*f;
 	}
 };

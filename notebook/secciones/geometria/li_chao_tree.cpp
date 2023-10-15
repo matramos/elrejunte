@@ -1,7 +1,3 @@
-#include<bits/stdc++.h>
-#define pb push_back
-#define sz(v) int(v.size())
-using namespace std;
 typedef long long T;
 const T INF = 1e18;
 
@@ -28,7 +24,7 @@ struct li_chao {
 		cnt++;
 	}
 	
-	li_chao(bool min_, T minx_, T maxx_){ // for min, min_=1 otherwise min_0
+	li_chao(bool min_, T minx_, T maxx_){ // for min: min_=1, for max: min_=0
 		f = min_ ? 1 : -1;
 		identity = line(0,INF);
 		minx = minx_;
@@ -140,11 +136,6 @@ struct li_chao {
 		else return min(cur[id].f(x), get(R[id], x, m, tr));
 	}
 	T get(int id, T x) {
-		assert(id != -1);
 		return get(id,x,minx,maxx)*f;
 	}
 };
-
-int main() {
-	
-}
