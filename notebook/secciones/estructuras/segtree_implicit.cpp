@@ -16,11 +16,10 @@ struct ST {
 		L = l; R = r;
 		val = oper(lp==nullptr?neutro : lp->val, rp==nullptr?neutro : rp->val);
 	}
-	// O(log(R-L))
+	// O(log(R-L)), parameter 'isnew' only needed when persistent
 	// This operation inserts at most 2 nodes to the tree, i.e. the
 	// total memory used by the tree is O(N), where N is the number
 	// of times this 'set' function is called. (2*log nodes when persistent)
-	// parameter 'isnew' only needed when persistent
 	void set(int p, tipo x, bool isnew = false) { // return ST* for persistent
 		// uncomment for persistent
 		/*if(!isnew) {
@@ -54,11 +53,9 @@ struct ST {
 		val = oper(lc ? lc->val : neutro, rc ? rc->val : neutro);
 		//return this; // uncomment for persistent
 	}
-	// O(log(R-L))
-	tipo get(int ql, int qr) {
+	tipo get(int ql, int qr) { // O(log(R-L))
 		if(qr <= L || R <= ql) return neutro;
 		if(ql <= L && R <= qr) return val;
 		return oper(lc ? lc->get(ql,qr) : neutro, rc ? rc->get(ql,qr) : neutro);
 	}
-};
-// Usage: 1- RMQ st(MIN_INDEX, MAX_INDEX) 2- normally use set/get
+}; // Usage: 1- RMQ st(MIN_INDEX, MAX_INDEX) 2- normally use set/get

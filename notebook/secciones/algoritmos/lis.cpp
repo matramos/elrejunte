@@ -1,6 +1,7 @@
 //Para non-increasing, cambiar comparaciones y revisar busq binaria
-//Given an array, paint it in the least number of colors so that each color turns to a non-increasing subsequence.
-//Solution:Min number of colors=Length of the longest increasing subsequence
+//Given an array, paint it in the least number of colors so that each
+//color turns to a non-increasing subsequence. Solution:Min number of
+//colors=Length of the longest increasing subsequence
 int N, a[MAXN];//secuencia y su longitud
 ii d[MAXN+1];//d[i]=ultimo valor de la subsecuencia de tamanio i
 int p[MAXN];//padres

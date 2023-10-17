@@ -7,9 +7,8 @@ struct UnionFind {
 		int a = comp(i), b = comp(j);
 		if(a != b) {
 			if(setsz[a] > setsz[b]) swap(a,b);
-			setsz[b] += setsz[a];
 			f[a] = b; // the bigger group (b) now represents the smaller (a)
-			nsets--;
+			nsets--; setsz[b] += setsz[a];
 		}
 		return a == b;
 	}
