@@ -66,7 +66,7 @@ struct circle{
 		return (*this).inter(l);
 	}
 	
-	ld intertriangle(pto a, pto b){ // area of intersection with oab
+	ld inter_triangle(pto a, pto b){ // area of intersection with oab
 		if(abs((o-a)^(o-b))<=EPS)return 0.;
 		vector<pto> q={a}, w=inter(line(a,b));
 		if(sz(w)==2) forn(i,sz(w)) if((a-w[i])*(b-w[i])<-EPS) q.pb(w[i]);
@@ -81,7 +81,7 @@ struct circle{
 	}
 };
 
-vector<ld> intercircles(vector<circle> c){
+vector<ld> inter_circles(vector<circle> c){
 	vector<ld> r(sz(c)+1); // r[k]: area covered by at least k circles
 	forn(i, sz(c)){      // O(n^2 log n) (high constant)
 		int k=1; 
