@@ -15,7 +15,11 @@ struct circle{
 		o=bisector(a, b).inter(bisector(b, c));
 		r=o.dist(a);
 	}
-	
+	bool inside(pto p) { return (p-o).norm_sq() <= r*r+EPS; }
+	bool inside(circle c){ // this inside of c
+		double d=(o-c.o).norm_sq();
+		return d<=(c.r-r)*(c.r-r)+EPS;
+	}
 	// circle containing p1 and p2 with radius r
 	// swap p1, p2 to get snd solution
 	circle* circle2PtoR(pto a, pto b, T r_){
@@ -61,4 +65,48 @@ struct circle{
 		-sqr(c.o.y))/ld(2.0);
 		return (*this).inter(l);
 	}
+	
+	ld intertriangle(pto a, pto b){ // area of intersection with oab
+		if(abs((o-a)^(o-b))<=EPS)return 0.;
+		vector<pto> q={a}, w=inter(line(a,b));
+		if(sz(w)==2) forn(i,sz(w)) if((a-w[i])*(b-w[i])<-EPS) q.pb(w[i]);
+		q.pb(b);
+		if(sz(q)==4 && (q[0]-q[1])*(q[2]-q[1])>EPS) swap(q[1],q[2]);
+		ld s=0;
+		forn(i,sz(q)-1){
+			if(!inside(q[i]) || !inside(q[i+1])) s += angle((q[i]-o)*r*r,q[i+1]-o)/T(2);
+			else s += abs((q[i]-o)^(q[i+1]-o)/2);
+		}
+		return s;
+	}
 };
+
+vector<ld> intercircles(vector<circle> c){
+	vector<ld> r(sz(c)+1); // r[k]: area covered by at least k circles
+	forn(i, sz(c)){      // O(n^2 log n) (high constant)
+		int k=1; 
+		cmp s(c[i].o,pto(1,0));
+		vector<pair<pto,int>> p={
+			{c[i].o+pto(1,0)*c[i].r,0},
+			{c[i].o-pto(1,0)*c[i].r,0}};
+		forn(j,sz(c)) if(j!=i){
+			bool b0 = c[i].inside(c[j]), b1=c[j].inside(c[i]);
+			if(b0 && (!b1 || i<j)) k++;
+			else if(!b0 && !b1){
+				vector<pto> v=c[i].inter(c[j]);
+				if(sz(v)==2) {
+					p.pb({v[0],1}); p.pb({v[1],-1});
+					if(s(v[1],v[0])) k++;
+				}
+			}
+		}
+		sort(p.begin(), p.end(), [&](pair<pto,int> a, pair<pto,int> b){return s(a.fst,b.fst);});
+		forn(j,sz(p)){
+			pto p0 = p[j? j-1: sz(p)-1].fst, p1=p[j].fst;
+			ld a=angle(p0-c[i].o, p1-c[i].o);
+			r[k] += (p0.x-p1.x)*(p0.y+p1.y)/ld(2) + c[i].r*c[i].r*(a-sinl(a))/ld(2);
+			k += p[j].snd;
+		}
+	}
+	return r;
+}
