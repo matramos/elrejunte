@@ -71,7 +71,7 @@ struct poly{
 		return poly(ret);
 	}
 
-	// addition of polygons
+	// addition of convex polygons
 	poly minkowski(poly p) { // O(n+m) n=|this|,m=|p| 
 		this->normalize(); p.normalize();
 		vector<pto> a = (*this).pt, b = p.pt;
@@ -86,6 +86,27 @@ struct poly{
 			if(cross >= 0 && j < sz(b)-2) j++;
 		}
 		return poly(sum);
+	}
+	
+	pto farthest(pto v){ // O(log(n)) for convex polygons
+		if(sz(pt)<10){
+			int k=0;
+			forr(i,1,sz(pt)) if(v*(pt[i]-pt[k])>EPS) k=i;
+			return pt[k];
+		}
+		pt.pb(pt[0]);
+		pto a=pt[1]-pt[0];
+		int s=0, e=sz(pt)-1, ua=v*a>EPS;
+		if(!ua && v*(pt[sz(pt)-2]-pt[0]) <= EPS){ pt.pop_back(); return pt[0];}
+		while(1){
+			int m = (s+e)/2; pto c=pt[m+1]-pt[m];
+			int uc=v*c > EPS;
+			if(!uc && v*(pt[m-1]-pt[m]) <= EPS){ pt.pop_back(); return pt[m];}
+			if(ua && (!uc || v*(pt[s]-pt[m])>EPS)) e=m;
+			else if(ua || uc || v*(pt[s]-pt[m]) >= -EPS) s=m, a=c, ua=uc;
+			else e=m;
+			assert(e>s+1);
+		}
 	}
 	
 	// area ellipse = M_PI*a*b where a and b are the semi axis lengths
