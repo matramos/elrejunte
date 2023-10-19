@@ -70,6 +70,7 @@ struct poly{
 			nxt.pb(pt[i]); len++;
 		}
 		if(len>2 && abs((pt[1]-pt[0])^(pt[0]-pt.back())) <= EPS) nxt.pop_front(), len--;
+		if(len>2 && abs((pt.back()-pt[len-2])^(pt[0]-pt.back())) <= EPS) nxt.pop_back(), len--;
 		pt.clear(); forn(i,sz(nxt)) pt.pb(nxt[i]);
 	}
 	
