@@ -109,6 +109,16 @@ struct poly{
 		}
 	}
 	
+	ld inter_circle(circle c){ // area of intersection with circle
+		ld r = 0.;
+		forn(i,sz(pt)){
+			int j=(i+1)%sz(pt); ld w = c.inter_triangle(pt[i], pt[j]);
+			if(((pt[j]-c.o)^(pt[i]-c.o)) > 0) r += w;
+			else r -= w;
+		}
+		return fabsl(r);
+	}
+	
 	// area ellipse = M_PI*a*b where a and b are the semi axis lengths
 	// area triangle = sqrt(s*(s-a)(s-b)(s-c)) where s=(a+b+c)/2
 	ld area(){ // O(n)
