@@ -14,7 +14,7 @@ struct poly{
 		pt.clear(); forn(i,sz(nxt)) pt.pb(nxt[i]);
 	}
 	
-	void normalize(){ // |this| should be greater than 2
+	void normalize(){
 		delete_collinears();
 		if(pt[2].left(pt[0], pt[1])) reverse(pt.begin(), pt.end()); // this makes it clockwise
 		int n=sz(pt), pi=0;
