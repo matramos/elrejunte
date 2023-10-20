@@ -4,9 +4,20 @@ struct poly{
 	poly(){}
 	poly(vector<pto> pt_) : pt(pt_) {}
 	
-	void normalize(){ // delete collinear points first
-		// this makes it clockwise
-		if(pt[2].left(pt[0], pt[1])) reverse(pt.begin(), pt.end());
+	void delete_collinears(){ // delete collinear points
+		deque<pto> nxt; int len = 0;
+		forn(i,sz(pt)) {
+			if(len>1 && abs((pt[i]-pt[len-1])^(pt[len-1]-pt[len-2])) <= EPS) nxt.pop_back(), len--;
+			nxt.pb(pt[i]); len++;
+		}
+		if(len>2 && abs((pt[1]-pt[0])^(pt[0]-pt.back())) <= EPS) nxt.pop_front(), len--;
+		if(len>2 && abs((pt.back()-pt[len-2])^(pt[0]-pt.back())) <= EPS) nxt.pop_back(), len--;
+		pt.clear(); forn(i,sz(nxt)) pt.pb(nxt[i]);
+	}
+	
+	void normalize(){
+		delete_collinears();
+		if(pt[2].left(pt[0], pt[1])) reverse(pt.begin(), pt.end()); // this makes it clockwise
 		int n=sz(pt), pi=0;
 		forn(i, n)
 			if(pt[i].x<pt[pi].x || (pt[i].x==pt[pi].x && pt[i].y<pt[pi].y))
@@ -61,7 +72,7 @@ struct poly{
 		return poly(ret);
 	}
 
-	// addition of polygons
+	// addition of convex polygons
 	poly minkowski(poly p) { // O(n+m) n=|this|,m=|p| 
 		this->normalize(); p.normalize();
 		vector<pto> a = (*this).pt, b = p.pt;
@@ -78,11 +89,56 @@ struct poly{
 		return poly(sum);
 	}
 	
+	pto farthest(pto v){ // O(log(n)) for convex polygons
+		if(sz(pt)<10){
+			int k=0;
+			forr(i,1,sz(pt)) if(v*(pt[i]-pt[k])>EPS) k=i;
+			return pt[k];
+		}
+		pt.pb(pt[0]);
+		pto a=pt[1]-pt[0];
+		int s=0, e=sz(pt)-1, ua=v*a>EPS;
+		if(!ua && v*(pt[sz(pt)-2]-pt[0]) <= EPS){ pt.pop_back(); return pt[0];}
+		while(1){
+			int m = (s+e)/2; pto c=pt[m+1]-pt[m];
+			int uc=v*c > EPS;
+			if(!uc && v*(pt[m-1]-pt[m]) <= EPS){ pt.pop_back(); return pt[m];}
+			if(ua && (!uc || v*(pt[s]-pt[m])>EPS)) e=m;
+			else if(ua || uc || v*(pt[s]-pt[m]) >= -EPS) s=m, a=c, ua=uc;
+			else e=m;
+			assert(e>s+1);
+		}
+	}
+	
+	ld inter_circle(circle c){ // area of intersection with circle
+		ld r = 0.;
+		forn(i,sz(pt)){
+			int j=(i+1)%sz(pt); ld w = c.inter_triangle(pt[i], pt[j]);
+			if(((pt[j]-c.o)^(pt[i]-c.o)) > 0) r += w;
+			else r -= w;
+		}
+		return fabsl(r);
+	}
+	
 	// area ellipse = M_PI*a*b where a and b are the semi axis lengths
 	// area triangle = sqrt(s*(s-a)(s-b)(s-c)) where s=(a+b+c)/2
 	ld area(){ // O(n)
 		ld area=0;
 		forn(i, sz(pt)) area+=pt[i]^pt[(i+1)%sz(pt)];
 		return abs(area)/ld(2);
+	}
+	
+	// returns one pair of most distant points
+	pair<pto,pto> callipers() { // O(n), for convex  poly, normalize first
+		int n = sz(pt);
+		if(n<=2) return {pt[0],pt[1%n]};
+		pair<pto,pto> ret = {pt[0],pt[1]};
+		T maxi = 0; int j = 1;
+		forn(i,sz(pt)) {
+			while(((pt[(i+1)%n]-pt[i])^(pt[(j+1)%n]-pt[j])) < -EPS) j=(j+1)%sz(pt);
+			if(pt[i].dist(pt[j]) > maxi+EPS)
+				ret = {pt[i],pt[j]}, maxi = pt[i].dist(pt[j]);
+		}
+		return ret;
 	}
 };
