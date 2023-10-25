@@ -15,9 +15,9 @@ struct circle{
 		o=bisector(a, b).inter(bisector(b, c));
 		r=o.dist(a);
 	}
-	bool inside(pto p) { return (p-o).norm_sq() <= r*r+EPS; }
+	bool inside(pto p) { return (o-p).norm_sq() <= r*r+EPS; }
 	bool inside(circle c){ // this inside of c
-		double d=(o-c.o).norm_sq();
+		T d=(o-c.o).norm_sq();
 		return d<=(c.r-r)*(c.r-r)+EPS;
 	}
 	// circle containing p1 and p2 with radius r
@@ -74,7 +74,7 @@ struct circle{
 		if(sz(q)==4 && (q[0]-q[1])*(q[2]-q[1])>EPS) swap(q[1],q[2]);
 		ld s=0;
 		forn(i,sz(q)-1){
-			if(!inside(q[i]) || !inside(q[i+1])) s += angle((q[i]-o)*r*r,q[i+1]-o)/T(2);
+			if(!inside(q[i]) || !inside(q[i+1])) s += r*r*angle((q[i]-o),q[i+1]-o)/T(2);
 			else s += abs((q[i]-o)^(q[i+1]-o)/2);
 		}
 		return s;

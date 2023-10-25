@@ -117,7 +117,7 @@ struct poly{
 			if(((pt[j]-c.o)^(pt[i]-c.o)) > 0) r += w;
 			else r -= w;
 		}
-		return fabsl(r);
+		return abs(r);
 	}
 	
 	// area ellipse = M_PI*a*b where a and b are the semi axis lengths
