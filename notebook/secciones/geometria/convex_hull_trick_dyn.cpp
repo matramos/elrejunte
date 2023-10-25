@@ -5,13 +5,13 @@ struct Line {
     const Line *succ(multiset<Line>::iterator it) const;
     bool operator<(const Line& rhs) const {
         if (rhs.b != is_query) return m < rhs.m;
-        const Line *s=succ(it);
+        const Line *s = succ(it);
         if(!s) return 0;
         ll x = rhs.m;
         return b - s->b < (s->m - m) * x;
     }
 };
-struct HullDynamic : public multiset<Line>{ // will maintain upper hull for maximum
+struct HullDynamic : public multiset<Line> { // will maintain upper hull for max
     bool bad(iterator y) {
         iterator z = next(y);
         if (y == begin()) {
