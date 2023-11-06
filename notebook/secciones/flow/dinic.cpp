@@ -62,6 +62,8 @@ struct Dinic {
 	}
 };
 // Dinic wrapper to allow setting demands of min flow on edges
+// If an edge with a min flow demand is part of a cycle, then the result
+// is not guaranteed to be correct, it could result in false positives
 struct DinicWithDemands {
 	int N;
 	vector<pair<Edge, ll>> E; // (normal dinic edge, min flow)
