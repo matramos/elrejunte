@@ -1,3 +1,4 @@
+// WARNING: it could be a good idea use pair<ll,int> instead of pair<int,int> in most of the cases
 struct Dijkstra {
 	vector<vector<ii>> G;//ady. list with pairs (weight, dst)
 	vector<ll> dist;
