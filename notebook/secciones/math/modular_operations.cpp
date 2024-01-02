@@ -16,7 +16,7 @@ ll mulMod(ll a,ll b,ll m=MOD) //O(log b)
 }
 ll expMod(ll b,ll e,ll m=MOD) //O(log e)
 {
-	if(!e) return 1;
+	if(e<0) return 0;
 	ll ret = 1;
 	while(e){
 		if(e&1) ret=ret*b%m; // ret = mulMod(ret,b,m); //if needed
