@@ -17,9 +17,13 @@ ll mulMod(ll a,ll b,ll m=MOD) //O(log b)
 ll expMod(ll b,ll e,ll m=MOD) //O(log e)
 {
 	if(!e) return 1;
-	ll q=expMod(b,e/2,m);
-	q=q*q%m; // or q=mulMod(q,q,m); if needed
-	return e%2? b*q%m : q; // or e%2? mulMod(b,q,m) : q;
+	ll ret = 1;
+	while(e){
+		if(e&1) ret=ret*b%m; // ret = mulMod(ret,b,m); //if needed
+		b=b*b%m; // b = mulMod(b,b,m);
+		e>>=1;
+	}
+	return ret;
 }
 ll sumMod(ll a,ll b,ll m=MOD)
 {
