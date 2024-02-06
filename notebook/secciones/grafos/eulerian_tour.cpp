@@ -7,13 +7,15 @@ struct EulerianTour {
   vector<int> deg;
   vector<bool> vis;
   EulerianTour(int N) : N(N), E(N), deg(N), vis(N) {}
-  void add_edge(int u, int v) {
+  void addEdge(int u, int v) {
     int V[2] = {u, v};
     for (auto t : {0, 1}) {
       int v = V[t];
+      //~ E[v].emplace_back(V[t ^ 1], M); // directed graph
       E[v].emplace_back(V[t ^ 1], M << 1 | t);
       deg[v] += 1;
       odd += (deg[v] % 2 ? +1 : -1);
+      //~ break; // directed graph
     }
     ++M;
   }
@@ -38,11 +40,18 @@ struct EulerianTour {
         for (int& l = ptr[u]; l < deg[u]; ++l) {
           ii aux2 = E[u][l];
           int v=aux2.fst, j=aux2.snd;
+	  // undirected graph
           if (!dead[j >> 1]) {
             stk.emplace(v, j);
             --d[u], --d[v], dead[j >> 1] = true;
             break;
           }
+	  // directed graph
+          //~ if (!dead[j]) {
+            //~ stk.emplace(v, j);
+            //~ --d[u]; dead[j] = true;
+            //~ break;
+          //~ }
         }
       }
     }
