@@ -12,7 +12,7 @@ struct EulerianTour {
     for (auto t : {0, 1}) {
       int v = V[t];
       //~ E[v].emplace_back(V[t ^ 1], M); // directed graph
-      E[v].emplace_back(V[t ^ 1], M << 1 | t);
+      E[v].emplace_back(V[t ^ 1], M << 1 | t); // undirected graph
       deg[v] += 1;
       odd += (deg[v] % 2 ? +1 : -1);
       //~ break; // directed graph
