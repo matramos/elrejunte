@@ -132,4 +132,13 @@ struct poly{
 		}
 		return ret;
 	}
+	pto centroid(){ // (barycenter, mass center, needs float points)
+		int n = sz(pt);
+		pto r(0,0); ld t=0;
+		forn(i,n) {
+			r = r + (pt[i] + pt[(i+1)%n]) * (pt[i] ^ pt[(i+1)%n]);
+			t += pt[i] ^ pt[(i+1)%n];
+		}
+		return r/t/3;
+	}
 };
