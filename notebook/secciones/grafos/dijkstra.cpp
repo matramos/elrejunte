@@ -1,4 +1,4 @@
-struct Dijkstra { // WARNING: ii should needs to be pair<ll, int>
+struct Dijkstra { // WARNING: ii usually needs to be pair<ll, int>
 	vector<vector<ii>> G;//ady. list with pairs (weight, dst)
 	vector<ll> dist;
 	//vector<int> vp; // for path reconstruction (parent of each node)
