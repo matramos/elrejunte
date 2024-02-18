@@ -133,3 +133,18 @@ struct poly{
 		return ret;
 	}
 };
+// Dynamic convex hull trick (based on poly struct)
+vector<poly> w;
+void add(pto q) { // add(q), O(log^2(n))
+	vector<pto> p = {q};
+	while(!w.empty() && sz(w.back().pt) < 2*sz(p)){
+		for(pto v : w.back().pt) p.pb(v);
+		w.pop_back();
+	}
+	w.pb(poly(CH(p))); // CH = convex hull, must delete collinears
+}
+T query(pto v) { // max(q*v:q in w), O(log^2(n))
+	T r = -INF;
+	for(auto& p : w) r = max(r, p.farthest(v)*v);
+	return r;
+}

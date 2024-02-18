@@ -1,6 +1,7 @@
 // returns convex hull of p in CCW order
 // left must return >=0 to delete collinear points
 vector<pto> CH(vector<pto>& p) {
+	if(sz(p) < 3) return p; // edge case, keep line or point
 	vector<pto> ch;
 	sort(p.begin(), p.end());
 	forn(i, sz(p)) { // lower hull
