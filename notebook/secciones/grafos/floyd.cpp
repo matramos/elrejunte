@@ -1,6 +1,6 @@
-// Camino minimo en grafos dirigidos ponderados, en todas las parejas de nodos.
-//G[i][j] contains weight of edge (i, j) or INF
-//G[i][i]=0
+//Min path between every pair of nodes in directed graph
+//G[i][j] initially needs weight of edge (i, j) or INF
+//be careful with multiedges and loops when assigning to G
 int G[MAX_N][MAX_N];
 void floyd(){//O(N^3)
 forn(k, N) forn(i, N) if(G[i][k]!=INF) forn(j, N) if(G[k][j]!=INF)

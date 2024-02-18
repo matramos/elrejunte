@@ -1,5 +1,4 @@
-// WARNING: it could be a good idea use pair<ll,int> instead of pair<int,int> in most of the cases
-struct Dijkstra {
+struct Dijkstra { // WARNING: ii should needs to be pair<ll, int>
 	vector<vector<ii>> G;//ady. list with pairs (weight, dst)
 	vector<ll> dist;
 	//vector<int> vp; // for path reconstruction (parent of each node)

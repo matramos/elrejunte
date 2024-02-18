@@ -1,4 +1,4 @@
-//Suponemos un grafo con el formato definido en Edmond Karp o Push relabel
+//Suponemos un grafo con el formato definido en Push relabel
 bitset<MAX_V> type,used; //reset this
 void dfs1(int nodo)
 {
