@@ -1,39 +1,33 @@
-#define MAX_V 1000
-#define INF 1e9
-//special nodes
-#define SRC 0
-#define SNK 1
-map<int, int> G[MAX_V];//limpiar esto -- unordered_map mejora
-//To add an edge use
-#define add(a, b, w) G[a][b]=w
-int f, p[MAX_V];
-void augment(int v, int minE)
-{
-	if(v==SRC) f=minE;
-	else if(p[v]!=-1)
-	{
-		augment(p[v], min(minE, G[p[v]][v]));
-		G[p[v]][v]-=f, G[v][p[v]]+=f;
-	}
-}
-ll maxflow()//O(min(VE^2,Mf*E))
-{
-	ll Mf=0;
-	do
-	{
-		f=0;
-		char used[MAX_V]; queue<int> q; q.push(SRC);
-		zero(used), memset(p, -1, sizeof(p));
-		while(sz(q))
-		{
-			int u=q.front(); q.pop();
-			if(u==SNK) break;
-			forall(it, G[u])
-				if(it->snd>0 && !used[it->fst])
-				used[it->fst]=true, q.push(it->fst), p[it->fst]=u;
+struct EdmondsKarp {
+	int N;
+	vector<unordered_map<int,ll>> g;
+	vector<int> p;
+	ll f;
+	EdmondsKarp(int n) : N(n), g(n), p(n) {}
+	void addEdge(int a, int b, int w) { g[a][b] = w; }
+	void augment(int v, int SRC, ll minE) {
+		if(v == SRC) f = minE;
+		else if(p[v] != -1) {
+			augment(p[v], SRC, min(minE, g[p[v]][v]));
+			g[p[v]][v] -= f, g[v][p[v]] += f;
 		}
-		augment(SNK, INF);
-		Mf+=f;
-	}while(f);
-	return Mf;
-}
+	}
+	ll maxflow(int SRC, int SNK) { //O(min(VE^2,Mf*E))
+		ll ret = 0;
+		do {
+			queue<int> q; q.push(SRC);
+			fill(p.begin(), p.end(), -1);
+			f = 0;
+			while(sz(q)) {
+				int node = q.front(); q.pop();
+				if(node == SNK) break;
+				forall(it, g[node])if(it->snd > 0 && p[it->fst] == -1) {
+					q.push(it->fst), p[it->fst] = node;
+				}
+			}
+			augment(SNK, SRC, INF); // INF > max possible flow
+			ret += f;
+		} while(f);
+		return ret;
+	}
+};
