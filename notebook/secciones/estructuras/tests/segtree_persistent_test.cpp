@@ -38,7 +38,7 @@ struct ST {
 		int m = (l+r)/2, a = init(v, l, m), b = init(v, m ,r);
 		return new_node(oper(st[a], st[b]), a, b);
 	}
-	int update(int cur, int pos, int val, int l, int r) {
+	int update(int cur, int pos, tipo val, int l, int r) {
 		int id = new_node(st[cur], L[cur], R[cur]);
 		if(l+1 == r) { st[id] = val; return id; }
 		int m = (l+r)/2, ASD; // MUST USE THE ASD!!!
@@ -54,7 +54,7 @@ struct ST {
 		return oper(get(L[cur], from, to, l, m), get(R[cur], from, to, m, r));
 	}
 	int init(vector<tipo>& v) { return init(v, 0, n); }
-	int update(int root, int pos, int val) {
+	int update(int root, int pos, tipo val) {
 		return update(root, pos, val, 0, n);
 	}
 	tipo get(int root, int from, int to) {
@@ -62,6 +62,7 @@ struct ST {
 	}
 }; // usage: ST st(n); root = st.init(v) (or root = 0);
 // new_root = st.update(root,i,x); st.get(root,l,r);
+
  
 int kth(ST& st, int xl, int xr, int k, int l, int r)
 {
