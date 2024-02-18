@@ -5,13 +5,13 @@ struct poly{
 	void delete_collinears() { // delete collinear points
 		deque<pto> nxt; int len = 0;
 		forn(i,sz(pt)) {
-			if(len>1 && abs((pt[i]-pt[len-1])^(pt[len-1]-pt[len-2])) <= EPS)
-				nxt.pop_back(), len--;
+			if(len>1 && abs((pt[i]-nxt[len-2])^(nxt[len-1]-nxt[len-2])) <= EPS)
+				nxt.pop_back(), len--; 
 			nxt.pb(pt[i]); len++;
 		}
-		if(len>2 && abs((pt[1]-pt[0])^(pt[0]-pt.back())) <= EPS)
+		if(len>2 && abs((nxt[1]-nxt[len-1])^(nxt[0]-nxt[len-1])) <= EPS) 
 			nxt.pop_front(), len--;
-		if(len>2 && abs((pt.back()-pt[len-2])^(pt[0]-pt.back())) <= EPS)
+		if(len>2 && abs((nxt[len-1]-nxt[len-2])^(nxt[0]-nxt[len-2])) <= EPS)
 			nxt.pop_back(), len--;
 		pt.clear(); forn(i,sz(nxt)) pt.pb(nxt[i]);
 	}
