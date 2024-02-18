@@ -90,7 +90,6 @@ struct VirtualTree {
 		tin.rsz(n); tout.rsz(n); tree.rsz(n); imp.rsz(n);
 		dfs(l->ROOT,l->ROOT);
 	}
-	//bool cmp(int& a, int& b) { return tin[a] < tin[b]; }
 	bool isAncestor(int a, int b) {
 		return tin[a] < tin[b] && tout[a] > tout[b];
 	}
