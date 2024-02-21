@@ -1,55 +1,58 @@
-const int MAXN=10000;
 typedef ll tf;
 typedef ll tc;
-const tf INFFLUJO = 1e14;
-const tc INFCOSTO = 1e14;
+const tf INF_FLOW = 1e14;
+const tc INF_COST = 1e14;
 struct edge {
 	int u, v;
 	tf cap, flow;
 	tc cost;
 	tf rem() { return cap - flow; }
 };
-int nodes; //numero de nodos
-vector<int> G[MAXN]; // limpiar!
-vector<edge> e;  // limpiar!
-void addEdge(int u, int v, tf cap, tc cost) {
-	G[u].pb(sz(e)); e.pb((edge){u,v,cap,0,cost});
-	G[v].pb(sz(e)); e.pb((edge){v,u,0,0,-cost});
-}
-tc dist[MAXN], mnCost;
-int pre[MAXN];
-tf cap[MAXN], mxFlow;
-//tf wantedFlow; //For fixed flow instead of max
-bool in_queue[MAXN];
-void flow(int s, int t) {// O(n^2 * m^2)
-	zero(in_queue);
-	mxFlow=mnCost=0;
-	while(1) {
-		fill(dist, dist+nodes, INFCOSTO); dist[s] = 0;
-		memset(pre, -1, sizeof(pre)); pre[s]=0;
-		zero(cap); cap[s] = INFFLUJO;		
-		queue<int> q; q.push(s); in_queue[s]=1;
-		while(sz(q)) {//Fast bellman-ford
-			int u=q.front(); q.pop(); in_queue[u]=0;
-			for(auto it:G[u]) {
-				edge &E = e[it];
-				if(E.rem() && dist[E.v] > dist[u] + E.cost + 1e-9) {// ojo EPS
-					dist[E.v]=dist[u]+E.cost;
-					pre[E.v] = it;
-					cap[E.v] = min(cap[u], E.rem());
-					if(!in_queue[E.v]) q.push(E.v), in_queue[E.v]=1;
+struct MCMF {
+	vector<edge> e;
+	vector<vector<int>> g;
+	vector<tf> vcap;
+	vector<tc> dist;
+	vector<int> pre;
+	tc minCost;
+	tf maxFlow;
+	// tf wantedFlow; // Use it for fixed flow instead of max flow
+	MCMF(int n): g(n), vcap(n), dist(n), pre(n) {}
+	void addEdge(int u, int v, tf cap, tc cost) {
+		g[u].pb(sz(e)); e.pb({u, v, cap, 0, cost});
+		g[v].pb(sz(e)); e.pb({v, u, 0, 0, -cost});
+	}
+	// O(n*m * min(flow, n*m)), sometimes faster in practice
+	void run(int s, int t) { 
+		vector<bool> inq(sz(g));
+		maxFlow = minCost = 0; // result will be in these variables
+		while(1) {
+			fill(vcap.begin(), vcap.end(), 0); vcap[s] = INF_FLOW;
+			fill(dist.begin(), dist.end(), INF_COST); dist[s] = 0;
+			fill(pre.begin(), pre.end(), -1); pre[s] = 0;
+			queue<int> q; q.push(s); inq[s] = true;
+			while(sz(q)) { // Fast bellman-ford
+				int u = q.front(); q.pop(); inq[u] = false;
+				for(auto eid : g[u]) {
+					edge &E = e[eid];
+					if(E.rem() && dist[E.v] > dist[u] + E.cost) {
+						dist[E.v] = dist[u] + E.cost;
+						pre[E.v] = eid;
+						vcap[E.v] = min(vcap[u], E.rem());
+						if(!inq[E.v]) q.push(E.v), inq[E.v] = true;
+					}
 				}
 			}
+			if (pre[t] == -1) break;
+			tf flow = vcap[t];
+			// flow = min(flow, wantedFlow - maxFlow); //For fixed flow
+			maxFlow += flow;
+			minCost += flow*dist[t];
+			for (int v = t; v != s; v = e[pre[v]].u) {
+				e[pre[v]].flow += flow;
+				e[pre[v]^1].flow -= flow;
+			}
+			// if(maxFlow == wantedFlow) break; //For fixed flow
 		}
-		if (pre[t] == -1) break;
-		tf flow = cap[t];
-		//flow = min(flow, wantedFlow-mxFlow) //For fixed flow
-		mxFlow += flow;
-		mnCost += flow*dist[t];
-		for (int v = t; v != s; v = e[pre[v]].u) {
-			e[pre[v]].flow += flow;
-			e[pre[v]^1].flow -= flow;
-		}
-		//if(mxFlow == wantedFlow) break; //For fixed flow
 	}
-}
+};
