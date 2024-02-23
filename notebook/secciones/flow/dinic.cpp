@@ -9,13 +9,11 @@ struct Dinic {
 	vector<Edge> E;
 	vector<vector<int>> g;
 	vector<int> d, pt;
-	Dinic(int n): N(n), E(0), g(n), d(n), pt(n) {} //clear and init
+	Dinic(int n): N(n), g(n), d(n), pt(n) {} //clear and init
 	void addEdge(int u, int v, ll cap) {
 		if (u != v) {
-			E.emplace_back(Edge(u, v, cap));
-			g[u].emplace_back(E.size() - 1);
-			E.emplace_back(Edge(v, u, 0));
-			g[v].emplace_back(E.size() - 1);
+			g[u].pb(sz(E)); E.pb({u, v, cap});
+			g[v].pb(sz(E)); E.pb({v, u, 0});
 		}
 	}
 	bool BFS(int S, int T) {
@@ -25,11 +23,11 @@ struct Dinic {
 		while(!q.empty()) {
 			int u = q.front(); q.pop();
 			if (u == T) break;
-			for (int k: g[u]) {
+			for (int k : g[u]) {
 				Edge &e = E[k];
 				if (e.flow < e.cap && d[e.v] > d[e.u] + 1) {
 					d[e.v] = d[e.u] + 1;
-					q.emplace(e.v);
+					q.push(e.v);
 				}
 			}
 		}
@@ -39,7 +37,7 @@ struct Dinic {
 		if (u == T || flow == 0) return flow;
 		for (int &i = pt[u]; i < sz(g[u]); ++i) {
 			Edge &e = E[g[u][i]];
-			Edge &oe = E[g[u][i]^1];
+			Edge &oe = E[g[u][i] ^ 1];
 			if (d[e.v] == d[e.u] + 1) {
 				ll amt = e.cap - e.flow;
 				if (flow != -1 && amt > flow) amt = flow;
@@ -52,7 +50,7 @@ struct Dinic {
 		}
 		return 0;
 	}
-	ll maxFlow(int S,int T) { //O(V^2*E), unit nets: O(sqrt(V)*E)
+	ll maxFlow(int S, int T) { //O(V^2*E), unit nets: O(sqrt(V)*E)
 		ll total = 0;
 		while(BFS(S, T)) {
 			fill(pt.begin(), pt.end(), 0);
@@ -71,7 +69,7 @@ struct DinicWithDemands {
 	DinicWithDemands(int n): N(n), E(0), dinic(n+2) {}
 	void addEdge(int u, int v, ll cap, ll minFlow) {
 		assert(minFlow <= cap);
-		if (u != v) E.emplace_back(mp(Edge(u, v, cap), minFlow));
+		if (u != v) E.pb(mp(Edge(u, v, cap), minFlow));
 	}
 	ll maxFlow(int S, int T) { // Same complexity as normal Dinic
 		int SRC = N, SNK = N+1;
