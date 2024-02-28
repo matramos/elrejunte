@@ -61,7 +61,7 @@ void dft(CD *a, int n, bool inv) {
 }
 
 poly multiply (poly &p1, poly &p2) {
-	int n = sz(p1)+sz(p2);
+	int n = sz(p1)+sz(p2)+1;
 	int m = 1, cnt = 0;
 	while(m <= n) m += m, cnt++;
 	forn(i,m) { R[i] = 0; forn(j,cnt) R[i] = (R[i] << 1) | ((i>>j)&1); }
