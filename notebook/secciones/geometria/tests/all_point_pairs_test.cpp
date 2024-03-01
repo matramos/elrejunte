@@ -58,14 +58,6 @@ struct cmp {
 	}
 };
 
-pto inv(pto a) {
-	return pto(-a.x, -a.y);
-}
-
-pto rotate(pto a) {
-	return pto(a.y, -a.x);
-}
-
 void print_ans(pto a1, pto a2, pto a3) {
 	cout << "Yes\n";
 	cout << a1.x << " " << a1.y << "\n";
@@ -115,6 +107,7 @@ struct all_point_pairs {
 		cur_step++;
 		return true;
 	}
+	
 };
 
 int main () {
@@ -133,13 +126,13 @@ int main () {
 	}
 	
 	all_point_pairs app(pts); pto ans;
-	do {
-		int u = app.idx[app.ev[app.cur_step].u] , v = app.idx[app.ev[app.cur_step].v];
+	while(app.step()){
+		int u = app.idx[app.ev[app.cur_step-1].u] , v = app.idx[app.ev[app.cur_step-1].v];
 		if(solve_down(u, app.pt, app.pt[u], app.pt[v], s, ans)){
 			print_ans(ans, app.pt[u], app.pt[v]);
 			return 0;
 		}
-	} while (app.step());
+	} 
 	
 	cout << "No\n";
 	
@@ -147,3 +140,4 @@ int main () {
 		cerr << "Time elapsed: " <<  clock() * 1000 / CLOCKS_PER_SEC << " ms\n";
 	#endif
 }
+
