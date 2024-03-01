@@ -67,6 +67,34 @@ struct poly{
 		}
 		return poly(ret);
 	}
+	ii cut(pto u, pto v) { // O(log(n)) for convex polygons
+		int n = sz(pt); pto dir = v-u;
+		int L = farthest(pto(dir.y,-dir.x));
+		int R = farthest(pto(-dir.y,dir.x));
+		if(!pt[L].left(u,v)) swap(L,R);
+		if(!pt[L].left(u,v)) return mp(-1,-1); // line doesn't cut the poly
+		
+		ii ans;
+		int l = L, r = L > R ? R+n : R;
+		while(l<r) {
+			int med = (l+r+1)/2;
+			if(pt[med >= n ? med-n : med].left(u,v)) l = med;
+			else r = med-1;
+		}
+		ans.fst = l >= n ? l-n : l;
+		
+		l = R, r = L < R ? L+n : L;
+		while(l<r) {
+			int med = (l+r)/2;
+			if(!pt[med >= n ? med-n : med].left(u,v)) l = med+1;
+			else r = med;
+		}
+		ans.snd = l >= n ? l-n : l;
+		
+		if(ans.fst>ans.snd) swap(ans.fst,ans.snd);
+		if(!pt[(ans.fst+ans.snd)/2].left(u,v)) swap(ans.fst,ans.snd);
+		return ans;
+	}
 	// addition of convex polygons
 	poly minkowski(poly p) { // O(n+m) n=|this|,m=|p| 
 		this->normalize(); p.normalize();
