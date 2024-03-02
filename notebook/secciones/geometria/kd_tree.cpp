@@ -1,5 +1,5 @@
-bool cmpx(pto a, pto b) { return a.x+EPS<b.x; }
-bool cmpy(pto a, pto b) { return a.y+EPS<b.y; }
+bool cmpx(pto a, pto b) { return a.x+EPS < b.x; }
+bool cmpy(pto a, pto b) { return a.y+EPS < b.y; }
 struct kd_tree {
 	pto p; T x0 = INF, x1 = -INF, y0 = INF, y1 = -INF;
 	kd_tree *l, *r;
@@ -31,15 +31,15 @@ struct kd_tree {
 		}
 		kd_tree *al = l, *ar = r;
 		T bl = l->distance(q), br = r->distance(q);
-		if(bl > br) swap(al,ar), swap(bl,br);
-		al->nearest(q,k,ret);
-		if(br < ret.top().fst) ar->nearest(q,k,ret);
+		if(bl > br) swap(al, ar), swap(bl, br);
+		al->nearest(q, k, ret);
+		if(br < ret.top().fst) ar->nearest(q, k, ret);
 		while(sz(ret) > k) ret.pop();
 	}
 	priority_queue<pair<T,pto>> nearest(pto q, int k) {
 		priority_queue<pair<T,pto>> ret;
-		forn(i,k) ret.push({INF*INF, pto(INF,INF)});
-		nearest(q,k,ret);
+		forn(i,k) ret.push({INF*INF, pto(INF, INF)});
+		nearest(q, k, ret);
 		return ret;
 	}
 };

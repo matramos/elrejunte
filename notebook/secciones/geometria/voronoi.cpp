@@ -1,12 +1,13 @@
 // Returns planar graph representing Delaunay's triangulation.
 // Edges for each vertex are in ccw order.
-// It can work with doubles, but also integers (replace long double in line 51)
+// To use doubles replace __int128 for long double in line 51
+pto pinf = pto(INF,INF);
 typedef struct QuadEdge* Q;
 struct QuadEdge {
 	int id,used;
 	pto o;
 	Q rot,nxt;
-	QuadEdge(int id_=-1, pto o_=pto(INF,INF)):id(id_),used(0),o(o_),rot(0),nxt(0){}
+	QuadEdge(int id_=-1, pto o_=pinf):id(id_),used(0),o(o_),rot(0),nxt(0){}
 	Q rev(){return rot->rot;}
 	Q next(){return nxt;}
 	Q prev(){return rot->next()->rot;}
@@ -47,7 +48,7 @@ auto area(pto p, pto q, pto r){return (q-p)^(r-q);}
 // is p in circunference formed by (a,b,c)?
 bool in_c(pto a, pto b, pto c, pto p){
 	// Warning: this number is O(max_coord^4).
-	// Consider using int128 or using an alternative method for this function
+	// Consider using doubles or an alternative method for this function
 	__int128 p2=p*p,A=a*a-p2,B=b*b-p2,C=c*c-p2;
 	return area(p,a,b)*C+area(p,b,c)*A+area(p,c,a)*B>EPS;
 }
@@ -77,11 +78,16 @@ pair<Q,Q> build_tr(vector<pto>& p, int l, int r){
 	if(lb->o==rb->o) rb=b;
 	while(1){
 		Q L=b->rev()->next();
-		if(valid(L)) while(in_c(b->dest(),b->o,L->dest(),L->next()->dest())) del_edge(L,L->next());
+		if(valid(L)) 
+			while(in_c(b->dest(),b->o,L->dest(),L->next()->dest()))
+				del_edge(L,L->next());
 		Q R=b->prev();
-		if(valid(R)) while(in_c(b->dest(),b->o,R->dest(),R->prev()->dest())) del_edge(R,R->prev());
+		if(valid(R)) 
+			while(in_c(b->dest(),b->o,R->dest(),R->prev()->dest()))
+				del_edge(R,R->prev());
 		if(!valid(L)&&!valid(R)) break;
-		if(!valid(L)||(valid(R)&&in_c(L->dest(),L->o,R->o,R->dest()))) b=conn(R,b->rev());
+		if(!valid(L)||(valid(R)&&in_c(L->dest(),L->o,R->o,R->dest())))
+			b=conn(R,b->rev());
 		else b=conn(b->rev(),L->rev());
 	}
 	return {la,rb};

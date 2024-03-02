@@ -67,7 +67,8 @@ struct poly{
 		}
 		return poly(ret);
 	}
-	// cuts this with line ab and returns the range [from, to] that is strictly on the left side
+	// cuts this with line ab and returns the range [from, to] that is
+	// strictly on the left side (note that indexes are circular)
 	ii cut(pto u, pto v) { // O(log(n)) for convex polygons
 		int n = sz(pt); pto dir = v-u;
 		int L = farthest(pto(dir.y,-dir.x));

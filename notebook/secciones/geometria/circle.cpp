@@ -64,7 +64,9 @@ struct circle{
 		if(sz(q) == 4 && (q[0]-q[1])*(q[2]-q[1]) > EPS) swap(q[1], q[2]);
 		ld s = 0;
 		forn(i, sz(q)-1){
-			if(!inside(q[i]) || !inside(q[i+1])) s += r*r*angle((q[i]-o),q[i+1]-o)/T(2);
+			if(!inside(q[i]) || !inside(q[i+1])) {
+				s += r*r*angle((q[i]-o),q[i+1]-o)/T(2);
+			}
 			else s += abs((q[i]-o)^(q[i+1]-o)/2);
 		}
 		return s;
