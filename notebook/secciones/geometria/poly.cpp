@@ -67,6 +67,7 @@ struct poly{
 		}
 		return poly(ret);
 	}
+	// cuts this with line ab and returns the range [from, to] that is strictly on the left side
 	ii cut(pto u, pto v) { // O(log(n)) for convex polygons
 		int n = sz(pt); pto dir = v-u;
 		int L = farthest(pto(dir.y,-dir.x));
@@ -81,7 +82,7 @@ struct poly{
 			if(pt[med >= n ? med-n : med].left(u,v)) l = med;
 			else r = med-1;
 		}
-		ans.fst = l >= n ? l-n : l;
+		ans.snd = l >= n ? l-n : l;
 		
 		l = R, r = L < R ? L+n : L;
 		while(l<r) {
@@ -89,10 +90,8 @@ struct poly{
 			if(!pt[med >= n ? med-n : med].left(u,v)) l = med+1;
 			else r = med;
 		}
-		ans.snd = l >= n ? l-n : l;
+		ans.fst = l >= n ? l-n : l;
 		
-		if(ans.fst>ans.snd) swap(ans.fst,ans.snd);
-		if(!pt[(ans.fst+ans.snd)/2].left(u,v)) swap(ans.fst,ans.snd);
 		return ans;
 	}
 	// addition of convex polygons
