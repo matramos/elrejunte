@@ -1,3 +1,4 @@
+// after each step() execution pt is sorted by dot product of the event processed 
 struct all_point_pairs { // O(n*n*log(n*n)), must add id, u, v to pto
 	vector<pto> pt, ev; 
 	vector<int> idx;
