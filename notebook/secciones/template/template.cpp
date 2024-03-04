@@ -27,8 +27,8 @@ int main()
 {
 	// agregar g++ -DANARAP en compilacion
 	#ifdef ANARAP
-		freopen("input", "r", stdin);
-		//freopen("output","w", stdout);
+		freopen("input.in", "r", stdin);
+		//freopen("output.out","w", stdout);
 	#endif
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
