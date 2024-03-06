@@ -76,7 +76,7 @@ struct VirtualTree {
 	int n, curt;
 	LCA* lca;
 	vector<int> tin, tout;
-	vector<vector<ii>> tree; // {node, dist}
+	vector<vector<ii>> tree; // {node, dist}, only parent -> child dire
 	// imp[i] = true iff i was part of 'newv' from last time that
 	// updateVT was called (note that LCAs are not imp)
 	vector<bool> imp;
@@ -95,7 +95,8 @@ struct VirtualTree {
 	}
 	int VTroot = -1; // root of the current VT
 	vector<int> v; // list of nodes of current VT (includes LCAs)
-	void updateVT(vector<int>& newv) { // O(sz(v)*log)
+	void updateVT(vector<int>& newv) { // O(sz(newv)*log)
+		assert(!newv.empty()); // this method assumes non-empty
 		auto cmp = [this](int a, int b) { return tin[a] < tin[b]; };
 		forn(i,sz(v)) tree[v[i]].clear(), imp[v[i]] = false;
 		v = newv;
@@ -118,6 +119,7 @@ struct VirtualTree {
 		VTroot = v[0];
 	}
 };
+
  
 const int INF = 1000100;
  
