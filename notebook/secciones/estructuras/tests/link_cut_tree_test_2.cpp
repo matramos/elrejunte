@@ -1,7 +1,22 @@
-const int N_DEL = 0, N_VAL = 0; // neutral elements for delta & values
-inline int u_oper(int x, int y){ return x + y; } // update operation
-inline int q_oper(int lval, int rval){ return lval + rval; } // query operation
-inline int u_segm(int d, int len){ return d==N_DEL ? N_DEL : d*len; } // update segment
+// https://codeforces.com/gym/102059/problem/A
+#include <bits/stdc++.h>
+#define forr(i,a,b) for(int i = a; i<b; i++)
+#define forn(i,n) forr(i,0,n)
+#define dforn(i,n) for(int i = n-1; i>-1; i--)
+#define forall(i,v) for(auto i = v.begin(); i != v.end(); i++)
+#define sz(v) ((int)v.size()) 
+#define pb push_back
+#define fst first
+#define snd second
+#define lb lower_bound
+#define ub upper_bound
+#define mp make_pair
+using namespace std;
+
+const int N_DEL = -1, N_VAL = -1; // neutral elements for delta & values
+inline int u_oper(int x, int y){ return x; } // update operation
+inline int q_oper(int lval, int rval){ return lval; } // query operation
+inline int u_segm(int d, int len){ return d==N_DEL ? N_DEL : d; } // update segment
 inline int u_delta(int d1, int d2){ // update delta
   if(d1==N_DEL) return d2;
   if(d2==N_DEL) return d1;
@@ -124,3 +139,61 @@ node lift_rec(node x, int k){
 node lift(node x, int k){ expose(x);return lift_rec(x,k); }
 // distance from x to its tree root
 int depth(node x){ expose(x);return get_sz(x)-1; }
+
+node expose2(node x, vector<int> &c, vector<int> &ans, int to_set){
+	node last=0;
+	for(node y=x; y; y = y->p) { 
+		splay(y); y->c[0] = 0; y->upd();
+		
+		int cur = y->n_val;
+		ans[c[cur]]--;
+		c[cur] -= get_sz(y);
+		ans[c[cur]]++;
+		
+		y->c[0]=last; y->upd(), last=y;
+	}
+	
+	splay(x);
+	ans[c[to_set]]--;
+	c[to_set] += get_sz(x);
+	ans[c[to_set]]++;
+	return last;
+}
+void update_ans(node u, vector<int> &c, vector<int> &ans, int to_set) {
+	expose2(u,c,ans,to_set);
+	u->d = to_set;
+}
+
+int main () {
+	#ifdef JP
+		freopen("input.in", "r", stdin);
+	#endif
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	
+	int n, nc, nq; cin >> n >> nc >> nq;
+	vector<int> ans(n), c(nc+1);
+	
+	vector<node> tree; forn(i,n) tree.pb(new node_t(0));
+	vector<int> son;
+	forn(i,n-1) {
+		int u,v; cin >> u >> v; u--,v--; 
+		if(u!=0 && v!=0) link(tree[u],tree[v]);
+		if(u == 0) son.pb(v);
+		if(v == 0) son.pb(u); 
+	}
+	forn(i,sz(son)) make_root(tree[son[i]]);
+	
+	c[0] = n-1;
+	ans[n-1] = 1; ans[0] += nc;
+	forn(i,nq) {
+		int u, col, m; cin >> u >> col >> m; u--;
+		if(u) update_ans(tree[u],c,ans,col);
+		cout << ans[m] - (m == c[0]) << "\n"; 
+	}
+	
+	#ifdef JP
+		cerr << "Time elapsed: " <<  clock() * 1000 / CLOCKS_PER_SEC << " ms\n";
+	#endif
+}
