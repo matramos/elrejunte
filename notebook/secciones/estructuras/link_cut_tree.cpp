@@ -1,7 +1,7 @@
 const int N_DEL = 0, N_VAL = 0; // neutral elements for delta & values
 inline int u_oper(int x, int y){ return x + y; } // update operation
 inline int q_oper(int lval, int rval){ return lval + rval; } // query operation
-inline int u_segm(int d, int len){ return d==N_DEL ? N_DEL : d*len; } // update segment
+inline int u_segm(int d, int len){return d==N_DEL?N_DEL:d*len;} // upd segment
 inline int u_delta(int d1, int d2){ // update delta
   if(d1==N_DEL) return d2;
   if(d2==N_DEL) return d1;
@@ -11,6 +11,7 @@ inline int a_delta(int v, int d){ // apply delta
 	return d==N_DEL ? v : u_oper(d, v);
 }
 
+// Splay tree
 struct node_t{
   int szi, n_val, t_val, d;
   bool rev;
@@ -36,8 +37,8 @@ int get_sz(node r){return r ? r->szi : 0;}
 int get_tree_val(node r){
   return r ? a_delta(r->t_val, u_segm(r->d,r->szi)) : N_VAL;
 }
-void node_t::upd(){
-  t_val = q_oper(q_oper(get_tree_val(c[0]), a_delta(n_val, d)), get_tree_val(c[1]));
+void node_t::upd() {
+  t_val=q_oper(q_oper(get_tree_val(c[0]),a_delta(n_val,d)),get_tree_val(c[1]));
   szi = 1 + get_sz(c[0]) + get_sz(c[1]);
 }
 void conn(node c, node p, int is_left){ 
@@ -63,19 +64,19 @@ void splay(node x){
   x->push(); x->upd();
 }
 
-/* Link Cut Tree
-Keep information of a tree (or forest) and allow to make many types of operations 
-(see them below) in an efficient way. Internally, each node of the tree will have 
-at most 1 "preferred" child, and as a consequence, the tree can be seen as a set 
-of independent "preferred" paths. Each of this paths is basically a list, represented
-with a splay tree, where the "implicit key" (for the BST) of each element is the depth 
-of the corresponding node in the original tree (or forest). Also, each of these preferred 
-paths (except one of them), will know who its "father path" is, i.e. will know the 
-preferred path of the father of the top-most node of this path.
-*/
+// Link-cut Tree
+// Keep information of a tree (or forest) and allow to make many types of
+// operations (see them below) in an efficient way. Internally, each node of
+// the tree will have at most 1 "preferred" child, and as a consequence, the
+// tree can be seen as a set of independent "preferred" paths. Each of this
+// paths is basically a list, represented with a splay tree, where the
+// "implicit key" (for the BST) of each element is the depth of the
+// corresponding node in the original tree (or forest). Also, each of these
+// preferred paths (except one of them), will know who its "father path" is,
+// i.e. will know the preferred path of the father of the top-most node.
 
-// Make the path from the root to x to be an "preferred path", and also make x 
-// to be the root of its splay tree (not the root of the original tree).
+// Make the path from the root to 'x' to be a "preferred path", and also make
+// 'x' to be the root of its splay tree (not the root of the original tree).
 node expose(node x){ 
   node last = 0;
   for(node y=x; y; y=y->p) 

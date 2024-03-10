@@ -7,7 +7,7 @@ struct Hungarian{
         forn(x, N) forn(y, M) cs[x][y] = INF;
     }
     void set(int x, int y, td c) { cs[x][y] = c; }
-	td assign() {
+	td assign() { // O(n^3)
 		int mat = 0; vd ds(n), u(n), v(n); vi dad(n), sn(n);
 		forn(i,n) u[i] = *min_element(cs[i].begin(), cs[i].end());
 		forn(j,n) {

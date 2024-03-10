@@ -27,7 +27,8 @@ struct DynCon{//bidirectional graphs; create vble as DynCon name(cant_nodos)
 	vector<Query> q;
 	UnionFind dsu;
 	vector<int> match,res;
-	map<ii,int> last;//se puede no usar cuando hay identificador para cada arista (mejora poco)
+	//se puede no usar cuando hay identificador para cada arista (mejora poco)
+	map<ii,int> last;
 	DynCon(int n=0):dsu(n){}
 	void add(int u, int v) //to add an edge
 	{
