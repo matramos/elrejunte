@@ -1,3 +1,4 @@
+// https://spoj.com/problems/RMQSQ/
 #include <bits/stdc++.h>
 #define sqr(a) ((a)*(a))
 #define rsz resize
@@ -20,21 +21,22 @@ typedef long long ll;
 typedef pair<int,int> ii;
 typedef int tipo;
 
-struct RMQ{
-	#define LVL 18 // LVL such that 2^LVL>n
-	tipo vec[LVL][1<<(LVL+1)]; 
-	tipo &operator[](int p) {return vec[0][p];}
-	tipo get(int i, int j) {//intervalo [i,j)
-		int p = 31 - __builtin_clz(j-i);
-		return min(vec[p][i], vec[p][j-(1<<p)]);
-	}
-	void build(int n) {//O(nlogn)
-		int mp = 31 - __builtin_clz(n);
-		forn(p, mp) forn(x, n-(1<<p))
-			vec[p+1][x] = min(vec[p][x], vec[p][x+(1<<p)]);
-	}
-}; //Use: define LVL y tipo; insert data with []; call build; answer queries
-
+// Solo para funciones idempotentes (como min y max, pero no sum)
+// Usar la version dynamic si la funcion no es idempotente
+struct RMQ {
+#define LVL 18  // LVL such that 2^LVL>n
+  tipo vec[LVL][1 << (LVL + 1)];
+  tipo& operator[](int p) { return vec[0][p]; }
+  tipo get(int i, int j) {  // intervalo [i,j) - O(1)
+    int p = 31 - __builtin_clz(j - i);
+    return min(vec[p][i], vec[p][j - (1 << p)]);
+  }
+  void build(int n) {  // O(nlogn)
+    int mp = 31 - __builtin_clz(n);
+    forn(p, mp) forn(x, n - (1 << p)) vec[p + 1][x] =
+        min(vec[p][x], vec[p][x + (1 << p)]);
+  }
+};  // Use: define LVL y tipo; insert data with []; call build; answer queries
 
 int main()
 {
