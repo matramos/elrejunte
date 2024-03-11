@@ -12,7 +12,7 @@ ll ans[MAXN];  // ans[i] = answer to ith query
 // Upd vupd[MAXN];
 
 // Without updates
-bool qcomp(const Qu &a, const Qu &b) {
+bool qcomp(const Qu& a, const Qu& b) {
   if (a.l / sq != b.l / sq) return a.l < b.l;
   return (a.l / sq) & 1 ? a.r < b.r : a.r > b.r;
 }
