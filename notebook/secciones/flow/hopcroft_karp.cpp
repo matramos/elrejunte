@@ -1,6 +1,6 @@
 struct HopcroftKarp {  // [0,n)->[0,m) (ids independent in each side)
-  vector<vector<int>> g;
   int n, m;
+  vector<vector<int>> g;
   vector<int> mt, mt2, ds;
   HopcroftKarp(int nn, int mm) : n(nn), m(mm), g(n) {}
   void add(int a, int b) { g[a].pb(b); }
