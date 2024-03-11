@@ -24,46 +24,46 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> ii;
  
-#define lg(x) (31-__builtin_clz(x))//=floor(log2(x))
+#define lg(x) (31 - __builtin_clz(x))  //=floor(log2(x))
 // Usage: 1) Create 2) Add edges 3) Call build 4) Use
 struct LCA {
-	int N, LOGN, ROOT;
-	//vp[node][k] holds the 2^k ancestor of node
-	//L[v] holds the level of v
-	vector<int> L;
-	vector<vector<int>> vp, G;
-	LCA(int n, int root): N(n), LOGN(lg(n)+1), ROOT(root), L(n), G(n) {
-		// Here you may want to replace the default from root to other
-		// value, like maybe -1.
-		vp = vector<vector<int>>(n, vector<int>(LOGN, root));
-	}
-	void addEdge(int a, int b) { G[a].pb(b); G[b].pb(a); }
-	void dfs(int node, int p, int lvl) {
-		vp[node][0] = p; L[node] = lvl;
-		forall(it, G[node]) if(*it != p) dfs(*it, node, lvl+1);
-	}
-	void build() {
-		// Here you may also want to change the 2nd param to -1
-		dfs(ROOT, ROOT, 0);
-		forn(k, LOGN-1) forn(i, N) vp[i][k+1] = vp[vp[i][k]][k];
-	}
-	int climb(int a, int d) { //O(lgn)
-		if(!d) return a;
-		dforn(i, lg(L[a])+1) if(1<<i <= d) a = vp[a][i], d -= 1<<i;
-		return a;
-	}
-	int lca(int a, int b){ //O(lgn)
-		if(L[a] < L[b]) swap(a, b);
-		a = climb(a, L[a]-L[b]);
-		if(a==b) return a;
-		dforn(i, lg(L[a])+1) if(vp[a][i] != vp[b][i])
-			a = vp[a][i], b = vp[b][i];
-		return vp[a][0];
-	}
-	int dist(int a, int b) { //returns distance between nodes
-		return L[a] + L[b] - 2*L[lca(a, b)];
-	}
+  int N, LOGN, ROOT;
+  // vp[node][k] holds the 2^k ancestor of node
+  // L[v] holds the level of v
+  vector<int> L;
+  vector<vector<int>> vp, G;
+  LCA(int n, int root) : N(n), LOGN(lg(n) + 1), ROOT(root), L(n), G(n) {
+    // Here you may want to replace the default from root to other
+    // value, like maybe -1.
+    vp = vector<vector<int>>(n, vector<int>(LOGN, root));
+  }
+  void addEdge(int a, int b) { G[a].pb(b), G[b].pb(a); }
+  void dfs(int node, int p, int lvl) {
+    vp[node][0] = p, L[node] = lvl;
+    forall(it, G[node]) if (*it != p) dfs(*it, node, lvl + 1);
+  }
+  void build() {
+    // Here you may also want to change the 2nd param to -1
+    dfs(ROOT, ROOT, 0);
+    forn(k, LOGN - 1) forn(i, N) vp[i][k + 1] = vp[vp[i][k]][k];
+  }
+  int climb(int a, int d) {  // O(lgn)
+    if (!d) return a;
+    dforn(i, lg(L[a]) + 1) if (1 << i <= d) a = vp[a][i], d -= 1 << i;
+    return a;
+  }
+  int lca(int a, int b) {  // O(lgn)
+    if (L[a] < L[b]) swap(a, b);
+    a = climb(a, L[a] - L[b]);
+    if (a == b) return a;
+    dforn(i, lg(L[a]) + 1) if (vp[a][i] != vp[b][i]) a = vp[a][i], b = vp[b][i];
+    return vp[a][0];
+  }
+  int dist(int a, int b) {  // returns distance between nodes
+    return L[a] + L[b] - 2 * L[lca(a, b)];
+  }
 };
+
 
 // Usage: (VT = VirtualTree)
 // 1- Build the LCA and use it for creating 1 VT instance
@@ -71,54 +71,51 @@ struct LCA {
 // 3- Between calls of updateVT you probably want to use the tree, imp
 // and VTroot variables from this struct to solve your problem
 struct VirtualTree {
-	// n = #nodes full tree
-	// curt used for computing tin and tout
-	int n, curt;
-	LCA* lca;
-	vector<int> tin, tout;
-	vector<vector<ii>> tree; // {node, dist}, only parent -> child dire
-	// imp[i] = true iff i was part of 'newv' from last time that
-	// updateVT was called (note that LCAs are not imp)
-	vector<bool> imp;
-	void dfs(int node, int p) {
-		tin[node] = curt++;
-		forall(it,lca->G[node]) if(*it != p) dfs(*it, node);
-		tout[node] = curt++;
-	}
-	VirtualTree(LCA* l) { // must call l.build() before
-		lca = l; n = sz(l->G); lca = l; curt = 0;
-		tin.rsz(n); tout.rsz(n); tree.rsz(n); imp.rsz(n);
-		dfs(l->ROOT,l->ROOT);
-	}
-	bool isAncestor(int a, int b) {
-		return tin[a] < tin[b] && tout[a] > tout[b];
-	}
-	int VTroot = -1; // root of the current VT
-	vector<int> v; // list of nodes of current VT (includes LCAs)
-	void updateVT(vector<int>& newv) { // O(sz(newv)*log)
-		assert(!newv.empty()); // this method assumes non-empty
-		auto cmp = [this](int a, int b) { return tin[a] < tin[b]; };
-		forn(i,sz(v)) tree[v[i]].clear(), imp[v[i]] = false;
-		v = newv;
-		sort(v.begin(), v.end(), cmp);
-		set<int> s;
-		forn(i,sz(v)) s.insert(v[i]), imp[v[i]] = true;
-		forn(i,sz(v)-1) s.insert(lca->lca(v[i], v[i+1]));
-		v.clear();
-		forall(it,s) v.pb(*it);
-		sort(v.begin(), v.end(), cmp);
-		stack<int> st;
-		forn(i,sz(v)) {
-			while(!st.empty() && !isAncestor(st.top(), v[i])) st.pop();
-			assert(i == 0 || !st.empty());
-			if(!st.empty()) {
-				tree[st.top()].pb(mp(v[i], lca->dist(st.top(), v[i])));
-			}
-			st.push(v[i]);
-		}
-		VTroot = v[0];
-	}
+  // n = #nodes full tree
+  // curt used for computing tin and tout
+  int n, curt;
+  LCA* lca;
+  vector<int> tin, tout;
+  vector<vector<ii>> tree;  // {node, dist}, only parent -> child dire
+  // imp[i] = true iff i was part of 'newv' from last time that
+  // updateVT was called (note that LCAs are not imp)
+  vector<bool> imp;
+  void dfs(int node, int p) {
+    tin[node] = curt++;
+    forall(it, lca->G[node]) if (*it != p) dfs(*it, node);
+    tout[node] = curt++;
+  }
+  VirtualTree(LCA* l) {  // must call l.build() before
+    lca = l, n = sz(l->G), lca = l, curt = 0;
+    tin.rsz(n), tout.rsz(n), tree.rsz(n), imp.rsz(n);
+    dfs(l->ROOT, l->ROOT);
+  }
+  bool isAncestor(int a, int b) { return tin[a] < tin[b] && tout[a] > tout[b]; }
+  int VTroot = -1;  // root of the current VT
+  vector<int> v;    // list of nodes of current VT (includes LCAs)
+  void updateVT(vector<int>& newv) {  // O(sz(newv)*log)
+    assert(!newv.empty());            // this method assumes non-empty
+    auto cmp = [this](int a, int b) { return tin[a] < tin[b]; };
+    forn(i, sz(v)) tree[v[i]].clear(), imp[v[i]] = false;
+    v = newv;
+    sort(v.begin(), v.end(), cmp);
+    set<int> s;
+    forn(i, sz(v)) s.insert(v[i]), imp[v[i]] = true;
+    forn(i, sz(v) - 1) s.insert(lca->lca(v[i], v[i + 1]));
+    v.clear();
+    forall(it, s) v.pb(*it);
+    sort(v.begin(), v.end(), cmp);
+    stack<int> st;
+    forn(i, sz(v)) {
+      while (!st.empty() && !isAncestor(st.top(), v[i])) st.pop();
+      assert(i == 0 || !st.empty());
+      if (!st.empty()) tree[st.top()].pb(mp(v[i], lca->dist(st.top(), v[i])));
+      st.push(v[i]);
+    }
+    VTroot = v[0];
+  }
 };
+
 
  
 const int INF = 1000100;

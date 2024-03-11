@@ -10,4 +10,5 @@ rope<int> s;
 // s.substr(i,k) // return new rope corresponding to subsequence [i,i+k)
 // s[i] // access ith element (cannot modify)
 // s.mutable_reference_at(i) // acces ith element (allows modification)
-// s.begin() and s.end() are const iterators (use mutable_begin(), mutable_end() to allow modification)
+// s.begin() and s.end() are const iterators (use mutable_begin(), mutable_end()
+// to allow modification)
