@@ -51,8 +51,8 @@ int R[MAXN + 9];
 void dft(CD* a, int n, bool inv) {
   forn(i, n) if (R[i] < i) swap(a[R[i]], a[i]);
   for (int m = 2; m <= n; m *= 2) {
-    // ld z=2*pi/m*(inv?-1:1); FFT
-    // CD wi=CD(cos(z),sin(z)); FFT
+    // ld z=2*pi/m*(inv?-1:1); // FFT
+    // CD wi=CD(cos(z),sin(z)); // FFT
     CD wi = root(m, inv);  // NTT
     for (int j = 0; j < n; j += m) {
       CD w(1);
@@ -65,7 +65,7 @@ void dft(CD* a, int n, bool inv) {
       }
     }
   }
-  // if(inv) forn(i,n) a[i]/=n; FFT
+  // if(inv) forn(i,n) a[i]/=n; // FFT
   if (inv) {  // NTT
     CD z(expMod(n, MOD - 2));
     forn(i, n) a[i] = a[i] * z;
@@ -88,7 +88,7 @@ poly multiply(poly& p1, poly& p2) {
   dft(cp1, m, true);
   poly res;
   n -= 2;
-  // forn(i,n) res.pb((T) floor(cp1[i].real()+0.5)); FFT
+  // forn(i,n) res.pb((T) floor(cp1[i].real()+0.5)); // FFT
   forn(i, n) res.pb(cp1[i].x);  // NTT
   return res;
 }
