@@ -1,0 +1,19 @@
+# To use this format configuration, make sure to run clang-format with --style=file. For example: clang-format -i --style=file fft.cpp
+# Use the Google style in this project.
+BasedOnStyle: Google
+
+# Some folks prefer to write "int& foo" while others prefer "int &foo".  The
+# Google Style Guide only asks for consistency within a project, we chose
+# "int& foo" for this project:
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+# Other
+AllowShortBlocksOnASingleLine: Always
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortLambdasOnASingleLine: All
+AllowShortLoopsOnASingleLine: true
+# Line below is commented because it failed
+# AllowShortCompoundRequirementOnASingleLine: true
+
