@@ -1,8 +1,6 @@
 typedef double tipo;
 typedef vector<tipo> vt;
-const tipo EPS = 1e-9;
-// maximize c^T x s.t. Ax<=b, x>=0
-// returns pair (maximum value, solution vector)
+// maximize c^T x s.t. Ax<=b, x>=0, returns pair (max val, solution vector)
 pair<tipo, vt> simplex(vector<vt> A, vt b, vt c) {
   int n = sz(b), m = sz(c);
   tipo z = 0.;

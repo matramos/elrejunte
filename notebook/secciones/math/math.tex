@@ -1,5 +1,5 @@
 \newpage
-\section{Matem\'atica}
+\section{Math}
 
 \subsection{Identidades}
 {
@@ -40,50 +40,55 @@ $T(n)=\sum_{i=1}^q{\sum_{j=0}^{m_i - 1}c_{ij} n^j r_i^n}$
 
 Las constantes $c_{ij}$ se determinan por los casos base.
 
-\subsection{Teorema Chino del Resto}
-$$y=\sum_{j=1}^n (x_j*(\prod_{i=1, i\neq j}^n m_i)_{m_j}^{-1}*\prod_{i=1, i\neq j}^n m_i)$$
-\lstinputlisting[language=C++]{secciones/math/teorema_chino_del_resto.cpp}
-
-\subsection{Euclides Extendido}
+\subsection{Extended euclid and diophantine equations}
 \lstinputlisting[language=C++]{secciones/math/extended_euclid.cpp}
 
-\subsection{Combinatoria}
-\lstinputlisting[language=C++]{secciones/math/combinatoria.cpp}
-
-\subsection{Exponenciaci\'on de Matrices}
-\lstinputlisting[language=C++]{secciones/math/matrix_exp.cpp}
-
-\subsection{Operaciones Modulares}
+\newpage
+\subsection{Modular operations}
 \lstinputlisting[language=C++]{secciones/math/modular_operations.cpp}
+\subsection{Chinese reminder theorem}
+$$y=\sum_{j=1}^n (x_j*(\prod_{i=1, i\neq j}^n m_i)_{m_j}^{-1}*\prod_{i=1, i\neq j}^n m_i)$$
+\newpage
+\lstinputlisting[language=C++]{secciones/math/teorema_chino_del_resto.cpp}
+\subsection{Modular inverse}
+\lstinputlisting[language=C++]{secciones/math/inversos.cpp}
+\subsection{Combinatorics}
+\lstinputlisting[language=C++]{secciones/math/combinatoria.cpp}
 
 \subsection{Discrete Logarithm}
 \lstinputlisting[language=C++]{secciones/math/discrete_log.cpp}
 
-\subsection{Funciones de Primos}
-Sea $n=\prod{p_i^{k_i}}$, fact(n) genera un map donde a cada $p_i$ le asocia su $k_i$
-\lstinputlisting[language=C++]{secciones/math/funciones_primos.cpp}
+\newpage
+\subsection{Fractions}
+\lstinputlisting[language=C++]{secciones/math/fraction.cpp}
 
+\subsection{Matrix exponentiation}
+\lstinputlisting[language=C++]{secciones/math/matrix_exp.cpp}
+
+\subsection{Primes, divisors and Phi}
+\lstinputlisting[language=C++]{secciones/math/funciones_primos.cpp}
+\newpage
 \subsection{Phollard's Rho}
 \lstinputlisting[language=C++]{secciones/math/phollard_rho.cpp}
 
-\subsection{Inversos}
-\lstinputlisting[language=C++]{secciones/math/inversos.cpp}
-
+\newpage
 \subsection{Guass-Jordan}
 \lstinputlisting[language=C++]{secciones/math/gauss_jordan.cpp}
-
+\newpage
 \subsection{Guass-Jordan modular}
 \lstinputlisting[language=C++]{secciones/math/gauss_jordan_mod.cpp}
-
+\newpage
 \subsection{Guass-Jordan with bitset}
 \lstinputlisting[language=C++]{secciones/math/gauss_jordan_bitset.cpp}
-
-\subsection{Fracciones}
-\lstinputlisting[language=C++]{secciones/math/fraction.cpp}
 
 \subsection{Simpson}
 \lstinputlisting[language=C++]{secciones/math/simpson.cpp}
 
+\newpage
+\subsection{Fast Fourier Transform (FFT)}
+\lstinputlisting[language=C++]{secciones/math/fft.cpp}
+
+\newpage
 \subsection{Simplex}
 \lstinputlisting[language=C++]{secciones/math/simplex.cpp}
 
@@ -103,9 +108,7 @@ Sea $n=\prod{p_i^{k_i}}$, fact(n) genera un map donde a cada $p_i$ le asocia su 
 9! =	362.880       & 20! =	2.432.902.008.176.640.000	($\in \mathtt{tint}$) \\
 10! =	3.628.800     & 21! =	51.090.942.171.709.400.000
 \end{tabular}
- 
-max signed tint = 9.223.372.036.854.775.807 \\
-max unsigned tint = 18.446.744.073.709.551.615
+
 %\subsubsection{
 \paragraph{Primos} \ \\
 2 3 5 7 11 13 17 19 23 29
@@ -140,7 +143,7 @@ max unsigned tint = 18.446.744.073.709.551.615
 1901 1907 1913 1931 1933 1949 1951 1973 1979 1987
 1993 1997 1999 2003 2011 2017 2027 2029 2039 2053
 2063 2069 2081
-
+\newpage
 \paragraph{Primos cercanos a $10^n$}\ \\
 9941 9949 9967 9973 10007 10009 10037 10039 10061 10067 10069 10079\\
 99961 99971 99989 99991 100003 100019 100043 100049 100057 100069\\
