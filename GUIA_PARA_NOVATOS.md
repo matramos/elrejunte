@@ -33,7 +33,7 @@ Bibliografía sobre el tema hay un monton, nosotros vamos a recomendar dos libro
 
    Otra cosa buena del Halim es que también tiene código para tomar como guía.
 
-2. [COMPTETITIVA PROGRAMMING HANDBOOK](https://cses.fi/book.html) por Antti Laaksonen.
+2. [COMPETITIVE PROGRAMMING HANDBOOK](https://cses.fi/book.html) por Antti Laaksonen.
 
    Este es un libro en proceso (todavía no está su versión definitiva), pero que se puede descargar.
    
@@ -53,8 +53,8 @@ Hay cientos de jueces online. Lo que sigue es una guía de los más utilizados p
   * El **GYM**: son competencias que ya pasaron que se pueden simular participando de manera virtual. Uno va subiendo problemas y situandose en el scoreboard como si estuviera compitiendo en vivo. Muy útil para usarlo en las simulaciones con su propio equipo.
   * Los **Blog**: posteos de usuarios pidiendo información o explicando temas, o haciendo un editorial de alguna competencia. Esto nos sirvio mucho para entender temas que por ahí no se encuentran en la bibliografía o dan otra perspectiva para entenderlos.
 * [UVA](https://uva.onlinejudge.org/): el juez online más conocido, tiene muchisimos problemas, y los problemas sugeridos por Halim se encuentran acá. También se suben con el tiempo los problemas de otras competencias.
-* [LiveArchive](https://icpcarchive.ecs.baylor.edu/): Juez Online muy parecido a UVA que tiene todos los problemas de REGIONALES y WORD FINALS pasadas.
-* [URI](https://www.urionlinejudge.com.br/): Juez Online Brasilero. Tiene problemas separados por temas, y también visualmente se pueden sacar estadísticas de usuarios que están buenas para ver el progreso personal. En este juez también pueden encontrar problemas de regionales y TAPs pasados (aunque hay que buscarlos).
+* [LiveArchive](https://icpc.kattis.com/): Juez Online muy parecido a UVA que tiene todos los problemas de REGIONALES y WORD FINALS pasadas.
+* [beecrowd](https://judge.beecrowd.com/): Juez Online Brasilero. Tiene problemas separados por temas, y también visualmente se pueden sacar estadísticas de usuarios que están buenas para ver el progreso personal. En este juez también pueden encontrar problemas de regionales y TAPs pasados (aunque hay que buscarlos).
 
 Hay jueces que tienen competencias mensuales como [HackerRank](https://www.hackerrank.com/) y [HackerEarth](https://www.hackerearth.com/), que tienen premios importantes. Pero personalmente nos parece que la calidad de problemas no es muy buena, y que los jueces nombrados son muy buenos para practicar en vista a participar en una competencia ICPC.
 
