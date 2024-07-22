@@ -19,6 +19,7 @@ struct Centroid {
       return;
     }
     taken[node] = true, vp[node] = p;
+    // do something using node as centroid
     forall(it, g[node]) if (!taken[*it]) centroid(*it, node, -1);
   }
 };
