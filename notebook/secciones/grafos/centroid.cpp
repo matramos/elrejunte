@@ -14,7 +14,7 @@ struct Centroid {
   }
   void centroid(int node, int p, int cursz) {
     if (cursz == -1) cursz = dfs(node, -1);
-    forall(it, g[node]) if (!taken[*it] && vsz[*it] >= cursz / 2) {
+    forall(it, g[node]) if (!taken[*it] && vsz[*it] > cursz / 2) {
       vsz[node] = 0, centroid(*it, p, cursz);
       return;
     }
