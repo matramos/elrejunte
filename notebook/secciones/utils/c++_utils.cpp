@@ -72,3 +72,6 @@ numeric_limits<T>
 	::epsilon()
 // double inf
 const double DINF=numeric_limits<double>::infinity();
+
+// 11- Bitset trick
+bs._Find_next(idx) // This function returns first set bit after index idx. Ex: bitset<10> bs, bs[1] = 1, bs[3] = 1; bs.Find_next(0) => 1, bs._Find_next(1) => 3 
