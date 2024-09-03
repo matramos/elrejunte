@@ -31,10 +31,30 @@ ${C_n = 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, \dots}$
 	\item sub-diagonal monotone paths in an $n\times n$ grid.
 	\item strings with $n$ pairs of parenthesis, correctly nested.
 	\item binary trees with with $n+1$ leaves (0 or 2 children).
+	\item binary search trees with $n$ vertices.
+	\item binary trees with $n$ nodes is $C_n * n!$.
 	\item ordered trees with $n+1$ vertices.
 	\item ways a convex polygon with $n+2$ sides can be cut into triangles by connecting vertices with straight lines.
 	\item permutations of $[n]$ with no 3-term increasing subseq.
 \end{itemize}
+
+\noindent
+\textbf{Stars and bars:}
+\noindent
+Count number of ways to partition a set of $n$ unlabeled objects into $k$ (possibly empty) labeled subsets:
+\[ \binom{n+k-1}{n} \]
+
+\noindent
+\textbf{Stirling numbers:}
+\noindent
+Count number of ways to partition a set of $n$ labeled objects into $k$ nonempty unlabeled subsets:
+\[ S_{n,k}= \frac{1}{k!} \sum_{i=0}^{k}(-1)^{k-i}\binom{k}{i} i^n =  \sum_{i=0}^{k}\frac{(-1)^{k-i} i^n}{(k-i)!i!} \]
+
+\noindent
+\textbf{Bell numbers:}
+\noindent
+Count number of partitions of a set with $n$ members:
+\[ B_n = \sum_{k=0}^{n} S_{n,k} \]
 
 \noindent
 \textbf{Number of Spanning Trees:}
@@ -100,6 +120,11 @@ $$\ln(1+x) = x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\dots,\,(-1<x\leq1)$$
 $$\sqrt{1+x} = 1+\frac{x}{2}-\frac{x^2}{8}+\frac{2x^3}{32}-\frac{5x^4}{128}+\dots,\,(-1\leq x\leq1)$$
 $$\sin x = x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\dots,\,(-\infty<x<\infty)$$
 $$\cos x = 1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\dots,\,(-\infty<x<\infty)$$
+
+\noindent
+\textbf{Lagrange interpolation:} $n+1$ points determine the following polynomial of degree $n$:
+\[ f(x)=\sum\limits_{i=1}^n y_i\prod _{i\neq j}\dfrac{x-x_j}{x_i-x_j} \]
+Note: denominator can be get efficently if x coordinates are all from 1 to $n+1$ using suffix and prefix arrays.
 
 \noindent
 \textbf{Expectation is linear:} \[\mathbb{E}(aX+bY) = a\mathbb{E}(X)+b\mathbb{E}(Y)\]
