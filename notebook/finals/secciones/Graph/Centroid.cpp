@@ -12,10 +12,11 @@ struct Centroid {
   }
   void centroid(int node, int p, int cursz) {
     if (cursz == -1) cursz = dfs(node, -1);
-    forall(it,g[node]) if(!taken[*it] && vsz[*it]>=cursz/2){
+    forall(it,g[node]) if(!taken[*it] && vsz[*it]>cursz/2){
       vsz[node] = 0, centroid(*it, p, cursz); return;
     }
     taken[node] = true, vp[node] = p;
+    // do something using node as centroid
     forall(it,g[node]) if(!taken[*it])centroid(*it,node,-1);
   }
 };
