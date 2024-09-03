@@ -1,27 +1,12 @@
-struct UF {
-  void init(int n) {}
-  void unir(int a, int v) {}
-  int comp(int n) { return 0; }
-} uf;
-vector<ii> G[MAXN];
-int n;
-
-struct Ar {
+struct Edge {
   int a, b, w;
 };
-bool operator<(const Ar& a, const Ar& b) { return a.w < b.w; }
-vector<Ar> E;
-
-// Minimun Spanning Tree in O(e log e)
-ll kruskal() {
-  ll cost = 0;
-  sort(E.begin(), E.end());  // ordenar aristas de menor a mayor
-  uf.init(n);
-  forall(it, E) {
-    if (uf.comp(it->a) != uf.comp(it->b)) {  // si no estan conectados
-      uf.unir(it->a, it->b);                 // conectar
-      cost += it->w;
-    }
-  }
+bool operator<(const Edge& a, const Edge& b) { return a.w < b.w; }
+// Minimun Spanning Tree in O(E log E)
+ll kruskal(vector<Edge> &E, int n) {
+  ll cost = 0; sort(E.begin(), E.end()); 
+  UnionFind uf(n);
+  forall(it, E) if(!uf.join(it->a, it->b))
+    cost += it->w;
   return cost;
 }
