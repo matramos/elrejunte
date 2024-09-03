@@ -1,3 +1,24 @@
+// https://cses.fi/problemset/task/1145
+#include <bits/stdc++.h>
+#define forr(i,a,b) for(int i = a; i<b; i++)
+#define forn(i,n) forr(i,0,n)
+#define dforn(i,n) for(int i = n-1; i>-1; i--)
+#define forall(i,v) for(auto i = v.begin(); i != v.end(); i++)
+#define sz(v) ((int) v.size())
+#define all(v) v.begin(), v.end()
+#define rsz resize 
+#define pb push_back
+#define fst first
+#define snd second
+#define mp make_pair
+#define lb lower_bound
+#define ub upper_bound
+using namespace std;
+
+typedef long long ll;
+typedef pair<int,int> ii;
+typedef long long T;
+
 // Change comparisons and binary search for non-increasing
 // Given an array, paint it in the least number of colors so that each
 // color turns to a non-increasing subsequence. Solution: Min number of
@@ -40,3 +61,21 @@ struct lis {
 		return 0;
 	}
 };
+
+int main () {
+	#ifdef JP
+		freopen("input.in", "r", stdin);
+	#endif
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	
+	int n; cin >> n;
+    vector<T> a(n); forn(i,n) cin >> a[i];
+    lis l(1e10, a);
+    cout << l.run() << "\n";
+	
+	#ifdef JP
+		cerr << "Time elapsed: " <<  clock() * 1000 / CLOCKS_PER_SEC << " ms\n";
+	#endif
+}
