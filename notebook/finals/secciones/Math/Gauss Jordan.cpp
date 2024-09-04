@@ -1,3 +1,10 @@
+/* Can solve cyclic expected values: given a matrix Pij 
+(probability of moving from node i to node j), then the 
+expected number of steps to reach node T from i is 
+E(i) = 1 + sum(Pij*E(j)) or E(i) - sum(Pij*E(j)) = 1 
+Then, each i generates a row in the system of equations. 
+Note that the row and column corresponding to T must be 
+removed before applying Gauss-Jordan. */
 // comments useful for MOD version
 const double EPS = 1e-9; // remove for MOD version
 const int INF = 2; // a value to indicate infinite solutions
