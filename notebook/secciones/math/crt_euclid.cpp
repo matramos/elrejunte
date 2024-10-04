@@ -13,7 +13,7 @@ ll euclid(ll a, ll b, ll &x, ll &y) {
 // Chinese remainder theorem (special case): find z such that
 // z % m = a, z % n = b.  Here, z is unique modulo M = lcm(m, n)
 // Returns -1 when there is no solution 
-// CRT is associative
+// CRT is associative and idempotent
 ll crt(ll a, ll m, ll b, ll n) {
   if (n > m) swap(a, b), swap(m, n);
   ll x, y, g = euclid(m, n, x, y);
