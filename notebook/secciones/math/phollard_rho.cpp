@@ -5,7 +5,7 @@ bool es_primo_prob(ll n, int a) {
   ll x = expMod(a, d, n);
   if ((x == 1) || (x + 1 == n)) return true;
   forn(i, s - 1) {
-    x = (x * x) % n;  // mulMod(x, x, n);
+    x = (x * x) % n; // mulMod(x, x, n); In most cases, it is necessary to use mulMod to avoid TLE
     if (x == 1) return false;
     if (x + 1 == n) return true;
   }
