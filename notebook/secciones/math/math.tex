@@ -40,16 +40,13 @@ $T(n)=\sum_{i=1}^q{\sum_{j=0}^{m_i - 1}c_{ij} n^j r_i^n}$
 
 Las constantes $c_{ij}$ se determinan por los casos base.
 
-\subsection{Extended euclid and diophantine equations}
-\lstinputlisting[language=C++]{secciones/math/extended_euclid.cpp}
-
 \newpage
 \subsection{Modular operations}
 \lstinputlisting[language=C++]{secciones/math/modular_operations.cpp}
-\subsection{Chinese reminder theorem}
+\subsection{Chinese reminder theorem, extended euclid and diophantine equations}
 $$y=\sum_{j=1}^n (x_j*(\prod_{i=1, i\neq j}^n m_i)_{m_j}^{-1}*\prod_{i=1, i\neq j}^n m_i)$$
 \newpage
-\lstinputlisting[language=C++]{secciones/math/teorema_chino_del_resto.cpp}
+\lstinputlisting[language=C++]{secciones/math/crt_euclid.cpp}
 \subsection{Modular inverse}
 \lstinputlisting[language=C++]{secciones/math/inversos.cpp}
 \subsection{Combinatorics}
@@ -87,6 +84,9 @@ $$y=\sum_{j=1}^n (x_j*(\prod_{i=1, i\neq j}^n m_i)_{m_j}^{-1}*\prod_{i=1, i\neq 
 \newpage
 \subsection{Fast Fourier Transform (FFT)}
 \lstinputlisting[language=C++]{secciones/math/fft.cpp}
+
+\subsection{Karatsuba}
+\lstinputlisting[language=C++]{secciones/math/karatsuba.cpp}
 
 \newpage
 \subsection{Simplex}
