@@ -1,5 +1,5 @@
 ---
-name: Sugerencia de Mejora o Algoritmo a agregar
+name: Sugerencia de mejora o algoritmo a agregar
 about: Suggest an idea for this project
 title: "[FEATURE]"
 labels: ''
@@ -16,6 +16,5 @@ Link a la sección o archivo.
 
 **Describe con precisión que es lo que sugieres agregar*
 
-
-**Links o imágenes adicionales**
+**Links**
 Agrega todo lo que te parezca que nos puede ayudar a agregar el algoritmo o mejora

@@ -1,0 +1,146 @@
+\noindent
+\textbf{Derangements:}
+\noindent
+Permutations of a set such that none of the elements appear in their original position.
+\[ \mkern-2mu D(n) = (n-1)(D(n-1)+D(n-2)) = n D(n-1)+(-1)^n = \left\lfloor\frac{n!}{e}\right\rceil \]
+
+\noindent
+\textbf{Burnside's lemma:}
+\noindent
+Given a group $G$ of symmetries and a set $X$, the number of elements of $X$ \emph{up to symmetry} equals
+ \[ {\frac {1}{|G|}}\sum _{{g\in G}}|X^{g}|, \]
+ where $X^{g}$ are the elements fixed by $g$ ($g.x = x$).
+\noindent
+ If $f(n)$ counts ``configurations'' (of some sort) of length $n$, we can ignore rotational symmetry using $G = \mathbb Z_n$ to get
+ \[ g(n) = \frac 1 n \sum_{k=0}^{n-1}{f(\text{gcd}(n, k))} = \frac 1 n \sum_{k|n}{f(k)\phi(n/k)}. \]
+
+\noindent
+\textbf{Labeled unrooted trees:}
+\noindent
+\# on $n$ vertices: $n^{n-2}$ \\
+\# on $k$ existing trees of size $n_i$: $n_1n_2\cdots n_k n^{k-2}$ \\
+\# with degrees $d_i$: $(n-2)! / ((d_1-1)! \cdots (d_n-1)!)$
+
+\noindent
+\textbf{Catalan numbers:}
+\noindent
+\[ C_n=\frac{1}{n+1}\binom{2n}{n}= \binom{2n}{n}-\binom{2n}{n+1} = \frac{(2n)!}{(n+1)!n!} \]
+\[ C_0=1,\ C_{n+1} = \frac{2(2n+1)}{n+2}C_n,\ C_{n+1}=\sum C_iC_{n-i} \]
+${C_n = 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, \dots}$
+\begin{itemize}
+	\item sub-diagonal monotone paths in an $n\times n$ grid.
+	\item strings with $n$ pairs of parenthesis, correctly nested.
+	\item binary trees with with $n+1$ leaves (0 or 2 children).
+	\item binary search trees with $n$ vertices.
+	\item binary trees with $n$ nodes is $C_n * n!$.
+	\item ordered trees with $n+1$ vertices.
+	\item ways a convex polygon with $n+2$ sides can be cut into triangles by connecting vertices with straight lines.
+	\item permutations of $[n]$ with no 3-term increasing subseq.
+\end{itemize}
+
+\noindent
+\textbf{Stars and bars:}
+\noindent
+Count number of ways to partition a set of $n$ unlabeled objects into $k$ (possibly empty) labeled subsets:
+\[ \binom{n+k-1}{n} \]
+
+\noindent
+\textbf{Stirling numbers:}
+\noindent
+Count number of ways to partition a set of $n$ labeled objects into $k$ nonempty unlabeled subsets:
+\[ S_{n,k}= \frac{1}{k!} \sum_{i=0}^{k}(-1)^{k-i}\binom{k}{i} i^n =  \sum_{i=0}^{k}\frac{(-1)^{k-i} i^n}{(k-i)!i!} \]
+
+\noindent
+\textbf{Bell numbers:}
+\noindent
+Count number of partitions of a set with $n$ members:
+\[ B_n = \sum_{k=0}^{n} S_{n,k} \]
+
+\noindent
+\textbf{Binomial formula:}
+\[ (x+y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k}y^{k} = \sum_{k=0}^{n} \binom{n}{k} x^{k}y^{n-k}\]
+
+\noindent
+\textbf{Number of Spanning Trees:}
+% I.e. matrix-tree theorem.
+% Source: https://en.wikipedia.org/wiki/Kirchhoff%27s_theorem
+% Test: stress-tests/graph/matrix-tree.cpp
+\noindent
+Create an $N\times N$ matrix \texttt{mat}, and for each edge $a \rightarrow b \in G$, do
+\texttt{mat[a][b]--, mat[b][b]++} (and \texttt{mat[b][a]--, mat[a][a]++} if $G$ is undirected).
+Remove the $i$th row and column and take the determinant; this yields the number of directed spanning trees rooted at $i$
+(if $G$ is undirected, remove any row/column).
+
+\noindent
+\textbf{Erdős–Gallai theorem:}
+% Source: https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Gallai_theorem
+% Test: stress-tests/graph/erdos-gallai.cpp
+\noindent
+A simple graph with node degrees $d_1 \ge \dots \ge d_n$ exists iff $d_1 + \dots + d_n$ is even and for every $k = 1\dots n$,
+\[ \sum _{i=1}^{k}d_{i}\leq k(k-1)+\sum _{i=k+1}^{n}\min(d_{i},k). \]
+
+\noindent
+\textbf{Equations:}
+\[ax^2+bx+c=0 \Rightarrow x = \frac{-b\pm\sqrt{b^2-4ac}}{2a}\]
+\noindent
+The extremum is given by $x = -b/2a$.
+
+\[\begin{aligned}ax+by=e\\cx+dy=f\end{aligned}
+\Rightarrow
+\begin{aligned}x=\dfrac{ed-bf}{ad-bc}\\y=\dfrac{af-ec}{ad-bc}\end{aligned}\]
+
+\noindent
+\textbf{Triangles:}
+\noindent
+Side lengths: $a,b,c$\\
+Semiperimeter: $p=\dfrac{a+b+c}{2}$\\
+Area: $A=\sqrt{p(p-a)(p-b)(p-c)}$\\
+Circumradius: $R=\dfrac{abc}{4A}$\\
+Inradius: $r=\dfrac{A}{p}$\\
+Length of median (divides triangle into two equal-area triangles): $m_a=\tfrac{1}{2}\sqrt{2b^2+2c^2-a^2}$\\
+
+\noindent
+\textbf{Spherical coordinates:}
+\[\begin{array}{cc}
+x = r\sin\theta\cos\phi & r = \sqrt{x^2+y^2+z^2}\\
+y = r\sin\theta\sin\phi & \theta = \textrm{acos}(z/\sqrt{x^2+y^2+z^2})\\
+z = r\cos\theta & \phi = \textrm{atan2}(y,x)
+\end{array}\]
+
+\noindent
+\textbf{Sums:}
+\[ c^a + c^{a+1} + \dots + c^{b} = \frac{c^{b+1} - c^a}{c-1}, c \neq 1 \]
+\begin{align*}
+	1 + 2 + 3 + \dots + n &= \frac{n(n+1)}{2} \\
+	1^2 + 2^2 + 3^2 + \dots + n^2 &= \frac{n(2n+1)(n+1)}{6} \\
+	1^3 + 2^3 + 3^3 + \dots + n^3 &= \frac{n^2(n+1)^2}{4} \\
+	1^4 + 2^4 + 3^4 + \dots + n^4 &= \frac{n(n+1)(2n+1)(3n^2 + 3n - 1)}{30} \\
+\end{align*}
+
+\noindent
+\textbf{Series:}
+$$e^x = 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\dots,\,(-\infty<x<\infty)$$
+$$\ln(1+x) = x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\dots,\,(-1<x\leq1)$$
+$$\sqrt{1+x} = 1+\frac{x}{2}-\frac{x^2}{8}+\frac{2x^3}{32}-\frac{5x^4}{128}+\dots,\,(-1\leq x\leq1)$$
+$$\sin x = x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\dots,\,(-\infty<x<\infty)$$
+$$\cos x = 1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\dots,\,(-\infty<x<\infty)$$
+
+\noindent
+\textbf{Lagrange interpolation:} $n+1$ points determine the following polynomial of degree $n$:
+\[ f(x)=\sum\limits_{i=1}^n y_i\prod _{i\neq j}\dfrac{x-x_j}{x_i-x_j} \]
+Note: denominator can be get efficiently if x coordinates are all from 1 to $n+1$ using suffix and prefix arrays.
+
+\noindent
+\textbf{Expectation is linear:} \[\mathbb{E}(aX+bY) = a\mathbb{E}(X)+b\mathbb{E}(Y)\]
+
+\noindent
+\textbf{Pick's theorem:} $A=I+\frac{B}{2}-1$
+
+\noindent
+\textbf{Konig's Theorem:} In a bipartite graph, max matching = min vertex cover (cover edges using nodes).
+
+\noindent
+Also, min edge cover (cover nodes using edges) = max independent set = N - min vertex cover = N - max matching
+
+\noindent
+\textbf{Dilworth's Theorem:} An antichain in a partially ordered set is a set of elements no two of which are comparable to each other, and a chain is a set of elements every two of which are comparable. A chain decomposition is a partition of the elements of the order into disjoint chains. Dilworth's theorem states that for any partially ordered set, the sizes of the max antichain and of the min chain decomposition are equal. Equivalent to Konig's theorem on the bipartite graph $(U,V,E)$ where $U=V=S$ and $(u,v)$ is an edge when $u<v$. Those vertices outside the min vertex cover in both $U$ and $V$ form a max antichain.

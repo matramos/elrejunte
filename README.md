@@ -1,47 +1,31 @@
-# El Rejunte - UTN FRSF
+# _El Rejunte - UTN FRSF_
 > _"Talk is cheap. Show me the code"_ - Linus Torvalds
 
-Repositorio del Equipo TheRejointSet (antiguamente El Rejunte) para utilizar/entrenar para competencias de Programación.
-Pueden encontrar el `notebook` del equipo.
+Repositorio del Equipo TheRejointSet (antiguamente El Rejunte) para competencias de Programación.
+Pueden encontrar el `notebook` del equipo bajo la carpeta `notebook/topics`.
 
-Y diferentes `solucionarios`.
+![](DSC03718.JPG)
 
-Y algunas otras herramientas (snippets,etc.) que nos fueron útiles a la hora de competir.
+## Cómo crear el PDF?
+1. Instalar [codes2pdf](https://github.com/Erfaniaa/codes2pdf).
+2. Ejecutar:
+```sh 
+bash create.sh <author> <initials>
+```
 
+## Cómo colaborar?
+### Agregar una sección
+1. Crear la carpeta de dicha sección bajo el directorio `notebook/topics/`, siguiendo el formato [snake case](https://en.wikipedia.org/wiki/Snake_case).
+2. Crear la carpeta de dicha sección bajo el directorio `notebook/tests/`, siguiendo el formato snake case.
+
+### Agregar código a una sección
+1. Crear archivo bajo el directorio de alguna sección `notebook/tests/<seccion>`, con la extensión correspondiente y siguiendo el formato snake_case.
+2. Crear un caso de prueba bajo el directorio `notebook/tests/<seccion>`, siguiendo el formato snake case.
 
 ## Recursos
-* __Notebooks Utilizados__
-    - [Notebook de ACM del equipo CaloventorEnDos de la UNR-FCEIA (2015-2016)](https://github.com/mvpossum/eldiego)
-    - [Notebook de ACM del equipo AJI de la UBA-FCEN (2011)](https://github.com/elsantodel90/notebook-aji)
-    - [Stanford University ACM Team Notebook (2014-15)](https://web.stanford.edu/~liszt90/acm/notebook.html)
-        + [Theoretical Computer Science Cheat Sheet](https://web.stanford.edu/~liszt90/acm/cheatsheet.pdf)
-
-* __Herramientas__
-    - [UVa Toolkit](http://uvatoolkit.com/)
-    - [UDebug](https://www.udebug.com/)
-    - [UVa Node](https://github.com/lucastan/uva-node)
-
-## Bibliografía
-* __Programación Competitiva__
-    - [_Competitive Programming_](https://mega.nz/#!nVZAERxC!n7mN7teymbp9RHexomokrKM3AwoVyAZ8sjKrkpg2xVk) - 3rd Ed. - Steven & Felix Halim
-        + [Material del libro](https://sites.google.com/site/stevenhalim/home/material)
-    - [_Programming Challenges_](https://mega.nz/#!HV42lSYY!dYo-pKEHuaYZaeee6EuYX-DenziKhcbK0rzJAXsNAY) - 1st Ed. - Skiena & Revilla
-    - [_Art of Programming Contest_](https://mega.nz/#!6JBFFQKL!CF7xL-IZ3bOQp1Z8mIzcnSd5sjPvHgyl8zwPzUsy9tY) - 2nd Ed. - Arefin
-* __Algoritmos y Estructuras de Datos__
-    - [_Introduction to Algorithms_](https://mega.nz/#!Xcxl0Koa!iWWuJUpBbdqTDN2925vyo-AC0WYeGbgJLa9ffP3iq6k) - 3rd Ed. - Cormen & others
-    - [_Data Structures and Problem Solving Using C++_](https://mega.nz/#!jZxjyCKD!c1GKjniGzdcxHtZmdBfxC-_ABjCQk086epjeej36Cm4) - 2nd Ed. - Mark A. Weiss
-    - [_Data Structures and Problem Solving Using Java_](https://mega.nz/#!yBYxWAQb!7GueKd4xYD8fqi99TYkLq2AfmDMCwXgV6BKnSB3v2bA) - 4th Ed. - Mark A. Weiss
-    - [_Data Structures and Algorithm Analysis in C++_](https://mega.nz/#!PYhQmTRR!1tE31Bg1AVjLkc2X6K6krjate1kG_XMWzVeCHaH3szw) - 4th Ed. - Mark A. Weiss
-    - [_Algorithms_](https://mega.nz/#!zIYGiQLJ!ZMwgIjXrXm3pC_hqPUMgy6-_I5YDidTh7jVLPsPOmH8) - 4th Ed. - Sedgewick & Wayne
-    - [_Algorithm Desing_](https://mega.nz/#!WMB1XT7R!kbD82yy8DpVTcUU__BBB9T9WfAaRGmohDuTPl9iiBWI) - 1st Ed. - Kleinberg & Tardos
-    - [_Resolución de Problemas con C++_](https://mega.nz/#!XVozyIIR!-7sE6T1vzdBgIKVirfpXZ7HA5RIBTRD9y7mAxk5OTwo) - 5ta Ed. - Savitch
-    - [_Estructura de Datos con C++_](https://mega.nz/#!aRoBGDoI!9PmCPMN16_VppdfLXBvU1tN6LRysTbSi2IRs-uLibec) - 1ra Ed. - Joyanes
-* __C/C++__
-    - [_The C++ Programming Language_](https://mega.nz/#!mIZRyR6R!YLku_7hNu6Ua2EE_skO3JHeSToGSbtFSZariXNgAg10) - 4th Ed. - Stroustrup
-* __Java__
-    - [_Thinking in Java_](https://mega.nz/#!uFw21CBD!wey7FBiHEmNYPSkkS5RTHPBgy6T049d5uuh8TOhRO5E) - 4th Ed. - Bruce Eckel
-* __Álgebra, Geometría y Matemática__
-    - [_Concrete Mathematics_](https://mega.nz/#!7ZAlSSjB!HTshmAbIOrl_uszctvW9e212DAFtKul1n00QkVng518) - 2nd Ed. - Knuth
-    - [_Computational Geometry in C_](https://mega.nz/#!nERRwQqL!MY0PzZ2_-RTQJJk0v8ZSni5xx2Xw5UmLjy_0-1Ll6UA) - 2nd Ed. - Rourke
-    - [_A Friendly Introduction to Number Theory_](https://mega.nz/#!KQZSFIiT!0gF3z7Rupf2Hq3dWmBlXbWP4R_3AvE4Ka8Z7SmRY_1o) - 4th Ed. - Silverman  
-    - [_Algebra Lineal_](https://mega.nz/#!nMAABb5Z!oczn7OnvYHHwPWxKYQ8c9yKdR-o77cLt7GeZIQfxwGU) - 7ma Ed. - Grossman   
+Notebooks utilizados:
+- [Notebook de ACM del equipo CaloventorEnDos de la UNR-FCEIA (2015-2016)](https://github.com/mvpossum/eldiego)
+- [Notebook de ACM del equipo AJI de la UBA-FCEN (2011)](https://github.com/elsantodel90/notebook-aji)
+- [Notebook de ACM del equipo Gracias Demetrio de la UNC](https://github.com/mhunicken/icpc-team-notebook-el-vasito)
+- [Stanford University ACM Team Notebook (2014-15)](https://web.stanford.edu/~liszt90/acm/notebook.html)
+- [Theoretical Computer Science Cheat Sheet](https://web.stanford.edu/~liszt90/acm/cheatsheet.pdf)

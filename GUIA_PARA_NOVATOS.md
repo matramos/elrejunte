@@ -41,14 +41,11 @@ Bibliografía sobre el tema hay un monton, nosotros vamos a recomendar dos libro
 
    Por su tamaño hasta es más amigable de llevar a las regionales que el Halim.
 
-Hay mucha más bibliografía que pueden ver en la [sección de nuestro README](https://github.com/matramos/elrejunte/#bibliografía)
-
 ## Jueces Online
 
 Hay cientos de jueces online. Lo que sigue es una guía de los más utilizados por nosotros, y que creemos que tienen mejor calidad de problemas.
 
 * [CodeForces](http://codeforces.com/) Juez Online Ruso, lo que tiene de bueno es:
-      
   * Las **ROUND**: son competencias casi semanales, de 2-3 horas. Que sirven para subir de categoría tu propio usuario.
   * El **GYM**: son competencias que ya pasaron que se pueden simular participando de manera virtual. Uno va subiendo problemas y situandose en el scoreboard como si estuviera compitiendo en vivo. Muy útil para usarlo en las simulaciones con su propio equipo.
   * Los **Blog**: posteos de usuarios pidiendo información o explicando temas, o haciendo un editorial de alguna competencia. Esto nos sirvio mucho para entender temas que por ahí no se encuentran en la bibliografía o dan otra perspectiva para entenderlos.
