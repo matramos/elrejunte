@@ -177,3 +177,6 @@ TSWLatexianTemp*
 
 #Config de VSCode
 .vscode/*
+
+#MacOS
+.DS_Store
