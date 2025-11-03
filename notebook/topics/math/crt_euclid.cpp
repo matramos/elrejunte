@@ -32,7 +32,7 @@ ll crt(const vector<ll>& r, const vector<ll>& m) {
 	ll ret = r[0], l = m[0];
 	forr(i, 1, sz(m)) {
 		ret = crt(ret, l, r[i], m[i]);
-		l = lcm(r[i],m[i]);
+		l = lcm(l,m[i]);
 		if (ret == -1) break;
 	}
 	return ret;
