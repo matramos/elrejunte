@@ -22,6 +22,7 @@ struct bint {
       if (r == BASE) r = 1;
     }
   }
+  // be careful when using ios::sync_with_stdio(false); mix printf and cout after that could fail
   void out() {
     cout << n[l - 1];
     dforn(i, l - 1) printf("%6.6llu", n[i]);  // 6=BASEXP!
